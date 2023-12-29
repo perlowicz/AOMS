@@ -35,3 +35,26 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Exlcuding unnecessary files from frontend ###
+aoms-front-app/.idea
+# dependencies
+aoms-front-app/node_modules
+aoms-front-app/pnp
+aoms-front-app/pnp.js
+
+# testing
+aoms-front-app/coverage
+
+# production
+aoms-front-app/build
+
+# misc
+aoms-front-app/.DS_Store
+aoms-front-app/.env.local
+aoms-front-app/.env.development.local
+aoms-front-app/.env.test.local
+aoms-front-app/.env.production.local
+aoms-front-app/npm-debug.log*
+aoms-front-app/yarn-debug.log*
+aoms-front-app/yarn-error.log*
