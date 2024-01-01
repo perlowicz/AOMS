@@ -17,30 +17,35 @@ export default function Home() {
     return (
         <div className="container">
             <div className="py-4">
-                <table className="table border shadow">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                {invoices && invoices.length > 0 ? (
+                    <table className="table border shadow">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Invoice Number</th>
+                            <th scope="col">Seller Name</th>
+                            <th scope="col">Buyer Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                    {
-                        invoices.map((invoice, index) => (
-                            <tr>
-                                <th scope="row" key={index}>
-                                    {index + 1}
-                                </th>
-                                {/* FIXME dokończyć specyfikowanie kolumn według tego co jest w encji Invoice */}
-                                <td>{invoice.invoiceNumber}</td>
-                            </tr>
-                        ))
-                    }
-                    </tbody>
-                </table>
+                        {
+                            invoices.map((invoice, index) => (
+                                <tr>
+                                    <th scope="row" key={index}>
+                                        {index + 1}
+                                    </th>
+                                    <td>{invoice.invoiceNumber}</td>
+                                    <td>{invoice.sellerName}</td>
+                                    <td>{invoice.buyerName}</td>
+                                </tr>
+                            ))
+                        }
+                        </tbody>
+                    </table>
+                ) : (
+                    <h2>There is no invoice in database. You can add some after clicking Add Invoice button.</h2>
+                )}
             </div>
         </div>
     )

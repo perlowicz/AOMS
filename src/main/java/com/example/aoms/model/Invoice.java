@@ -19,15 +19,15 @@ public class Invoice {
     private Long id;
     private String invoiceNumber;
     private String sellerName;
-    private String sellerAdress;
+    private String sellerAddress;
     private String sellerNIP;
     private String sellerPhoneNumber;
-    private String sellerEmailAdress;
+    private String sellerEmailAddress;
     private String buyerName;
-    private String buyerAdress;
+    private String buyerAddress;
     private String buyerNIP;
     private String buyerPhoneNumber;
-    private String buyerEmailAdress;
+    private String buyerEmailAddress;
     private PaymentType paymentType;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InvoiceItem> invoiceItemList;
