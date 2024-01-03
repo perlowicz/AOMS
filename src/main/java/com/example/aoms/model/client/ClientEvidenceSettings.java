@@ -21,8 +21,8 @@ public class ClientEvidenceSettings {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "from", nullable = false)
-    private Timestamp from;
+    @Column(name = "from_date", nullable = false)
+    private Timestamp fromDate;
 
     @Column(name = "kpir", nullable = false)
     private Integer KPiR;

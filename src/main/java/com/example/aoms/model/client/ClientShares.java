@@ -20,8 +20,8 @@ public class ClientShares {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "from", nullable = false)
-    private Timestamp from;
+    @Column(name = "from_date", nullable = false)
+    private Timestamp fromDate;
 
     @Column(name = "last_name", nullable = false)
     private String lastName;

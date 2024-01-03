@@ -21,11 +21,11 @@ public class ClientAddressInfo {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "from", nullable = false)
-    private Timestamp from;
+    @Column(name = "from_date", nullable = false)
+    private Timestamp fromDate;
 
-    @Column(name = "to", nullable = false)
-    private Timestamp to;
+    @Column(name = "to_date", nullable = false)
+    private Timestamp toDate;
 
     @Column(name = "city", nullable = false)
     private String city;
