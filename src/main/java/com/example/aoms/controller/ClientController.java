@@ -15,13 +15,13 @@ public class ClientController {
     private final ClientService clientService;
 
 
-    @GetMapping("/invoices")
+    @GetMapping("/clients")
     List<Client> getAll() {
         return clientService.getAll();
     }
 
-    @PostMapping("/invoice")
-    Client createInvoice(@RequestBody Client createdClient) {
+    @PostMapping("/client")
+    Client createClient(@RequestBody Client createdClient) {
         return clientService.save(createdClient);
     }
 }
