@@ -14,9 +14,9 @@ export default function Navbar() {
                     </button>
 
                     <Link className="btn btn-outline-light"
-                          to="/addInvoice"
+                          to="/addClient"
                     >
-                        Add Invoice
+                        Add Client
                     </Link>
                 </div>
             </nav>

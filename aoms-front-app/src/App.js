@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "./layout/Navbar";
 import Home from "./pages/Home";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import AddInvoice from "./invoices/AddInvoice";
+import AddClient from "./clients/AddClient";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
 
           <Routes>
               <Route exact path="/" element={<Home/>} />
-              <Route exact path="/addInvoice" element={<AddInvoice/>}/>
+              <Route exact path="/addClient" element={<AddClient/>}/>
           </Routes>
 
       </Router>
