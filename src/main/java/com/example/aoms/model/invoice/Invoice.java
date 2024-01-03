@@ -1,4 +1,4 @@
-package com.example.aoms.model;
+package com.example.aoms.model.invoice;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

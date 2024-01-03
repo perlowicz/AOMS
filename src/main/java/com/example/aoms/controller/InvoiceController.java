@@ -1,28 +1,28 @@
 package com.example.aoms.controller;
 
-import com.example.aoms.model.Invoice;
-import com.example.aoms.repository.InvoiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.aoms.model.invoice.Invoice;
+import com.example.aoms.service.InvoiceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
+@RequiredArgsConstructor
 public class InvoiceController {
 
-    @Autowired
-    private InvoiceRepository invoiceRepository;
+    private final InvoiceService invoiceService;
 
 
     @GetMapping("/invoices")
     List<Invoice> getAll() {
-        return invoiceRepository.findAll();
+        return invoiceService.getAll();
     }
 
 
     @PostMapping("/invoice")
     Invoice createInvoice(@RequestBody Invoice createdInvoice) {
-        return invoiceRepository.save(createdInvoice);
+        return invoiceService.save(createdInvoice);
     }
 }
