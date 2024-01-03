@@ -1,7 +1,7 @@
 package com.example.aoms.service;
 
 import com.example.aoms.model.invoice.Invoice;
-import com.example.aoms.repository.InvoiceRepository;
+import com.example.aoms.repository.invoice.InvoiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

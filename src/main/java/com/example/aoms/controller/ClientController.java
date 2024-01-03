@@ -1,6 +1,6 @@
 package com.example.aoms.controller;
 
-import com.example.aoms.model.client.Client;
+import com.example.aoms.dto.ClientDto;
 import com.example.aoms.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +16,12 @@ public class ClientController {
 
 
     @GetMapping("/clients")
-    List<Client> getAll() {
-        return clientService.getAll();
+    List<ClientDto> getAll() {
+        return clientService.getClientDtoList();
     }
 
     @PostMapping("/client")
-    Client createClient(@RequestBody Client createdClient) {
+    ClientDto createClient(@RequestBody ClientDto createdClient) {
         return clientService.save(createdClient);
     }
 }

@@ -3,41 +3,39 @@ import axios from "axios";
 
 export default function Home() {
 
-    const [invoices, setInvoices] = useState([]);
+    const [clients, setClients] = useState([]);
 
     useEffect(() => {
-        loadInvoices();
+        loadClients();
     }, []);
 
-    const loadInvoices=async() => {
-        const result = axios.get("http://localhost:8080/invoices");
-        setInvoices(result.data);
+    const loadClients = async() => {
+        const result = axios.get("http://localhost:8080/clients");
+        setClients(result.data);
     }
 
     return (
         <div className="container">
             <div className="py-4">
-                {invoices && invoices.length > 0 ? (
+                {clients && clients.length > 0 ? (
                     <table className="table border shadow">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Invoice Number</th>
-                            <th scope="col">Seller Name</th>
-                            <th scope="col">Buyer Name</th>
+                            <th scope="col">Client Full Name</th>
+                            <th scope="col">NIP</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         {
-                            invoices.map((invoice, index) => (
+                            clients.map((client, index) => (
                                 <tr>
                                     <th scope="row" key={index}>
                                         {index + 1}
                                     </th>
-                                    <td>{invoice.invoiceNumber}</td>
-                                    <td>{invoice.sellerName}</td>
-                                    <td>{invoice.buyerName}</td>
+                                    <td>{client.fullName}</td>
+                                    <td>{client.NIP}</td>
                                     <td>
                                         <button className="btn btn-primary mx-2">View</button>
                                         <button className="btn btn-outline-primary mx-2">Edit</button>
@@ -49,7 +47,7 @@ export default function Home() {
                         </tbody>
                     </table>
                 ) : (
-                    <h2>There is no invoice in database. You can add some after clicking Add Invoice button.</h2>
+                    <h2>There is no client in database. You can add some after clicking Add Client button.</h2>
                 )}
             </div>
         </div>

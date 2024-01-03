@@ -1,4 +1,4 @@
-package com.example.aoms.repository;
+package com.example.aoms.repository.invoice;
 
 import com.example.aoms.model.invoice.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;

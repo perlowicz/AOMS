@@ -1,4 +1,4 @@
-package com.example.aoms.repository;
+package com.example.aoms.repository.client;
 
 import com.example.aoms.model.client.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
