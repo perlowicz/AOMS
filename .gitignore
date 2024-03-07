@@ -38,3 +38,7 @@ out/
 
 /frontend/node_modules/
 /frontend/.idea/
+
+gradle/
+gradlew.bat
+gradlew
