@@ -6,7 +6,7 @@ export default function CompanyAddressCityInput() {
         <TextField
             required
             id="city"
-            label="Miasto"
+            label="Miejscowość"
             variant="outlined"
         />
     );

@@ -1,12 +1,12 @@
 import {TextField} from "@mui/material";
 
 
-export default function NIPInput() {
+export default function CompanyAddressStreetInput(){
     return (
         <TextField
             required
-            id="nip"
-            label="NIP"
+            id="street"
+            label="Ulica"
             variant="outlined"
         />
     );

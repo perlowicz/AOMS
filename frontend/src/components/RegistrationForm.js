@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import {Divider, FormLabel} from "@mui/material";
+import {FormLabel} from "@mui/material";
 import IsVatGroup from "./registrationFormComponents/IsVatGroup";
 import Box from "@mui/material/Box";
 import CompanyNameInput from "./registrationFormComponents/CompanyNameInput";
@@ -8,6 +8,11 @@ import CompanyOwnerNameInput from "./registrationFormComponents/CompanyOwnerName
 import CompanyOwnerSurnameInput from "./registrationFormComponents/CompanyOwnerSurnameInput";
 import NIPInput from "./registrationFormComponents/NIPInput";
 import CompanyAddressCityInput from "./registrationFormComponents/CompanyAddressCityInput";
+import CompanyAddressCountrySelect from "./registrationFormComponents/CompanyAddressCountrySelect";
+import PostalCodeInput from "./registrationFormComponents/PostalCodeInput";
+import CompanyAddressStreetInput from "./registrationFormComponents/CompanyAddressStreetInput";
+import CompanyAddressStreetNumberInput from "./registrationFormComponents/CompanyAddressStreetNumberInput";
+import Button from "@mui/material/Button";
 
 
 export default function RegistrationForm() {
@@ -40,15 +45,21 @@ export default function RegistrationForm() {
             <CompanyOwnerNameInput/>
             <CompanyOwnerSurnameInput/>
             <NIPInput/>
-            <FormLabel>
-                <Typography
-                    variant="h5"
-                >
-                    Adres firmy
-                </Typography>
-            </FormLabel>
-            <CompanyAddressCityInput/>
             <IsVatGroup/>
+            <FormLabel>
+                <Typography variant="h5">Adres firmy</Typography>
+            </FormLabel>
+            <CompanyAddressCountrySelect/>
+            <CompanyAddressCityInput/>
+            <PostalCodeInput/>
+            <CompanyAddressStreetInput/>
+            <CompanyAddressStreetNumberInput/>
+            <Button
+                type="submit"
+                variant="contained"
+            >
+                Zatwiedź
+            </Button>
         </Box>
     );
 }
