@@ -38,6 +38,6 @@ out/
 /frontend/node_modules/
 /frontend/.idea/
 
-gradle/
+gradle/wrapper/*
 gradlew.bat
 gradlew
