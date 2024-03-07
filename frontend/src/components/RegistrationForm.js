@@ -13,6 +13,7 @@ import PostalCodeInput from "./registrationFormComponents/PostalCodeInput";
 import CompanyAddressStreetInput from "./registrationFormComponents/CompanyAddressStreetInput";
 import CompanyAddressStreetNumberInput from "./registrationFormComponents/CompanyAddressStreetNumberInput";
 import Button from "@mui/material/Button";
+import CompanyBankAccountNumber from "./registrationFormComponents/CompanyBankAccountNumber";
 
 
 export default function RegistrationForm() {
@@ -45,6 +46,7 @@ export default function RegistrationForm() {
             <CompanyOwnerNameInput/>
             <CompanyOwnerSurnameInput/>
             <NIPInput/>
+            <CompanyBankAccountNumber/>
             <IsVatGroup/>
             <FormLabel>
                 <Typography variant="h5">Adres firmy</Typography>
