@@ -1,4 +1,4 @@
-package com.example.aoms;
+package com.example.aoms.country;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

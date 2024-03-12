@@ -1,5 +1,6 @@
 package com.example.aoms;
 
+import com.example.aoms.country.Country;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
