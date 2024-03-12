@@ -15,3 +15,5 @@ services:
 
 volumes:
   my_postgres_data:
+
+    # psql -h localhost -p 5432 -d aoms_db -U admin

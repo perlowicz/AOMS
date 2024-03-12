@@ -1,12 +1,19 @@
 import Container from "@mui/material/Container";
 import Navbar from "../components/Navbar";
-import RegistrationForm from "../components/RegistrationForm";
+import RegistrationForm from "../components/registration/RegistrationForm";
+import Typography from "@mui/material/Typography";
 
 
 export default function Registration() {
     return (
         <Container>
             <Navbar/>
+            <Typography
+                variant="h4"
+                align="center"
+            >
+                Rejestracja użytkownika w Systemie
+            </Typography>
             <RegistrationForm/>
         </Container>
     );
