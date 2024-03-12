@@ -2,7 +2,6 @@ package com.example.aoms.user;
 
 import com.example.aoms.user.exception.UserAlreadyExistsException;
 import com.example.aoms.user.exception.UserNotFoundException;
-import com.example.aoms.user.mappers.UserMapper;
 import com.example.aoms.user.mappers.VerificationTokenMapper;
 import com.example.aoms.user.token.VerificationToken;
 import com.example.aoms.user.token.VerificationTokenDto;
@@ -12,9 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.example.aoms.user.mappers.UserMapper.mapDtoToEntity;
 import static com.example.aoms.user.mappers.UserMapper.mapEntityToDto;
@@ -27,14 +24,6 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;
 
-
-    @Override
-    public List<UserDto> getUsers() {
-        return userRepository.findAll()
-                .stream()
-                .map(UserMapper::mapEntityToDto)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public UserDto registerUser(UserFormDto userFormDto) {
