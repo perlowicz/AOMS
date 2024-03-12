@@ -1,4 +1,4 @@
-package com.example.aoms.event;
+package com.example.aoms.user.event;
 
 import com.example.aoms.user.UserDto;
 import lombok.Getter;

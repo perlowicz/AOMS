@@ -1,7 +1,7 @@
 package com.example.aoms.user;
 
-import com.example.aoms.exception.UserAlreadyExistsException;
-import com.example.aoms.exception.UserNotFoundException;
+import com.example.aoms.user.exception.UserAlreadyExistsException;
+import com.example.aoms.user.exception.UserNotFoundException;
 import com.example.aoms.user.mappers.UserMapper;
 import com.example.aoms.user.mappers.VerificationTokenMapper;
 import com.example.aoms.user.token.VerificationToken;

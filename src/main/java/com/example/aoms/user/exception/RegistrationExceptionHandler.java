@@ -1,4 +1,4 @@
-package com.example.aoms.exception;
+package com.example.aoms.user.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

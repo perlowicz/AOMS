@@ -1,4 +1,4 @@
-package com.example.aoms.exception;
+package com.example.aoms.user.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException(String message) {

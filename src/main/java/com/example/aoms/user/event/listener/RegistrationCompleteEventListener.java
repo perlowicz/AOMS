@@ -1,6 +1,6 @@
-package com.example.aoms.event.listener;
+package com.example.aoms.user.event.listener;
 
-import com.example.aoms.event.RegistrationCompleteEvent;
+import com.example.aoms.user.event.RegistrationCompleteEvent;
 import com.example.aoms.user.UserDto;
 import com.example.aoms.user.UserService;
 import com.example.aoms.user.token.VerificationTokenDto;
