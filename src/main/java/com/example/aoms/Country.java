@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Country {
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "country", nullable = false, length = 256)
     private String country;

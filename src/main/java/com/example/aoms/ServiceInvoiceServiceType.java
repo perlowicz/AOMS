@@ -14,7 +14,7 @@ import java.util.Set;
 public class ServiceInvoiceServiceType {
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "type", nullable = false, length = 256)
     private String type;

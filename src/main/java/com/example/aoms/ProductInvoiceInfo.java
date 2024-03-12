@@ -13,7 +13,7 @@ import java.time.Instant;
 public class ProductInvoiceInfo {
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

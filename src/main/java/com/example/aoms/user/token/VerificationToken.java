@@ -29,15 +29,4 @@ public class VerificationToken {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-//    public VerificationToken(String token, User user) {
-//        super();
-//        this.token = token;
-//        this.user = user;
-//    }
-//
-//    public VerificationToken(String token) {
-//        super();
-//        this.token = token;
-//    }
 }

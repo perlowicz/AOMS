@@ -13,7 +13,7 @@ import java.time.Instant;
 public class ServiceInvoiceInfo {
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "scope", nullable = false, length = 256)
     private String scope;

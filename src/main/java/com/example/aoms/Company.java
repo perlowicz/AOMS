@@ -15,7 +15,7 @@ import java.util.Set;
 public class Company {
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 200)
     private String name;
