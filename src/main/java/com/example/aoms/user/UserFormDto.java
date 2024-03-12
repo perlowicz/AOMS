@@ -10,11 +10,11 @@ import lombok.Data;
 public class UserFormDto {
     @JsonProperty("username")
     @Nonnull
-    String userName;
+    private String userName;
     @JsonProperty("email")
     @Nonnull
-    String email;
+    private String email;
     @JsonProperty("password")
     @Nonnull
-    String password;
+    private String password;
 }

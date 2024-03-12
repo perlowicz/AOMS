@@ -1,5 +1,8 @@
 package com.example.aoms.country;
 
+import java.util.Optional;
+
 public interface CountryService {
-    void save(CountryDto dto);
+    Country save(CountrySaveDto dto);
+    Optional<Country> findByCountry(String country);
 }

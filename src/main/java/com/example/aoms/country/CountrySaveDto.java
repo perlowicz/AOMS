@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CountryDto {
-    private Long id;
+public class CountrySaveDto {
     private String country;
 }

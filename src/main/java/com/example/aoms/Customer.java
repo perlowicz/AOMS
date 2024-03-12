@@ -1,5 +1,6 @@
 package com.example.aoms;
 
+import com.example.aoms.address.Address;
 import com.example.aoms.invoice.Invoice;
 import jakarta.persistence.*;
 import lombok.Getter;

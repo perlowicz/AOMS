@@ -1,4 +1,4 @@
-package com.example.aoms;
+package com.example.aoms.address;
 
 import com.example.aoms.country.Country;
 import jakarta.persistence.*;
