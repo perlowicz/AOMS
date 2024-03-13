@@ -1,6 +1,6 @@
 package com.example.aoms.invoice;
 
-import com.example.aoms.Company;
+import com.example.aoms.company.Company;
 import com.example.aoms.Customer;
 import com.example.aoms.ProductInvoiceInfo;
 import com.example.aoms.invoice_service.ServiceInvoiceInfo;

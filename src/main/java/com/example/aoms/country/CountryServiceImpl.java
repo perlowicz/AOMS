@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.example.aoms.country.CountryMapper.mapSaveDtoToEntity;
+
 @Service
 @RequiredArgsConstructor
 public class CountryServiceImpl implements CountryService {
@@ -21,18 +23,5 @@ public class CountryServiceImpl implements CountryService {
     public Optional<Country> findByCountry(String country) {
         return countryRepository
                 .findCountryByCountry(country);
-    }
-
-    private Country mapSaveDtoToEntity(CountrySaveDto dto) {
-        Country entity = new Country();
-        entity.setCountry(dto.getCountry());
-        return entity;
-    }
-
-    private CountryDto mapEntityToDto(Country entity) {
-        return CountryDto.builder()
-                .id(entity.getId())
-                .country(entity.getCountry())
-                .build();
     }
 }

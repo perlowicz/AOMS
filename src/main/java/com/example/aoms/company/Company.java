@@ -1,4 +1,4 @@
-package com.example.aoms;
+package com.example.aoms.company;
 
 import com.example.aoms.address.Address;
 import com.example.aoms.invoice.Invoice;

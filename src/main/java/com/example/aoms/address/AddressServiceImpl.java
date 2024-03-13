@@ -1,6 +1,7 @@
 package com.example.aoms.address;
 
 import com.example.aoms.country.Country;
+import com.example.aoms.country.CountryMapper;
 import com.example.aoms.country.CountrySaveDto;
 import com.example.aoms.country.CountryService;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,20 @@ public class AddressServiceImpl implements AddressService {
     private final CountryService countryService;
 
     @Override
-    public void save(AddressDto dto) {
+    public AddressDto save(AddressDto dto) {
         Address entity = mapDtoToEntity(dto);
         setCountryRelation(entity, dto);
-        addressRepository.save(entity);
+        Address savedEntity = addressRepository.save(entity);
+        return mapEntityToDto(savedEntity);
+    }
+
+    private AddressDto mapEntityToDto(Address entity) {
+        return AddressDto.builder()
+                .city(entity.getCity())
+                .streetName(entity.getStreetName())
+                .streetNumber(entity.getStreetNumber())
+                .country(CountryMapper.mapEntityToDto(entity.getCountry()))
+                .build();
     }
 
     private Address mapDtoToEntity(AddressDto dto) {
