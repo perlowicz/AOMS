@@ -1,7 +1,7 @@
-package com.example.aoms;
+package com.example.aoms.customer.entity;
 
 import com.example.aoms.address.entity.Address;
-import com.example.aoms.invoice.Invoice;
+import com.example.aoms.invoice.entity.Invoice;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +16,11 @@ import java.util.Set;
 public class Customer {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false)
-    private Integer name;
+    private String name;
 
     @Column(name = "nip", nullable = false, length = 10)
     private String nip;

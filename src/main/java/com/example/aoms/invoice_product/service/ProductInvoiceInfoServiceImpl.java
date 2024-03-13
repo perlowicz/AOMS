@@ -21,11 +21,10 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
 
     @Override
     @Transactional
-    public ProductInvoiceInfoDto save(ProductInvoiceInfoDto dto) {
+    public ProductInvoiceInfo save(ProductInvoiceInfoDto dto) {
         ProductInvoiceProductType productType = findOrCreateProductType(dto.getProductType());
         ProductInvoiceInfo entity = mapDtoToEntity(dto, productType);
-        ProductInvoiceInfo savedEntity = productInvoiceInfoRepository.save(entity);
-        return mapEntityToDto(savedEntity);
+        return productInvoiceInfoRepository.save(entity);
     }
 
     @SneakyThrows

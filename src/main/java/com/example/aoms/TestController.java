@@ -4,7 +4,11 @@ import com.example.aoms.address.dto.AddressDto;
 import com.example.aoms.address.service.AddressService;
 import com.example.aoms.company.dto.CompanyDto;
 import com.example.aoms.company.service.CompanyService;
-import com.example.aoms.invoice.CustomerDto;
+import com.example.aoms.customer.dto.CustomerDto;
+import com.example.aoms.customer.service.CustomerService;
+import com.example.aoms.invoice.dto.InvoiceDto;
+import com.example.aoms.invoice.entity.Invoice;
+import com.example.aoms.invoice.service.InvoiceService;
 import com.example.aoms.invoice_product.dto.ProductInvoiceInfoDto;
 import com.example.aoms.invoice_product.service.ProductInvoiceInfoService;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +23,17 @@ public class TestController {
 
     private final ProductInvoiceInfoService productInvoiceInfoService;
     private final AddressService addressService;
-//    private final CustomerService customerService;
+    private final CustomerService customerService;
     private final CompanyService companyService;
+    private final InvoiceService invoiceService;
 
 
     @PostMapping("/product")
     ResponseEntity<?> saveProductType(@RequestBody ProductInvoiceInfoDto dto) {
-        ProductInvoiceInfoDto savedProductType = productInvoiceInfoService.save(dto);
+        productInvoiceInfoService.save(dto);
         return ResponseEntity
                 .status(201)
-                .body(savedProductType);
+                .build();
     }
 
     @PostMapping("/address")
@@ -47,5 +52,19 @@ public class TestController {
                 .build();
     }
 
+    @PostMapping("/customer")
+    ResponseEntity<?> customer(@RequestBody CustomerDto dto) {
+        customerService.save(dto);
+        return ResponseEntity
+                .status(201)
+                .build();
+    }
 
+    @PostMapping("/invoice")
+    ResponseEntity<?> invoice(@RequestBody InvoiceDto dto) {
+        invoiceService.save(dto);
+        return ResponseEntity
+                .status(201)
+                .build();
+    }
 }

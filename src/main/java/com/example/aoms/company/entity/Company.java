@@ -1,7 +1,7 @@
 package com.example.aoms.company.entity;
 
 import com.example.aoms.address.entity.Address;
-import com.example.aoms.invoice.Invoice;
+import com.example.aoms.invoice.entity.Invoice;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -21,11 +21,10 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
 
     @Override
     @Transactional
-    public ServiceInvoiceInfoDto save(ServiceInvoiceInfoDto dto) {
+    public ServiceInvoiceInfo save(ServiceInvoiceInfoDto dto) {
         ServiceInvoiceServiceType serviceType = findServiceType(dto.getServiceType());
         ServiceInvoiceInfo entity = mapDtoToEntity(dto, serviceType);
-        ServiceInvoiceInfo savedEntity = serviceInvoiceInfoRepository.save(entity);
-        return mapEntityToDto(savedEntity);
+        return serviceInvoiceInfoRepository.save(entity);
     }
 
     @SneakyThrows

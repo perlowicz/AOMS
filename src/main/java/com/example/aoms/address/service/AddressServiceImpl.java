@@ -9,6 +9,7 @@ import com.example.aoms.address.dto.CountryDto;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -19,6 +20,7 @@ public class AddressServiceImpl implements AddressService {
     private final CountryRepository countryRepository;
 
     @Override
+    @Transactional
     public Address save(AddressDto dto) {
         Country country = findOrCreateCountry(dto.getCountry());
         Address entity = mapDtoToEntity(dto, country);
