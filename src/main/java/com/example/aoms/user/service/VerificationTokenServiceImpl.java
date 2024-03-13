@@ -1,6 +1,9 @@
-package com.example.aoms.user.token;
+package com.example.aoms.user.service;
 
+import com.example.aoms.user.dto.VerificationTokenDto;
+import com.example.aoms.user.entity.VerificationToken;
 import com.example.aoms.user.mappers.VerificationTokenMapper;
+import com.example.aoms.user.repository.VerificationTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

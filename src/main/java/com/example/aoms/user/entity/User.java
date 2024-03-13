@@ -1,4 +1,4 @@
-package com.example.aoms.user;
+package com.example.aoms.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

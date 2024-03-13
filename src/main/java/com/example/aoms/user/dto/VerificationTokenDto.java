@@ -1,6 +1,6 @@
-package com.example.aoms.user.token;
+package com.example.aoms.user.dto;
 
-import com.example.aoms.user.UserDto;
+import com.example.aoms.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Data;
 

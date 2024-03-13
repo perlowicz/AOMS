@@ -1,8 +1,11 @@
-package com.example.aoms.user;
+package com.example.aoms.user.controller;
 
+import com.example.aoms.user.dto.UserDto;
+import com.example.aoms.user.dto.UserFormDto;
 import com.example.aoms.user.event.RegistrationCompleteEvent;
-import com.example.aoms.user.token.VerificationTokenDto;
-import com.example.aoms.user.token.VerificationTokenService;
+import com.example.aoms.user.service.UserService;
+import com.example.aoms.user.dto.VerificationTokenDto;
+import com.example.aoms.user.service.VerificationTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;

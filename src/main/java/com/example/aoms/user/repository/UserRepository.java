@@ -1,5 +1,6 @@
-package com.example.aoms.user;
+package com.example.aoms.user.repository;
 
+import com.example.aoms.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

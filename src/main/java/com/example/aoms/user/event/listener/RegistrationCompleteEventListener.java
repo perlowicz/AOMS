@@ -1,9 +1,9 @@
 package com.example.aoms.user.event.listener;
 
 import com.example.aoms.user.event.RegistrationCompleteEvent;
-import com.example.aoms.user.UserDto;
-import com.example.aoms.user.UserService;
-import com.example.aoms.user.token.VerificationTokenDto;
+import com.example.aoms.user.dto.UserDto;
+import com.example.aoms.user.service.UserService;
+import com.example.aoms.user.dto.VerificationTokenDto;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

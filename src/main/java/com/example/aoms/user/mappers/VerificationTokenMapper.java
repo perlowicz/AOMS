@@ -1,9 +1,9 @@
 package com.example.aoms.user.mappers;
 
-import com.example.aoms.user.User;
-import com.example.aoms.user.UserDto;
-import com.example.aoms.user.token.VerificationToken;
-import com.example.aoms.user.token.VerificationTokenDto;
+import com.example.aoms.user.entity.User;
+import com.example.aoms.user.dto.UserDto;
+import com.example.aoms.user.entity.VerificationToken;
+import com.example.aoms.user.dto.VerificationTokenDto;
 
 public class VerificationTokenMapper {
 

@@ -1,4 +1,4 @@
-package com.example.aoms.user;
+package com.example.aoms.user.dto;
 
 import lombok.Builder;
 import lombok.Data;

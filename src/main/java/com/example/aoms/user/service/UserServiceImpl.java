@@ -1,16 +1,22 @@
-package com.example.aoms.user;
+package com.example.aoms.user.service;
 
+import com.example.aoms.user.dto.UserDto;
+import com.example.aoms.user.dto.UserFormDto;
+import com.example.aoms.user.entity.User;
 import com.example.aoms.user.exception.UserAlreadyExistsException;
 import com.example.aoms.user.exception.UserNotFoundException;
+import com.example.aoms.user.mappers.UserMapper;
 import com.example.aoms.user.mappers.VerificationTokenMapper;
-import com.example.aoms.user.token.VerificationToken;
-import com.example.aoms.user.token.VerificationTokenDto;
-import com.example.aoms.user.token.VerificationTokenRepository;
+import com.example.aoms.user.repository.UserRepository;
+import com.example.aoms.user.entity.VerificationToken;
+import com.example.aoms.user.dto.VerificationTokenDto;
+import com.example.aoms.user.repository.VerificationTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.example.aoms.user.mappers.UserMapper.mapDtoToEntity;
@@ -24,6 +30,12 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;
 
+
+    @Override
+    public Optional<UserDto> findUserById(Long id) {
+        return userRepository.findById(id)
+                .map(UserMapper::mapEntityToDto);
+    }
 
     @Override
     public UserDto registerUser(UserFormDto userFormDto) {

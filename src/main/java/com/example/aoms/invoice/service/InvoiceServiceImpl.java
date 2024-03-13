@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class InvoiceServiceImpl implements InvoiceService {
@@ -25,6 +27,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     private final ProductInvoiceInfoService productInvoiceInfoService;
     private final ServiceInvoiceInfoService serviceInvoiceInfoService;
 
+
+    @Override
+    public List<InvoiceDto> findAllByUserId(Long userId) {
+        //TODO zastanowić się jak ograć relację usera i company.
+    }
 
     @Override
     @Transactional

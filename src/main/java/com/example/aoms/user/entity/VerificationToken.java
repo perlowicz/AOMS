@@ -1,6 +1,6 @@
-package com.example.aoms.user.token;
+package com.example.aoms.user.entity;
 
-import com.example.aoms.user.User;
+import com.example.aoms.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

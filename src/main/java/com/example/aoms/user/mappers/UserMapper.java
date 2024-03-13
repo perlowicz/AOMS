@@ -1,8 +1,8 @@
 package com.example.aoms.user.mappers;
 
-import com.example.aoms.user.User;
-import com.example.aoms.user.UserDto;
-import com.example.aoms.user.UserFormDto;
+import com.example.aoms.user.entity.User;
+import com.example.aoms.user.dto.UserDto;
+import com.example.aoms.user.dto.UserFormDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserMapper {

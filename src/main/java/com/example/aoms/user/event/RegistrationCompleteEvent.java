@@ -1,6 +1,6 @@
 package com.example.aoms.user.event;
 
-import com.example.aoms.user.UserDto;
+import com.example.aoms.user.dto.UserDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
