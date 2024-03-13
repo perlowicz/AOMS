@@ -1,16 +1,15 @@
 package com.example.aoms;
 
-import com.example.aoms.address.dto.AddressDto;
-import com.example.aoms.address.service.AddressService;
-import com.example.aoms.company.dto.CompanyDto;
-import com.example.aoms.company.service.CompanyService;
-import com.example.aoms.customer.dto.CustomerDto;
-import com.example.aoms.customer.service.CustomerService;
-import com.example.aoms.invoice.dto.InvoiceDto;
-import com.example.aoms.invoice.entity.Invoice;
-import com.example.aoms.invoice.service.InvoiceService;
-import com.example.aoms.invoice_product.dto.ProductInvoiceInfoDto;
-import com.example.aoms.invoice_product.service.ProductInvoiceInfoService;
+import com.example.aoms.database.address.dto.AddressDto;
+import com.example.aoms.database.address.service.AddressService;
+import com.example.aoms.database.company.dto.CompanyDto;
+import com.example.aoms.database.company.service.CompanyService;
+import com.example.aoms.database.customer.dto.CustomerDto;
+import com.example.aoms.database.customer.service.CustomerService;
+import com.example.aoms.database.invoice.dto.InvoiceDto;
+import com.example.aoms.database.invoice.service.InvoiceService;
+import com.example.aoms.database.invoice_product.dto.ProductInvoiceInfoDto;
+import com.example.aoms.database.invoice_product.service.ProductInvoiceInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
