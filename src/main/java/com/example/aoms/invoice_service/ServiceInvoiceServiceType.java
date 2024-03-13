@@ -13,6 +13,7 @@ import java.util.Set;
 @Table(name = "service_invoice_service_type", schema = "app")
 public class ServiceInvoiceServiceType {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

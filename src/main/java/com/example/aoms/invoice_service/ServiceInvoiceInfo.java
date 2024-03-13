@@ -13,6 +13,7 @@ import java.time.Instant;
 public class ServiceInvoiceInfo {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "scope", nullable = false, length = 256)

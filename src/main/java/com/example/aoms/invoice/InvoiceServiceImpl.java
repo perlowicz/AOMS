@@ -20,7 +20,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     private final CountryService countryService;
     private final AddressService addressService;
     private final CompanyService companyService;
-    private final CustomerService customerService;
+//    private final CustomerService customerService;
 
 
     @Override
@@ -34,7 +34,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         AddressDto customerAddressSaved = addressService.save(dto.getCustomerDto().getAddressDto());
 
         CompanyDto savedCompany = companyService.save(dto.getCompanyDto());
-        CustomerDto savedCustomer = customerService.save(dto.getCustomerDto());
+//        CustomerDto savedCustomer = customerService.save(dto.getCustomerDto());
 
 
         Invoice entity = mapDtoToEntity(dto);

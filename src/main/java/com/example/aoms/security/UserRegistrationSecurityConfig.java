@@ -40,7 +40,12 @@ public class UserRegistrationSecurityConfig {
                 .authorizeHttpRequests((
                         authorize ->
                                 authorize
-                                        .requestMatchers("/register/**", "/register/verifyEmail").permitAll()
+                                        .requestMatchers(
+                                                "/register/**",
+                                                "/register/verifyEmail",
+                                                "/service",
+                                                "/info")
+                                        .permitAll()
                                         .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
                                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         ))
