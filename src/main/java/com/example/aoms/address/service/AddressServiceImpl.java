@@ -19,11 +19,10 @@ public class AddressServiceImpl implements AddressService {
     private final CountryRepository countryRepository;
 
     @Override
-    public AddressDto save(AddressDto dto) {
+    public Address save(AddressDto dto) {
         Country country = findOrCreateCountry(dto.getCountry());
         Address entity = mapDtoToEntity(dto, country);
-        Address savedEntity = addressRepository.save(entity);
-        return mapEntityToDto(savedEntity);
+        return addressRepository.save(entity);
     }
 
     @SneakyThrows
@@ -53,6 +52,7 @@ public class AddressServiceImpl implements AddressService {
 
     private AddressDto mapEntityToDto(Address entity) {
         return AddressDto.builder()
+                .id(entity.getId())
                 .city(entity.getCity())
                 .streetNumber(entity.getStreetNumber())
                 .streetName(entity.getStreetName())

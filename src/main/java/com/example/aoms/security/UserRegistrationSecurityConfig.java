@@ -46,7 +46,8 @@ public class UserRegistrationSecurityConfig {
                                                 "/service",
                                                 "/info",
                                                 "/product",
-                                                "/address")
+                                                "/address",
+                                                "/company")
                                         .permitAll()
                                         .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
                                         .requestMatchers("/admin/**").hasAuthority("ADMIN")

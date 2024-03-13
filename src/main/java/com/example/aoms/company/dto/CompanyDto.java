@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CompanyDto {
-    private AddressDto addressDto;
+    private AddressDto address;
     private String name;
     private String NIP;
 }
