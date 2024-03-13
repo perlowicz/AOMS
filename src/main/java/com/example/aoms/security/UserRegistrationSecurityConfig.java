@@ -44,7 +44,8 @@ public class UserRegistrationSecurityConfig {
                                                 "/register/**",
                                                 "/register/verifyEmail",
                                                 "/service",
-                                                "/info")
+                                                "/info",
+                                                "/product")
                                         .permitAll()
                                         .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
                                         .requestMatchers("/admin/**").hasAuthority("ADMIN")

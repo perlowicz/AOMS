@@ -1,4 +1,4 @@
-package com.example.aoms.invoice_service;
+package com.example.aoms.invoice_service.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

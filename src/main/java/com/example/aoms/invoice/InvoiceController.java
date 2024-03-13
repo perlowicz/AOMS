@@ -1,7 +1,7 @@
 package com.example.aoms.invoice;
 
-import com.example.aoms.invoice_service.ServiceInvoiceInfoDto;
-import com.example.aoms.invoice_service.ServiceInvoiceInfoService;
+import com.example.aoms.invoice_service.dto.ServiceInvoiceInfoDto;
+import com.example.aoms.invoice_service.service.ServiceInvoiceInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

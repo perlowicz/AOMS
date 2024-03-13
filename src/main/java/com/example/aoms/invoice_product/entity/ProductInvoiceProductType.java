@@ -1,4 +1,4 @@
-package com.example.aoms;
+package com.example.aoms.invoice_product.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,6 +13,7 @@ import java.util.Set;
 @Table(name = "product_invoice_product_type", schema = "app")
 public class ProductInvoiceProductType {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

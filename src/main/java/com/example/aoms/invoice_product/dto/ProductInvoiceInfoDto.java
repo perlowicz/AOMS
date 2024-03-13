@@ -1,4 +1,4 @@
-package com.example.aoms.invoice_service;
+package com.example.aoms.invoice_product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +11,9 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceInvoiceInfoDto {
-    private String scope;
+public class ProductInvoiceInfoDto {
+    private String name;
+    private Integer quantity;
     private Instant date;
-    private ServiceInvoiceServiceTypeDto serviceType;
+    private ProductInvoiceProductTypeDto productType;
 }

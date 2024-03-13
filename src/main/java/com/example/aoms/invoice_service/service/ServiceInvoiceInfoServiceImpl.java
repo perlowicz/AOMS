@@ -1,5 +1,11 @@
-package com.example.aoms.invoice_service;
+package com.example.aoms.invoice_service.service;
 
+import com.example.aoms.invoice_service.entity.ServiceInvoiceInfo;
+import com.example.aoms.invoice_service.dto.ServiceInvoiceInfoDto;
+import com.example.aoms.invoice_service.entity.ServiceInvoiceServiceType;
+import com.example.aoms.invoice_service.dto.ServiceInvoiceServiceTypeDto;
+import com.example.aoms.invoice_service.repository.ServiceInvoiceInfoRepository;
+import com.example.aoms.invoice_service.repository.ServiceInvoiceServiceTypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -34,6 +40,7 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
 
     private ServiceInvoiceInfo mapDtoToEntity(ServiceInvoiceInfoDto dto, ServiceInvoiceServiceType serviceType) {
         ServiceInvoiceInfo entity = new ServiceInvoiceInfo();
+        entity.setName(dto.getName());
         entity.setServiceType(serviceType);
         entity.setDate(dto.getDate());
         entity.setScope(dto.getScope());
@@ -48,6 +55,7 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
 
     private ServiceInvoiceInfoDto mapEntityToDto(ServiceInvoiceInfo entity) {
         return ServiceInvoiceInfoDto.builder()
+                .name(entity.getName())
                 .date(entity.getDate())
                 .scope(entity.getScope())
                 .serviceType(mapServiceTypeEntityToDto(entity.getServiceType()))

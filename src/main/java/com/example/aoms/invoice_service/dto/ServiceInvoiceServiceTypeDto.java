@@ -1,4 +1,4 @@
-package com.example.aoms.invoice_service;
+package com.example.aoms.invoice_service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

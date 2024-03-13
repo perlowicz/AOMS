@@ -1,4 +1,4 @@
-package com.example.aoms.invoice_service;
+package com.example.aoms.invoice_service.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,5 +25,8 @@ public class ServiceInvoiceInfo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_type_id", nullable = false)
     private ServiceInvoiceServiceType serviceType;
+
+    @Column(name = "name", length = 256)
+    private String name;
 
 }

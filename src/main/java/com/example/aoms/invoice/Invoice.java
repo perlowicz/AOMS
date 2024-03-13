@@ -2,8 +2,8 @@ package com.example.aoms.invoice;
 
 import com.example.aoms.company.Company;
 import com.example.aoms.Customer;
-import com.example.aoms.ProductInvoiceInfo;
-import com.example.aoms.invoice_service.ServiceInvoiceInfo;
+import com.example.aoms.invoice_product.entity.ProductInvoiceInfo;
+import com.example.aoms.invoice_service.entity.ServiceInvoiceInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

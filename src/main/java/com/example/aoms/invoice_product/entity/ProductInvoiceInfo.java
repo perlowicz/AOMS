@@ -1,4 +1,4 @@
-package com.example.aoms;
+package com.example.aoms.invoice_product.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,6 +12,7 @@ import java.time.Instant;
 @Table(name = "product_invoice_info", schema = "app")
 public class ProductInvoiceInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -24,5 +25,8 @@ public class ProductInvoiceInfo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_type_id", nullable = false)
     private ProductInvoiceProductType productType;
+
+    @Column(name = "name", length = 256)
+    private String name;
 
 }

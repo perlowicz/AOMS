@@ -1,7 +1,8 @@
 package com.example.aoms.invoice;
 
 import com.example.aoms.company.CompanyDto;
-import com.example.aoms.invoice_service.ServiceInvoiceInfoDto;
+import com.example.aoms.invoice_product.dto.ProductInvoiceInfoDto;
+import com.example.aoms.invoice_service.dto.ServiceInvoiceInfoDto;
 import lombok.Builder;
 import lombok.Data;
 
