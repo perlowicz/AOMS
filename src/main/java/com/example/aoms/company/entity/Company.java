@@ -1,6 +1,6 @@
-package com.example.aoms.company;
+package com.example.aoms.company.entity;
 
-import com.example.aoms.address.Address;
+import com.example.aoms.address.entity.Address;
 import com.example.aoms.invoice.Invoice;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,6 +16,7 @@ import java.util.Set;
 public class Company {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false, length = 200)

@@ -1,5 +1,7 @@
 package com.example.aoms;
 
+import com.example.aoms.address.dto.AddressDto;
+import com.example.aoms.address.service.AddressService;
 import com.example.aoms.invoice_product.dto.ProductInvoiceInfoDto;
 import com.example.aoms.invoice_product.service.ProductInvoiceInfoService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private final ProductInvoiceInfoService productInvoiceInfoService;
+    private final AddressService addressService;
 
 
     @PostMapping("/product")
@@ -21,5 +24,13 @@ public class TestController {
         return ResponseEntity
                 .status(201)
                 .body(savedProductType);
+    }
+
+    @PostMapping("/address")
+    ResponseEntity<?> saveAddress(@RequestBody AddressDto dto) {
+        AddressDto save = addressService.save(dto);
+        return ResponseEntity
+                .status(201)
+                .body(save);
     }
 }

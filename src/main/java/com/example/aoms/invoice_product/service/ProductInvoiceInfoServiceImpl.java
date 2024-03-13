@@ -22,14 +22,14 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
     @Override
     @Transactional
     public ProductInvoiceInfoDto save(ProductInvoiceInfoDto dto) {
-        ProductInvoiceProductType productType = findProductType(dto.getProductType());
+        ProductInvoiceProductType productType = findOrCreateProductType(dto.getProductType());
         ProductInvoiceInfo entity = mapDtoToEntity(dto, productType);
         ProductInvoiceInfo savedEntity = productInvoiceInfoRepository.save(entity);
         return mapEntityToDto(savedEntity);
     }
 
     @SneakyThrows
-    private ProductInvoiceProductType findProductType(ProductInvoiceProductTypeDto productTypeDto) {
+    private ProductInvoiceProductType findOrCreateProductType(ProductInvoiceProductTypeDto productTypeDto) {
         return productInvoiceProductTypeRepository
                 .findByType(productTypeDto.getType())
                 .orElseGet(() -> {
@@ -38,18 +38,18 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
                 });
     }
 
+    private ProductInvoiceProductType mapProductTypeDtoToEntity(ProductInvoiceProductTypeDto dto) {
+        ProductInvoiceProductType entity = new ProductInvoiceProductType();
+        entity.setType(dto.getType());
+        return entity;
+    }
+
     private ProductInvoiceInfo mapDtoToEntity(ProductInvoiceInfoDto dto, ProductInvoiceProductType productType) {
         ProductInvoiceInfo entity = new ProductInvoiceInfo();
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
         entity.setQuantity(dto.getQuantity());
         entity.setProductType(productType);
-        return entity;
-    }
-
-    private ProductInvoiceProductType mapProductTypeDtoToEntity(ProductInvoiceProductTypeDto dto) {
-        ProductInvoiceProductType entity = new ProductInvoiceProductType();
-        entity.setType(dto.getType());
         return entity;
     }
 

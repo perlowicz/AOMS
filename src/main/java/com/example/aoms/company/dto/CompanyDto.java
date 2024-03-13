@@ -1,6 +1,6 @@
-package com.example.aoms.company;
+package com.example.aoms.company.dto;
 
-import com.example.aoms.address.AddressDto;
+import com.example.aoms.address.dto.AddressDto;
 import lombok.Builder;
 import lombok.Data;
 

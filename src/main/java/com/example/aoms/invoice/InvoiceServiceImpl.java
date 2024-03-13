@@ -1,11 +1,9 @@
 package com.example.aoms.invoice;
 
-import com.example.aoms.address.AddressDto;
-import com.example.aoms.address.AddressService;
-import com.example.aoms.company.CompanyDto;
-import com.example.aoms.company.CompanyService;
-import com.example.aoms.country.Country;
-import com.example.aoms.country.CountryService;
+import com.example.aoms.address.dto.AddressDto;
+import com.example.aoms.address.service.AddressService;
+import com.example.aoms.company.dto.CompanyDto;
+import com.example.aoms.company.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +15,7 @@ import static com.example.aoms.invoice.InvoiceMapper.mapDtoToEntity;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
-    private final CountryService countryService;
+//    private final CountryService countryService;
     private final AddressService addressService;
     private final CompanyService companyService;
 //    private final CustomerService customerService;
@@ -27,8 +25,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Transactional
     public Long save(InvoiceFormDto dto) {
 
-        Country companySavedCountry = countryService.save(dto.getCompanyDto().getAddressDto().getCountry());
-        Country customerSavedCountry = countryService.save(dto.getCustomerDto().getAddressDto().getCountry());
+//        Country companySavedCountry = countryService.save(dto.getCompanyDto().getAddressDto().getCountry());
+//        Country customerSavedCountry = countryService.save(dto.getCustomerDto().getAddressDto().getCountry());
 
         AddressDto companyAddressSaved = addressService.save(dto.getCompanyDto().getAddressDto());
         AddressDto customerAddressSaved = addressService.save(dto.getCustomerDto().getAddressDto());

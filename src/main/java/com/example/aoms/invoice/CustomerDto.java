@@ -1,6 +1,6 @@
 package com.example.aoms.invoice;
 
-import com.example.aoms.address.AddressDto;
+import com.example.aoms.address.dto.AddressDto;
 import lombok.Builder;
 import lombok.Data;
 

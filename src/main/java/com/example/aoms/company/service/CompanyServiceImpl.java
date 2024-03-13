@@ -1,7 +1,9 @@
-package com.example.aoms.company;
+package com.example.aoms.company.service;
 
-import com.example.aoms.address.AddressDto;
-import com.example.aoms.address.AddressService;
+import com.example.aoms.address.dto.AddressDto;
+import com.example.aoms.address.service.AddressService;
+import com.example.aoms.company.dto.CompanyDto;
+import com.example.aoms.company.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

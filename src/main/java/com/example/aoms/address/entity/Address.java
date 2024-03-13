@@ -1,6 +1,5 @@
-package com.example.aoms.address;
+package com.example.aoms.address.entity;
 
-import com.example.aoms.country.Country;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +11,7 @@ import lombok.Setter;
 public class Address {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
