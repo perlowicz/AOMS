@@ -29,14 +29,6 @@ public class Invoice {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "service_invoice_info_id")
-    private ServiceInvoiceInfo serviceInvoiceInfo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_invoice_info_id")
-    private ProductInvoiceInfo productInvoiceInfo;
-
     @Column(name = "number", nullable = false, length = 256)
     private String number;
 

@@ -1,5 +1,6 @@
 package com.example.aoms.api.invoice_product.service;
 
+import com.example.aoms.api.invoice.entity.Invoice;
 import com.example.aoms.api.invoice_product.dto.ProductInvoiceInfoDto;
 import com.example.aoms.api.invoice_product.repository.ProductInvoiceInfoRepository;
 import com.example.aoms.api.invoice_product.repository.ProductInvoiceProductTypeRepository;
@@ -11,6 +12,9 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService {
@@ -21,10 +25,22 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
 
     @Override
     @Transactional
-    public ProductInvoiceInfo save(ProductInvoiceInfoDto dto) {
+    public ProductInvoiceInfo save(ProductInvoiceInfoDto dto, Invoice invoice) {
         ProductInvoiceProductType productType = findOrCreateProductType(dto.getProductType());
-        ProductInvoiceInfo entity = mapDtoToEntity(dto, productType);
+        ProductInvoiceInfo entity = mapDtoToEntity(dto, productType, invoice);
         return productInvoiceInfoRepository.save(entity);
+    }
+
+    @Override
+    @Transactional
+    public List<ProductInvoiceInfo> saveAll(List<ProductInvoiceInfoDto> dtoList, Invoice invoice) {
+        List<ProductInvoiceInfo> entities = dtoList.stream()
+                .map(dto -> {
+                    ProductInvoiceProductType productType = findOrCreateProductType(dto.getProductType());
+                    return mapDtoToEntity(dto, productType, invoice);
+                })
+                .collect(Collectors.toList());
+        return productInvoiceInfoRepository.saveAll(entities);
     }
 
     @SneakyThrows
@@ -43,12 +59,14 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
         return entity;
     }
 
-    private ProductInvoiceInfo mapDtoToEntity(ProductInvoiceInfoDto dto, ProductInvoiceProductType productType) {
+    private ProductInvoiceInfo mapDtoToEntity(ProductInvoiceInfoDto dto, ProductInvoiceProductType productType,
+                                              Invoice invoice) {
         ProductInvoiceInfo entity = new ProductInvoiceInfo();
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
         entity.setQuantity(dto.getQuantity());
         entity.setProductType(productType);
+        entity.setInvoice(invoice);
         return entity;
     }
 

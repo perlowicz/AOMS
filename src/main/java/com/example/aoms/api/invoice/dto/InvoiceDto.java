@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @Builder
@@ -25,6 +26,6 @@ public class InvoiceDto {
     private BigDecimal overallValue;
     private CompanyDto company;
     private CustomerDto customer;
-    private ServiceInvoiceInfoDto serviceInvoiceInfo;
-    private ProductInvoiceInfoDto productInvoiceInfo;
+    private List<ServiceInvoiceInfoDto> listOfServiceInvoiceInfo;
+    private List<ProductInvoiceInfoDto> listOfProductInvoiceInfo;
 }

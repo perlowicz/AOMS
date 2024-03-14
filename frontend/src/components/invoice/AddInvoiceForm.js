@@ -29,26 +29,21 @@ export default function AddInvoiceForm() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //
-    //     const formData = {
-    //         userName: event.target[0].value,
-    //         email: event.target[2].value,
-    //         password: event.target[4].value
-    //     };
-    //
-    //     try {
-    //         const response = await axios.post('http://localhost:8080/api/invoice/addInvoice', formData);
-    //         if (response.status === 200 || response.status === 201) {
-    //             console.log('Registration successful');
-    //         } else {
-    //             console.log('Registration failed');
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        console.log('formData: ' + formData);
+        // try {
+        //     const response = await axios.post('http://localhost:8080/api/invoice/addInvoice', formData);
+        //     if (response.status === 201) {
+        //         console.log('New invoice added successfully!');
+        //     } else {
+        //         console.log('Adding new invoice failed');
+        //     }
+        // } catch (error) {
+        //     console.log(error);
+        // }
+    }
 
     return (
         <Box
@@ -109,7 +104,9 @@ export default function AddInvoiceForm() {
             )}
 
             {activeStep === 5 && (
-                <Button>
+                <Button
+                    onClick={handleSubmit}
+                >
                     Submit
                 </Button>
             )}

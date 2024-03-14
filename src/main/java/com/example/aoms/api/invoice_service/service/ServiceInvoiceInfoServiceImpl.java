@@ -1,5 +1,6 @@
 package com.example.aoms.api.invoice_service.service;
 
+import com.example.aoms.api.invoice.entity.Invoice;
 import com.example.aoms.api.invoice_service.dto.ServiceInvoiceInfoDto;
 import com.example.aoms.api.invoice_service.dto.ServiceInvoiceServiceTypeDto;
 import com.example.aoms.api.invoice_service.entity.ServiceInvoiceInfo;
@@ -11,6 +12,9 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService {
@@ -21,14 +25,25 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
 
     @Override
     @Transactional
-    public ServiceInvoiceInfo save(ServiceInvoiceInfoDto dto) {
-        ServiceInvoiceServiceType serviceType = findServiceType(dto.getServiceType());
-        ServiceInvoiceInfo entity = mapDtoToEntity(dto, serviceType);
+    public ServiceInvoiceInfo save(ServiceInvoiceInfoDto dto, Invoice invoice) {
+        ServiceInvoiceServiceType serviceType = findOrCreateServiceType(dto.getServiceType());
+        ServiceInvoiceInfo entity = mapDtoToEntity(dto, serviceType, invoice);
         return serviceInvoiceInfoRepository.save(entity);
     }
 
+    @Override
+    public List<ServiceInvoiceInfo> saveAll(List<ServiceInvoiceInfoDto> dtoList, Invoice invoice) {
+        List<ServiceInvoiceInfo> entities = dtoList.stream()
+                .map(dto -> {
+                    ServiceInvoiceServiceType serviceType = findOrCreateServiceType(dto.getServiceType());
+                    return mapDtoToEntity(dto, serviceType, invoice);
+                })
+                .collect(Collectors.toList());
+        return serviceInvoiceInfoRepository.saveAll(entities);
+    }
+
     @SneakyThrows
-    private ServiceInvoiceServiceType findServiceType(ServiceInvoiceServiceTypeDto serviceTypeDto) {
+    private ServiceInvoiceServiceType findOrCreateServiceType(ServiceInvoiceServiceTypeDto serviceTypeDto) {
         return serviceInvoiceServiceTypeRepository
                 .findByType(serviceTypeDto.getType())
                 .orElseGet(() -> {
@@ -37,12 +52,14 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
                 });
     }
 
-    private ServiceInvoiceInfo mapDtoToEntity(ServiceInvoiceInfoDto dto, ServiceInvoiceServiceType serviceType) {
+    private ServiceInvoiceInfo mapDtoToEntity(ServiceInvoiceInfoDto dto, ServiceInvoiceServiceType serviceType,
+                                              Invoice invoice) {
         ServiceInvoiceInfo entity = new ServiceInvoiceInfo();
         entity.setName(dto.getName());
         entity.setServiceType(serviceType);
         entity.setDate(dto.getDate());
         entity.setScope(dto.getScope());
+        entity.setInvoice(invoice);
         return entity;
     }
 

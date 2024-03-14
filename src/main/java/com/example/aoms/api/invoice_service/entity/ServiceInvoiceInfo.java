@@ -1,5 +1,6 @@
 package com.example.aoms.api.invoice_service.entity;
 
+import com.example.aoms.api.invoice.entity.Invoice;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,5 +29,9 @@ public class ServiceInvoiceInfo {
 
     @Column(name = "name", length = 256)
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "invoice_id", nullable = false)
+    private Invoice invoice;
 
 }
