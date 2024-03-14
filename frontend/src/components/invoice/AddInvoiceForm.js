@@ -10,6 +10,9 @@ import {useState} from "react";
 import InvoiceDetailsForm from "./subForms/InvoiceDetailsForm";
 import CompanyDetailsForm from "./subForms/CompanyDetailsForm";
 import CustomerDetailsForm from "./subForms/CustomerDetailsForm";
+import ServiceInvoiceInfoForm from "./subForms/ServiceInvoiceInfoForm";
+import ProductInvoiceInfoForm from "./subForms/ProductInvoiceInfoForm";
+import SummaryInfo from "./subForms/SummaryInfo";
 
 
 export default function AddInvoiceForm() {
@@ -76,6 +79,9 @@ export default function AddInvoiceForm() {
                 <Step>
                     <StepLabel>Usługi na fakturze</StepLabel>
                 </Step>
+                <Step>
+                    <StepLabel>Podsumowanie</StepLabel>
+                </Step>
             </Stepper>
 
             {activeStep === 0 && (
@@ -91,14 +97,27 @@ export default function AddInvoiceForm() {
             )}
 
             {activeStep === 3 && (
-                <ServiceInvoiceInfoForm handleNext={handleNext}/>
-            )}
-
-            {activeStep === 4 && (
                 <ProductInvoiceInfoForm handleNext={handleNext}/>
             )}
 
-            <Button disabled={activeStep === 0} onClick={handleBack}>
+            {activeStep === 4 && (
+                <ServiceInvoiceInfoForm handleNext={handleNext}/>
+            )}
+
+            {activeStep === 5 && (
+                <SummaryInfo handleNext={handleNext}/>
+            )}
+
+            {activeStep === 5 && (
+                <Button>
+                    Submit
+                </Button>
+            )}
+
+            <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+            >
                 Back
             </Button>
         </Box>

@@ -93,7 +93,9 @@ export default function CustomerDetailsForm( {handleNext} ) {
             {/*    value={streetNumber}*/}
             {/*    onChange={(event) => setStreetNumber(event.target.value)}*/}
             {/*/>*/}
-            <Button type="submit">
+            <Button
+                type="submit"
+            >
                 Next
             </Button>
         </Box>

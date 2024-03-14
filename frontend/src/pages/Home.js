@@ -1,5 +1,5 @@
 import Container from "@mui/material/Container";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 
 
 export default function Home() {

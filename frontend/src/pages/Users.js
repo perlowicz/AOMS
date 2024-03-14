@@ -2,7 +2,7 @@ import axios from "axios";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import {List, ListItem} from "@mui/material";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 
 
 
