@@ -49,7 +49,7 @@ public class UserRegistrationSecurityConfig {
                                                 "/address",
                                                 "/company",
                                                 "/customer",
-                                                "/invoice")
+                                                "/invoice/**")
                                         .permitAll()
                                         .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
                                         .requestMatchers("/admin/**").hasAuthority("ADMIN")

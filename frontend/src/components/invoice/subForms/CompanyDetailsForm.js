@@ -40,61 +40,61 @@ export default function CompanyDetailsForm( {handleNext} ) {
                 Dane podatnika
             </Typography>
             <TextField
-                required
+                //required
                 id="company-name-input"
                 label="Nazwa"
                 variant="outlined"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
             />
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="company-nip-input"*/}
-            {/*    label="NIP"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={nip}*/}
-            {/*    onChange={(event) => setNip(event.target.value)}*/}
-            {/*/>*/}
-            {/*<Typography*/}
-            {/*    variant="h5"*/}
-            {/*>*/}
-            {/*    Adres:*/}
-            {/*</Typography>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="company-addresss-country-input"*/}
-            {/*    label="Kraj"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={country}*/}
-            {/*    onChange={(event) => setCountry(event.target.value)}*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="company-addresss-city-input"*/}
-            {/*    label="Miasto"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={city}*/}
-            {/*    onChange={(event) => setCity(event.target.value)}*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="company-addresss-street-name-input"*/}
-            {/*    label="Nazwa ulicy"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={streetName}*/}
-            {/*    onChange={(event) => setStreetName(event.target.value)}*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="company-addresss-street-number-input"*/}
-            {/*    label="Numer ulicy"*/}
-            {/*    variant="outlined"*/}
-            {/*    type="number"*/}
-            {/*    value={streetNumber}*/}
-            {/*    onChange={(event) => setStreetNumber(event.target.value)}*/}
-            {/*/>*/}
+            <TextField
+                //required
+                id="company-nip-input"
+                label="NIP"
+                variant="outlined"
+                value={nip}
+                onChange={(event) => setNip(event.target.value)}
+            />
+            <Typography
+                variant="h5"
+            >
+                Adres:
+            </Typography>
+            <TextField
+                //required
+                id="company-addresss-country-input"
+                label="Kraj"
+                variant="outlined"
+                value={country}
+                onChange={(event) => setCountry(event.target.value)}
+            />
+            <TextField
+                //required
+                id="company-addresss-city-input"
+                label="Miasto"
+                variant="outlined"
+                value={city}
+                onChange={(event) => setCity(event.target.value)}
+            />
+            <TextField
+                //required
+                id="company-addresss-street-name-input"
+                label="Nazwa ulicy"
+                variant="outlined"
+                value={streetName}
+                onChange={(event) => setStreetName(event.target.value)}
+            />
+            <TextField
+                //required
+                id="company-addresss-street-number-input"
+                label="Numer ulicy"
+                variant="outlined"
+                type="number"
+                value={streetNumber}
+                onChange={(event) => setStreetNumber(event.target.value)}
+            />
             <Button type="submit">
-                Next
+                Dalej
             </Button>
         </Box>
     );

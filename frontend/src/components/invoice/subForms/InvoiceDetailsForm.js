@@ -43,56 +43,57 @@ export default function InvoiceDetailsForm( {handleNext} ) {
                 Dane faktury
             </Typography>
             <TextField
-                required
+                //required
                 id="invoice-number-input"
-                label="Invoice Number"
+                label="Numer faktury"
                 variant="outlined"
                 value={invoiceNumber}
                 onChange={(event) => setInvoiceNumber(event.target.value)}
             />
-            {/*<LocalizationProvider dateAdapter={AdapterDayjs}>*/}
-            {/*    <DatePicker*/}
-            {/*        value={date}*/}
-            {/*        onChange={(event) => setDate(event.target.value)}*/}
-            {/*    />*/}
-            {/*</LocalizationProvider>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="tax-rate-input"*/}
-            {/*    label="Wysokość podatku VAT"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={taxRate}*/}
-            {/*    onChange={(event) => setTaxRate(event.target.value)}*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="netto-value-input"*/}
-            {/*    label="Wartość netto"*/}
-            {/*    type="number"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={nettoRate}*/}
-            {/*    onChange={(event) => setNettoRate(event.target.value)}*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="brutto-value-input"*/}
-            {/*    label="Wartość brutto"*/}
-            {/*    type="number"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={bruttoRate}*/}
-            {/*    onChange={(event) => setBruttoRate(event.target.value)}*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*    required*/}
-            {/*    id="overall-value-input"*/}
-            {/*    label="Łączna wartość"*/}
-            {/*    type="number"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={overallValue}*/}
-            {/*    onChange={(event) => setOverallValue(event.target.value)}*/}
-            {/*/>*/}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                    label="Data wystawienia"
+                    value={date}
+                    onChange={(event) => setDate(event.target.value)}
+                />
+            </LocalizationProvider>
+            <TextField
+                //required
+                id="tax-rate-input"
+                label="Wysokość podatku VAT"
+                variant="outlined"
+                value={taxRate}
+                onChange={(event) => setTaxRate(event.target.value)}
+            />
+            <TextField
+                //required
+                id="netto-value-input"
+                label="Wartość netto"
+                type="number"
+                variant="outlined"
+                value={nettoRate}
+                onChange={(event) => setNettoRate(event.target.value)}
+            />
+            <TextField
+                //required
+                id="brutto-value-input"
+                label="Wartość brutto"
+                type="number"
+                variant="outlined"
+                value={bruttoRate}
+                onChange={(event) => setBruttoRate(event.target.value)}
+            />
+            <TextField
+                //required
+                id="overall-value-input"
+                label="Łączna wartość"
+                type="number"
+                variant="outlined"
+                value={overallValue}
+                onChange={(event) => setOverallValue(event.target.value)}
+            />
             <Button type="submit">
-                Next
+                Dalej
             </Button>
         </Box>
     );

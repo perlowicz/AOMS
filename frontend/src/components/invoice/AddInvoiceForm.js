@@ -107,7 +107,7 @@ export default function AddInvoiceForm() {
                 <Button
                     onClick={handleSubmit}
                 >
-                    Submit
+                    Wyślij formularz
                 </Button>
             )}
 
@@ -115,7 +115,7 @@ export default function AddInvoiceForm() {
                 disabled={activeStep === 0}
                 onClick={handleBack}
             >
-                Back
+                Cofnij
             </Button>
         </Box>
     );

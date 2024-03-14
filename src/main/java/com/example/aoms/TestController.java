@@ -29,7 +29,7 @@ public class TestController {
 
     @PostMapping("/product")
     ResponseEntity<?> saveProductType(@RequestBody ProductInvoiceInfoDto dto) {
-        productInvoiceInfoService.save(dto);
+//        productInvoiceInfoService.save(dto);
         return ResponseEntity
                 .status(201)
                 .build();
