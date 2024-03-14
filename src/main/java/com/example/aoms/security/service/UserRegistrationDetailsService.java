@@ -1,6 +1,6 @@
 package com.example.aoms.security.service;
 
-import com.example.aoms.database.user.repository.UserRepository;
+import com.example.aoms.api.user.repository.UserRepository;
 import com.example.aoms.security.data.UserRegistrationDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
 package com.example.aoms.security.data;
 
-import com.example.aoms.database.user.entity.User;
+import com.example.aoms.api.user.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

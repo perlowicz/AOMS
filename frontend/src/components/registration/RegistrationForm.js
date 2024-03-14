@@ -1,5 +1,3 @@
-import Typography from "@mui/material/Typography";
-import {FormLabel} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -16,14 +14,18 @@ export default function RegistrationForm() {
         event.preventDefault();
 
         const formData = {
-            username: event.target[0].value,
+            userName: event.target[0].value,
             email: event.target[2].value,
             password: event.target[4].value
         };
 
         try {
-            const response = await axios.post('http://localhost:8080/user/register', formData);
-            console.log(response.data);
+            const response = await axios.post('http://localhost:8080/api/register', formData);
+            if (response.status === 200 || response.status === 201) {
+                console.log('Registration successful');
+            } else {
+                console.log('Registration failed');
+            }
         } catch (error) {
             console.log(error);
         }

@@ -1,10 +1,20 @@
 import Container from "@mui/material/Container";
+import Navbar from "../components/Navbar";
+import AddInvoiceForm from "../components/invoice/AddInvoiceForm";
+import Typography from "@mui/material/Typography";
 
 
 export default function AddInvoice() {
     return (
         <Container>
-            <h1>AddInvoice</h1>
+            <Navbar/>
+            <Typography
+                variant="h4"
+                align="center"
+            >
+                Formularz dodania nowej faktury
+            </Typography>
+            <AddInvoiceForm/>
         </Container>
     );
 }
