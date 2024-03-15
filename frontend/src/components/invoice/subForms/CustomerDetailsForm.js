@@ -15,7 +15,15 @@ export default function CustomerDetailsForm( {handleNext} ) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext({ name, nip, country, city, streetName, streetNumber });
+        const customerData = {
+            name,
+            nip,
+            country,
+            city,
+            streetName,
+            streetNumber
+        };
+        handleNext({ customer: customerData });
     };
 
     return (

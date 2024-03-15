@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {TextField} from "@mui/material";
+import {Divider, TextField} from "@mui/material";
 import {useState} from "react";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
@@ -10,27 +10,33 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 
 export default function ServiceInvoiceInfoForm( {handleNext} ) {
 
-    const [services, setServices] = useState([{ name: "", scope: "", price: "" }]);
+    const [listOfServiceInvoiceInfo, setListOfServiceInvoiceInfo] = useState([{ name: "", scope: "", bruttoPrice: "", nettoPrice: "", date: "" }]);
 
     const addService = () => {
-        setServices([...services, { name: "", scope: "", price: "" }]);
+        setListOfServiceInvoiceInfo([...listOfServiceInvoiceInfo, { name: "", scope: "", bruttoPrice: "", nettoPrice: "", date: "" }]);
     };
 
     const removeService = (index) => {
-        const newServices = [...services];
+        const newServices = [...listOfServiceInvoiceInfo];
         newServices.splice(index, 1);
-        setServices(newServices);
+        setListOfServiceInvoiceInfo(newServices);
     };
 
     const handleServiceChange = (event, index) => {
-        const newServices = [...services];
+        const newServices = [...listOfServiceInvoiceInfo];
         newServices[index][event.target.name] = event.target.value;
-        setServices(newServices);
+        setListOfServiceInvoiceInfo(newServices);
+    };
+
+    const handleDateChange = (selectedDate, index) => {
+        const newServices = [...listOfServiceInvoiceInfo];
+        newServices[index].date = selectedDate;
+        setListOfServiceInvoiceInfo(newServices);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext(services);
+        handleNext({ listOfServiceInvoiceInfo: listOfServiceInvoiceInfo });
     };
 
 
@@ -56,7 +62,7 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
                 Usługi na fakturze
             </Typography>
 
-            {services.map((service, index) => (
+            {listOfServiceInvoiceInfo.map((service, index) => (
                 <div key={index}>
                     <TextField
                         // TODO Uncomment required attribute
@@ -69,36 +75,38 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
                     <TextField
                         // TODO Uncomment required attribute
                         //required
-                        name="quantity"
-                        label="Ilość"
-                        value={service.quantity}
+                        name="scope"
+                        label="Zakres"
+                        value={service.scope}
                         onChange={(event) => handleServiceChange(event, index)}
                     />
                     <TextField
                         // TODO Uncomment required attribute
                         //required
-                        name="price"
+                        name="bruttoPrice"
                         label="Cena brutto"
-                        value={service.price}
+                        value={service.bruttoPrice}
                         onChange={(event) => handleServiceChange(event, index)}
                     />
                     <TextField
                         // TODO Uncomment required attribute
                         //required
-                        name="price"
+                        name="nettoPrice"
                         label="Cena netto"
-                        value={service.price}
+                        value={service.nettoPrice}
                         onChange={(event) => handleServiceChange(event, index)}
                     />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
+                            label="Data poświadczenia usługi"
                             value={service.date}
-                            onChange={(event) => handleServiceChange(event, index)}
+                            onChange={(selectedDate) => handleDateChange(selectedDate, index)}
                         />
                     </LocalizationProvider>
                     <Button onClick={() => removeService(index)}>Usuń usługę</Button>
                 </div>
             ))}
+            <Divider/>
             <Button onClick={addService}>Dodaj usługę</Button>
             <Button
                 type="submit"

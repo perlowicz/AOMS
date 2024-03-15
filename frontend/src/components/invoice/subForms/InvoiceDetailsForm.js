@@ -7,9 +7,20 @@ import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+class InvoiceDetails {
+    constructor( number, date, taxRate, nettoRate, bruttoRate, overallValue) {
+        this.number = number;
+        this.date = date;
+        this.taxRate = taxRate;
+        this.nettoRate = nettoRate;
+        this.bruttoRate = bruttoRate;
+        this.overallValue = overallValue;
+    }
+}
 
 export default function InvoiceDetailsForm( {handleNext} ) {
-    const [invoiceNumber, setInvoiceNumber] = useState('');
+
+    const [number, setNumber] = useState('');
     const [date, setDate] = useState('');
     const [taxRate, setTaxRate] = useState('');
     const [nettoRate, setNettoRate] = useState('');
@@ -18,7 +29,7 @@ export default function InvoiceDetailsForm( {handleNext} ) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext({ invoiceNumber, taxRate, nettoRate, bruttoRate, overallValue });
+        handleNext(new InvoiceDetails(number, date, taxRate, nettoRate, bruttoRate, overallValue));
     };
 
     return (
@@ -47,14 +58,14 @@ export default function InvoiceDetailsForm( {handleNext} ) {
                 id="invoice-number-input"
                 label="Numer faktury"
                 variant="outlined"
-                value={invoiceNumber}
-                onChange={(event) => setInvoiceNumber(event.target.value)}
+                value={number}
+                onChange={(event) => setNumber(event.target.value)}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     label="Data wystawienia"
                     value={date}
-                    onChange={(event) => setDate(event.target.value)}
+                    onChange={(selectedDate) => setDate(selectedDate)}
                 />
             </LocalizationProvider>
             <TextField

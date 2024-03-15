@@ -15,7 +15,15 @@ export default function CompanyDetailsForm( {handleNext} ) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext({ name, nip, country, city, streetName, streetNumber });
+        const companyData = {
+            name,
+            nip,
+            country,
+            city,
+            streetName,
+            streetNumber
+        };
+        handleNext({ company: companyData });
     };
 
     return (

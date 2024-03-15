@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {TextField} from "@mui/material";
+import {Divider, TextField} from "@mui/material";
 import {useState} from "react";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
@@ -10,27 +10,33 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 
 export default function ProductInvoiceInfoForm( {handleNext} ) {
 
-    const [products, setProducts] = useState([{ name: "", quantity: "", price: "", bruttoPrice: "", nettoPrice: "" }]);
+    const [listOfProductInvoiceInfo, setListOfProductInvoiceInfo] = useState([{ name: "", quantity: "", bruttoPrice: "", nettoPrice: "" , date: "" }]);
 
     const addProduct = () => {
-        setProducts([...products, { name: "", quantity: "", price: "", bruttoPrice: "", nettoPrice: "" }]);
+        setListOfProductInvoiceInfo([...listOfProductInvoiceInfo, { name: "", quantity: "", bruttoPrice: "", nettoPrice: "", date: "" }]);
     };
 
     const removeProduct = (index) => {
-        const newProducts = [...products];
+        const newProducts = [...listOfProductInvoiceInfo];
         newProducts.splice(index, 1);
-        setProducts(newProducts);
+        setListOfProductInvoiceInfo(newProducts);
     };
 
     const handleProductChange = (event, index) => {
-        const newProducts = [...products];
+        const newProducts = [...listOfProductInvoiceInfo];
         newProducts[index][event.target.name] = event.target.value;
-        setProducts(newProducts);
+        setListOfProductInvoiceInfo(newProducts);
+    };
+
+    const handleDateChange = (selectedDate, index) => {
+        const newProducts = [...listOfProductInvoiceInfo];
+        newProducts[index].date = selectedDate;
+        setListOfProductInvoiceInfo(newProducts);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext(products);
+        handleNext({ listOfProductInvoiceInfo: listOfProductInvoiceInfo });
     };
 
 
@@ -55,7 +61,7 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
             >
                 Towary na fakturze
             </Typography>
-            {products.map((product, index) => (
+            {listOfProductInvoiceInfo.map((product, index) => (
                 <div key={index}>
                     <TextField
                         // TODO Uncomment required attribute
@@ -96,12 +102,13 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
                         <DatePicker
                             label="Data dostarczenia towaru"
                             value={product.date}
-                            onChange={(event) => handleProductChange(event, index)}
+                            onChange={(selectedDate) => handleDateChange(selectedDate, index)}
                         />
                     </LocalizationProvider>
                     <Button onClick={() => removeProduct(index)}>Usuń towar</Button>
                 </div>
             ))}
+            <Divider/>
             <Button onClick={addProduct}>Dodaj towar</Button>
             <Button
                 type="submit"

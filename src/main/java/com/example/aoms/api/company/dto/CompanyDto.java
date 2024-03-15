@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompanyDto {
-    private AddressDto address;
     private String name;
     private String NIP;
+    private AddressDto address;
 }

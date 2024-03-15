@@ -1,11 +1,7 @@
 import axios from "axios";
 import Box from "@mui/material/Box";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Button from "@mui/material/Button";
-import {Divider, InputAdornment, InputLabel, OutlinedInput, Step, StepLabel, Stepper, TextField} from "@mui/material";
-import {LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import Typography from "@mui/material/Typography";
+import {Step, StepLabel, Stepper} from "@mui/material";
 import {useState} from "react";
 import InvoiceDetailsForm from "./subForms/InvoiceDetailsForm";
 import CompanyDetailsForm from "./subForms/CompanyDetailsForm";
@@ -14,11 +10,25 @@ import ServiceInvoiceInfoForm from "./subForms/ServiceInvoiceInfoForm";
 import ProductInvoiceInfoForm from "./subForms/ProductInvoiceInfoForm";
 import SummaryInfo from "./subForms/SummaryInfo";
 
+class InvoiceFormData {
+    constructor() {
+        this.number = null;
+        this.date = null;
+        this.taxRate = null;
+        this.nettoRate = null;
+        this.bruttoRate = null;
+        this.overallValue = null;
+        this.company = null;
+        this.customer = null;
+        this.listOfProductInvoiceInfo = [];
+        this.listOfServiceInvoiceInfo = [];
+    }
+}
 
 export default function AddInvoiceForm() {
 
     const [activeStep, setActiveStep] = useState(0);
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState(new InvoiceFormData());
 
     const handleNext = (stepData) => {
         setFormData(prevFormData => ({...prevFormData, ...stepData}));
@@ -31,18 +41,16 @@ export default function AddInvoiceForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        console.log('formData: ' + formData);
-        // try {
-        //     const response = await axios.post('http://localhost:8080/api/invoice/addInvoice', formData);
-        //     if (response.status === 201) {
-        //         console.log('New invoice added successfully!');
-        //     } else {
-        //         console.log('Adding new invoice failed');
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        try {
+            const response = await axios.post('http://localhost:8080/api/invoice/save', formData);
+            if (response.status === 201) {
+                console.log('New invoice added successfully!');
+            } else {
+                console.log('Adding new invoice failed');
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -100,7 +108,7 @@ export default function AddInvoiceForm() {
             )}
 
             {activeStep === 5 && (
-                <SummaryInfo handleNext={handleNext}/>
+                <SummaryInfo formData={formData}/>
             )}
 
             {activeStep === 5 && (
