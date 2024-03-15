@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Getter
@@ -33,5 +34,11 @@ public class ServiceInvoiceInfo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "invoice_id", nullable = false)
     private Invoice invoice;
+
+    @Column(name = "netto_price", nullable = false, precision = 6, scale = 2)
+    private BigDecimal nettoPrice;
+
+    @Column(name = "brutto_price", nullable = false, precision = 6, scale = 2)
+    private BigDecimal bruttoPrice;
 
 }

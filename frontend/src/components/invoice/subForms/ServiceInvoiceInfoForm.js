@@ -10,10 +10,24 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 
 export default function ServiceInvoiceInfoForm( {handleNext} ) {
 
-    const [listOfServiceInvoiceInfo, setListOfServiceInvoiceInfo] = useState([{ name: "", scope: "", bruttoPrice: "", nettoPrice: "", date: "" }]);
+    const [listOfServiceInvoiceInfo, setListOfServiceInvoiceInfo] = useState([{
+        name: "",
+        scope: "",
+        bruttoPrice: "",
+        nettoPrice: "",
+        date: "",
+        serviceType: ""
+    }]);
 
     const addService = () => {
-        setListOfServiceInvoiceInfo([...listOfServiceInvoiceInfo, { name: "", scope: "", bruttoPrice: "", nettoPrice: "", date: "" }]);
+        setListOfServiceInvoiceInfo([...listOfServiceInvoiceInfo, {
+            name: "",
+            scope: "",
+            bruttoPrice: "",
+            nettoPrice: "",
+            date: "",
+            serviceType: ""
+        }]);
     };
 
     const removeService = (index) => {
@@ -36,7 +50,17 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext({ listOfServiceInvoiceInfo: listOfServiceInvoiceInfo });
+        const serviceInvoiceInfoData = listOfServiceInvoiceInfo.map(service => ({
+            name: service.name,
+            scope: service.scope,
+            bruttoPrice: service.bruttoPrice,
+            nettoPrice: service.nettoPrice,
+            date: service.date.toISOString,
+            serviceType: {
+                type: service.serviceType
+            }
+        }));
+        handleNext({ listOfServiceInvoiceInfo: serviceInvoiceInfoData });
     };
 
 
@@ -103,6 +127,14 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
                             onChange={(selectedDate) => handleDateChange(selectedDate, index)}
                         />
                     </LocalizationProvider>
+                    <TextField
+                        // TODO Uncomment required attribute
+                        //required
+                        name="serviceType"
+                        label="Typ usługi"
+                        value={service.serviceType}
+                        onChange={(event) => handleServiceChange(event, index)}
+                    />
                     <Button onClick={() => removeService(index)}>Usuń usługę</Button>
                 </div>
             ))}

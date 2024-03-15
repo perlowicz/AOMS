@@ -17,11 +17,15 @@ export default function CompanyDetailsForm( {handleNext} ) {
         event.preventDefault();
         const companyData = {
             name,
-            nip,
-            country,
-            city,
-            streetName,
-            streetNumber
+            NIP: nip,
+            address: {
+                country: {
+                    country
+                },
+                city,
+                streetName,
+                streetNumber: parseInt(streetNumber)
+            }
         };
         handleNext({ company: companyData });
     };

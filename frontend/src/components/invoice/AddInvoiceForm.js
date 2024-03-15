@@ -12,12 +12,7 @@ import SummaryInfo from "./subForms/SummaryInfo";
 
 class InvoiceFormData {
     constructor() {
-        this.number = null;
-        this.date = null;
-        this.taxRate = null;
-        this.nettoRate = null;
-        this.bruttoRate = null;
-        this.overallValue = null;
+        this.invoiceDetails = null;
         this.company = null;
         this.customer = null;
         this.listOfProductInvoiceInfo = [];
@@ -41,16 +36,64 @@ export default function AddInvoiceForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/api/invoice/save', formData);
-            if (response.status === 201) {
-                console.log('New invoice added successfully!');
-            } else {
-                console.log('Adding new invoice failed');
-            }
-        } catch (error) {
-            console.log(error);
-        }
+
+        // This is the data structure expected by InvoiceDto.java
+        const invoiceDto = {
+            number: formData.invoiceDetails.number,
+            date: formData.invoiceDetails.date.toISOString(),
+            taxRate: formData.invoiceDetails.taxRate,
+            nettoRate: formData.invoiceDetails.nettoRate,
+            bruttoRate: formData.invoiceDetails.bruttoRate,
+            overallValue: formData.invoiceDetails.overallValue,
+            company: {
+                name: formData.company.name,
+                NIP: formData.company.nip,
+                address: {
+                    country: {
+                        country: formData.company.country
+                    },
+                    city: formData.company.city,
+                    streetName: formData.company.streetName,
+                    streetNumber: formData.company.streetNumber
+                }
+            },
+            customer: {
+                name: formData.customer.name,
+                NIP: formData.customer.nip,
+                address: {
+                    country: {
+                        country: formData.customer.country
+                    },
+                    city: formData.customer.city,
+                    streetName: formData.customer.streetName,
+                    streetNumber: formData.customer.streetNumber
+                }
+            },
+            listOfProductInvoiceInfo: formData.listOfProductInvoiceInfo.map(product => ({
+                name: product.name,
+                quantity: product.quantity,
+                date: product.date.toISOString(),
+                productType: {
+                    type: product.productType
+                }
+            })),
+            listOfServiceInvoiceInfo: formData.listOfServiceInvoiceInfo.map(service => ({
+                name: service.name,
+                scope: service.scope,
+                date: service.date.toISOString(),
+                serviceType: {
+                    type: service.serviceType
+                }
+            }))
+        };
+
+        axios.post('/api/invoice/save', invoiceDto)
+            .then(response => {
+                console.log('Invoice saved successfully');
+            })
+            .catch(error => {
+                console.log('Error while saving invoice', error);
+            });
     }
 
     return (

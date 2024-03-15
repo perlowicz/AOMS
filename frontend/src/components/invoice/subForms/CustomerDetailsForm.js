@@ -18,10 +18,14 @@ export default function CustomerDetailsForm( {handleNext} ) {
         const customerData = {
             name,
             nip,
-            country,
-            city,
-            streetName,
-            streetNumber
+            address: {
+                country: {
+                    country
+                },
+                city,
+                streetName,
+                streetNumber: parseInt(streetNumber)
+            }
         };
         handleNext({ customer: customerData });
     };

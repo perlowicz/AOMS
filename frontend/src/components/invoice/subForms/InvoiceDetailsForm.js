@@ -29,7 +29,15 @@ export default function InvoiceDetailsForm( {handleNext} ) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext(new InvoiceDetails(number, date, taxRate, nettoRate, bruttoRate, overallValue));
+        const invoiceDetails = new InvoiceDetails(
+            number,
+            new Date(date).toISOString(),
+            taxRate,
+            nettoRate,
+            bruttoRate,
+            overallValue
+        );
+        handleNext(invoiceDetails);
     };
 
     return (

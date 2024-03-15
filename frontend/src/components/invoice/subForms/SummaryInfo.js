@@ -16,12 +16,12 @@ export default function SummaryInfo( {formData} ) {
                 Szczegóły faktury:
             </Typography>
             <Typography>
-                Numer faktury: {formData.number} <br/>
-                Data faktury: {formData.date.format('YYYY-MM-DD')} <br/>
-                Stawka podatku: {formData.taxRate} <br/>
-                Stawka netto: {formData.nettoRate} <br/>
-                Stawka brutto: {formData.bruttoRate} <br/>
-                Łączna wartość: {formData.overallValue} <br/>
+                Numer faktury: {formData.invoiceDetails.number} <br/>
+                Data faktury: {formData.invoiceDetails.date} <br/>
+                Stawka podatku: {formData.invoiceDetails.taxRate} <br/>
+                Stawka netto: {formData.invoiceDetails.nettoRate} <br/>
+                Stawka brutto: {formData.invoiceDetails.bruttoRate} <br/>
+                Łączna wartość: {formData.invoiceDetails.overallValue} <br/>
             </Typography>
             <Divider/>
             <Typography
@@ -32,10 +32,10 @@ export default function SummaryInfo( {formData} ) {
             <Typography>
                 Nazwa: {formData.company.name} <br/>
                 NIP: {formData.company.nip} <br/>
-                Kraj: {formData.company.country} <br/>
-                Miasto: {formData.company.city} <br/>
-                Ulica: {formData.company.streetName} <br/>
-                Numer: {formData.company.streetNumber} <br/>
+                Kraj: {formData.company.address.country.country} <br/>
+                Miasto: {formData.company.address.city} <br/>
+                Ulica: {formData.company.address.streetName} <br/>
+                Numer: {formData.company.address.streetNumber} <br/>
             </Typography>
             <Divider/>
             <Typography
@@ -46,10 +46,10 @@ export default function SummaryInfo( {formData} ) {
             <Typography>
                 Nazwa: {formData.customer.name} <br/>
                 NIP: {formData.customer.nip} <br/>
-                Kraj: {formData.customer.country} <br/>
-                Miasto: {formData.customer.city} <br/>
-                Ulica: {formData.customer.streetName} <br/>
-                Numer: {formData.customer.streetNumber} <br/>
+                Kraj: {formData.customer.address.country.country} <br/>
+                Miasto: {formData.customer.address.city} <br/>
+                Ulica: {formData.customer.address.streetName} <br/>
+                Numer: {formData.customer.address.streetNumber} <br/>
             </Typography>
             <Divider/>
             <Typography

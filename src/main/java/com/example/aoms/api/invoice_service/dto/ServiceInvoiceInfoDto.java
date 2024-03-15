@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
@@ -15,5 +16,7 @@ public class ServiceInvoiceInfoDto {
     private String name;
     private String scope;
     private Instant date;
+    private BigDecimal nettoPrice;
+    private BigDecimal bruttoPrice;
     private ServiceInvoiceServiceTypeDto serviceType;
 }

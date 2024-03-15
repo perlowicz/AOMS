@@ -65,6 +65,8 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
         entity.setQuantity(dto.getQuantity());
+        entity.setNettoPrice(dto.getNettoPrice());
+        entity.setBruttoPrice(dto.getBruttoPrice());
         entity.setProductType(productType);
         entity.setInvoice(invoice);
         return entity;
@@ -75,6 +77,8 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
                 .name(entity.getName())
                 .date(entity.getDate())
                 .quantity(entity.getQuantity())
+                .nettoPrice(entity.getNettoPrice())
+                .bruttoPrice(entity.getBruttoPrice())
                 .productType(mapProductTypeEntityToDto(entity.getProductType()))
                 .build();
     }

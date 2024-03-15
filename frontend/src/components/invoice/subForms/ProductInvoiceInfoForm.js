@@ -10,10 +10,24 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 
 export default function ProductInvoiceInfoForm( {handleNext} ) {
 
-    const [listOfProductInvoiceInfo, setListOfProductInvoiceInfo] = useState([{ name: "", quantity: "", bruttoPrice: "", nettoPrice: "" , date: "" }]);
+    const [listOfProductInvoiceInfo, setListOfProductInvoiceInfo] = useState([{
+        name: "",
+        quantity: "",
+        bruttoPrice: "",
+        nettoPrice: "" ,
+        date: "",
+        productType: ""
+    }]);
 
     const addProduct = () => {
-        setListOfProductInvoiceInfo([...listOfProductInvoiceInfo, { name: "", quantity: "", bruttoPrice: "", nettoPrice: "", date: "" }]);
+        setListOfProductInvoiceInfo([...listOfProductInvoiceInfo, {
+            name: "",
+            quantity: "",
+            bruttoPrice: "",
+            nettoPrice: "",
+            date: "",
+            productType: ""
+        }]);
     };
 
     const removeProduct = (index) => {
@@ -36,7 +50,17 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleNext({ listOfProductInvoiceInfo: listOfProductInvoiceInfo });
+        const productInvoiceInfoData = listOfProductInvoiceInfo.map(product => ({
+            name: product.name,
+            quantity: product.quantity,
+            bruttoPrice: product.bruttoPrice,
+            nettoPrice: product.nettoPrice,
+            date: product.date.toISOString,
+            productType: {
+                type: product.productType
+            }
+        }));
+        handleNext({ listOfProductInvoiceInfo: productInvoiceInfoData });
     };
 
 
@@ -105,6 +129,14 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
                             onChange={(selectedDate) => handleDateChange(selectedDate, index)}
                         />
                     </LocalizationProvider>
+                    <TextField
+                        // TODO Uncomment required attribute
+                        //required
+                        name="productType"
+                        label="Typ towaru"
+                        value={product.productType}
+                        onChange={(event) => handleProductChange(event, index)}
+                    />
                     <Button onClick={() => removeProduct(index)}>Usuń towar</Button>
                 </div>
             ))}

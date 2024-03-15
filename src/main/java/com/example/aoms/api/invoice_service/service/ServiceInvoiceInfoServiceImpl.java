@@ -59,6 +59,8 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
         entity.setServiceType(serviceType);
         entity.setDate(dto.getDate());
         entity.setScope(dto.getScope());
+        entity.setNettoPrice(dto.getNettoPrice());
+        entity.setBruttoPrice(dto.getBruttoPrice());
         entity.setInvoice(invoice);
         return entity;
     }
@@ -74,6 +76,8 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
                 .name(entity.getName())
                 .date(entity.getDate())
                 .scope(entity.getScope())
+                .nettoPrice(entity.getNettoPrice())
+                .bruttoPrice(entity.getBruttoPrice())
                 .serviceType(mapServiceTypeEntityToDto(entity.getServiceType()))
                 .build();
     }
