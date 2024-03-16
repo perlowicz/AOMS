@@ -13,8 +13,8 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
     const [listOfServiceInvoiceInfo, setListOfServiceInvoiceInfo] = useState([{
         name: "",
         scope: "",
-        bruttoPrice: "",
         nettoPrice: "",
+        bruttoPrice: "",
         date: "",
         serviceType: ""
     }]);
@@ -23,8 +23,8 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
         setListOfServiceInvoiceInfo([...listOfServiceInvoiceInfo, {
             name: "",
             scope: "",
-            bruttoPrice: "",
             nettoPrice: "",
+            bruttoPrice: "",
             date: "",
             serviceType: ""
         }]);
@@ -53,8 +53,8 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
         const serviceInvoiceInfoData = listOfServiceInvoiceInfo.map(service => ({
             name: service.name,
             scope: service.scope,
-            bruttoPrice: service.bruttoPrice,
             nettoPrice: service.nettoPrice,
+            bruttoPrice: service.bruttoPrice,
             date: service.date.toISOString,
             serviceType: {
                 type: service.serviceType
@@ -107,17 +107,17 @@ export default function ServiceInvoiceInfoForm( {handleNext} ) {
                     <TextField
                         // TODO Uncomment required attribute
                         //required
-                        name="bruttoPrice"
-                        label="Cena brutto"
-                        value={service.bruttoPrice}
+                        name="nettoPrice"
+                        label="Cena netto"
+                        value={service.nettoPrice}
                         onChange={(event) => handleServiceChange(event, index)}
                     />
                     <TextField
                         // TODO Uncomment required attribute
                         //required
-                        name="nettoPrice"
-                        label="Cena netto"
-                        value={service.nettoPrice}
+                        name="bruttoPrice"
+                        label="Cena brutto"
+                        value={service.bruttoPrice}
                         onChange={(event) => handleServiceChange(event, index)}
                     />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>

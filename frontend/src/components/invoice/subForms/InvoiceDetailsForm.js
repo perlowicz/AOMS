@@ -66,6 +66,7 @@ export default function InvoiceDetailsForm( {handleNext} ) {
                 id="invoice-number-input"
                 label="Numer faktury"
                 variant="outlined"
+                type="number"
                 value={number}
                 onChange={(event) => setNumber(event.target.value)}
             />

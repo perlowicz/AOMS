@@ -13,8 +13,8 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
     const [listOfProductInvoiceInfo, setListOfProductInvoiceInfo] = useState([{
         name: "",
         quantity: "",
-        bruttoPrice: "",
         nettoPrice: "" ,
+        bruttoPrice: "",
         date: "",
         productType: ""
     }]);
@@ -23,8 +23,8 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
         setListOfProductInvoiceInfo([...listOfProductInvoiceInfo, {
             name: "",
             quantity: "",
-            bruttoPrice: "",
             nettoPrice: "",
+            bruttoPrice: "",
             date: "",
             productType: ""
         }]);
@@ -53,8 +53,8 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
         const productInvoiceInfoData = listOfProductInvoiceInfo.map(product => ({
             name: product.name,
             quantity: product.quantity,
-            bruttoPrice: product.bruttoPrice,
             nettoPrice: product.nettoPrice,
+            bruttoPrice: product.bruttoPrice,
             date: product.date.toISOString,
             productType: {
                 type: product.productType
@@ -107,19 +107,19 @@ export default function ProductInvoiceInfoForm( {handleNext} ) {
                     <TextField
                         // TODO Uncomment required attribute
                         //required
-                        name="bruttoPrice"
-                        label="Cena brutto"
+                        name="nettoPrice"
+                        label="Cena netto"
                         type="number"
-                        value={product.bruttoPrice}
+                        value={product.nettoPrice}
                         onChange={(event) => handleProductChange(event, index)}
                     />
                     <TextField
                         // TODO Uncomment required attribute
                         //required
-                        name="nettoPrice"
-                        label="Cena netto"
+                        name="bruttoPrice"
+                        label="Cena brutto"
                         type="number"
-                        value={product.nettoPrice}
+                        value={product.bruttoPrice}
                         onChange={(event) => handleProductChange(event, index)}
                     />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>

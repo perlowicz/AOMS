@@ -15,14 +15,14 @@ export default function SummaryInfo( {formData} ) {
             >
                 Szczegóły faktury:
             </Typography>
-            <Typography>
-                Numer faktury: {formData.invoiceDetails.number} <br/>
-                Data faktury: {formData.invoiceDetails.date} <br/>
-                Stawka podatku: {formData.invoiceDetails.taxRate} <br/>
-                Stawka netto: {formData.invoiceDetails.nettoRate} <br/>
-                Stawka brutto: {formData.invoiceDetails.bruttoRate} <br/>
-                Łączna wartość: {formData.invoiceDetails.overallValue} <br/>
-            </Typography>
+            {/*<Typography>*/}
+            {/*    Numer faktury: {formData.invoiceDetails.number} <br/>*/}
+            {/*    Data faktury: {formData.invoiceDetails.date} <br/>*/}
+            {/*    Stawka podatku: {formData.invoiceDetails.taxRate} <br/>*/}
+            {/*    Stawka netto: {formData.invoiceDetails.nettoRate} <br/>*/}
+            {/*    Stawka brutto: {formData.invoiceDetails.bruttoRate} <br/>*/}
+            {/*    Łączna wartość: {formData.invoiceDetails.overallValue} <br/>*/}
+            {/*</Typography>*/}
             <Divider/>
             <Typography
                 variant="h4"
@@ -64,7 +64,7 @@ export default function SummaryInfo( {formData} ) {
                         Ilość: {product.quantity} <br/>
                         Cena brutto: {product.bruttoPrice} <br/>
                         Cena netto: {product.nettoPrice} <br/>
-                        Data dostarczenia towaru: {product.date.format('YYYY-MM-DD')} <br/>
+                        Data dostarczenia towaru: {product.date} <br/>
                     </Typography>
                     <Divider/>
                 </div>
@@ -81,7 +81,7 @@ export default function SummaryInfo( {formData} ) {
                         Zakres: {service.scope} <br/>
                         Cena brutto: {service.bruttoPrice} <br/>
                         Cena netto: {service.nettoPrice} <br/>
-                        Data poświadczenia usługi: {service.date.format('YYYY-MM-DD')} <br/>
+                        Data poświadczenia usługi: {service.date} <br/>
                     </Typography>
                     <Divider/>
                 </div>

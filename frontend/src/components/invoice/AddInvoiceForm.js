@@ -72,6 +72,8 @@ export default function AddInvoiceForm() {
             listOfProductInvoiceInfo: formData.listOfProductInvoiceInfo.map(product => ({
                 name: product.name,
                 quantity: product.quantity,
+                nettoPrice: product.nettoPrice,
+                bruttoPrice: product.bruttoPrice,
                 date: product.date.toISOString(),
                 productType: {
                     type: product.productType
@@ -81,6 +83,8 @@ export default function AddInvoiceForm() {
                 name: service.name,
                 scope: service.scope,
                 date: service.date.toISOString(),
+                nettoPrice: service.nettoPrice,
+                bruttoPrice:service.bruttoPrice,
                 serviceType: {
                     type: service.serviceType
                 }
