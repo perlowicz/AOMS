@@ -74,13 +74,13 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         mailSender.send(message);
     }
 
+    private String generateToken() {
+        return UUID.randomUUID().toString();
+    }
+
     private Instant getTokenExpirationTime() {
         return Instant
                 .now()
                 .plus(EXPIRATION_TIME, ChronoUnit.MINUTES);
-    }
-
-    private String generateToken() {
-        return UUID.randomUUID().toString();
     }
 }

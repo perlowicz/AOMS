@@ -18,26 +18,29 @@ class InvoiceDetails {
     }
 }
 
-export default function InvoiceDetailsForm( {handleNext} ) {
+export default function InvoiceDetailsForm( {handleNext, formData, setFormData} ) {
 
-    const [number, setNumber] = useState('');
-    const [date, setDate] = useState('');
-    const [taxRate, setTaxRate] = useState('');
-    const [nettoRate, setNettoRate] = useState('');
-    const [bruttoRate, setBruttoRate] = useState('');
-    const [overallValue, setOverallValue] = useState('');
+    const [number, setNumber] = useState(formData.invoiceDetails ? formData.invoiceDetails.number : '');
+    const [date, setDate] = useState(formData.invoiceDetails ? formData.invoiceDetails.date : '');
+    const [taxRate, setTaxRate] = useState(formData.invoiceDetails ? formData.invoiceDetails.taxRate : '');
+    const [nettoRate, setNettoRate] = useState(formData.invoiceDetails ? formData.invoiceDetails.nettoRate : '');
+    const [bruttoRate, setBruttoRate] = useState(formData.invoiceDetails ? formData.invoiceDetails.bruttoRate : '');
+    const [overallValue, setOverallValue] = useState(formData.invoiceDetails ? formData.invoiceDetails.overallValue : '');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const invoiceDetails = new InvoiceDetails(
-            number,
-            new Date(date).toISOString(),
-            taxRate,
-            nettoRate,
-            bruttoRate,
-            overallValue
-        );
-        handleNext(invoiceDetails);
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            invoiceDetails: new InvoiceDetails(
+                number,
+                date,
+                taxRate,
+                nettoRate,
+                bruttoRate,
+                overallValue
+            )
+        }))
+        handleNext();
     };
 
     return (
