@@ -34,10 +34,6 @@ export default function AddInvoiceForm() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    useEffect(() => {
-        console.log(formData);
-    }, [formData]);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -143,7 +139,7 @@ export default function AddInvoiceForm() {
             )}
 
             {activeStep === 1 && (
-                <CompanyDetailsForm handleNext={handleNext}/>
+                <CompanyDetailsForm handleNext={handleNext} formData={formData} setFormData={setFormData}/>
             )}
 
             {activeStep === 2 && (

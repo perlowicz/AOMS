@@ -5,13 +5,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 
-export default function CompanyDetailsForm( {handleNext} ) {
-    const [name, setName] = useState('');
-    const [nip, setNip] = useState('');
-    const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
-    const [streetName, setStreetName] = useState('');
-    const [streetNumber, setStreetNumber] = useState('');
+export default function CompanyDetailsForm( {handleNext, formData, setFormData} ) {
+    const [name, setName] = useState(formData.company ? formData.company.name : '');
+    const [nip, setNip] = useState(formData.company ? formData.company.NIP : '');
+    const [country, setCountry] = useState(formData.company ? formData.company.address.country.country : '');
+    const [city, setCity] = useState(formData.company ? formData.company.address.city : '');
+    const [streetName, setStreetName] = useState(formData.company ? formData.company.address.streetName : '');
+    const [streetNumber, setStreetNumber] = useState(formData.company ? formData.company.address.streetNumber : '');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,7 +27,11 @@ export default function CompanyDetailsForm( {handleNext} ) {
                 streetNumber: parseInt(streetNumber)
             }
         };
-        handleNext({ company: companyData });
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            company: companyData
+        }));
+        handleNext();
     };
 
     return (

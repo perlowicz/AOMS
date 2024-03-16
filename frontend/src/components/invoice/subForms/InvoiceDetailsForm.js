@@ -39,7 +39,7 @@ export default function InvoiceDetailsForm( {handleNext, formData, setFormData} 
                 bruttoRate,
                 overallValue
             )
-        }))
+        }));
         handleNext();
     };
 
