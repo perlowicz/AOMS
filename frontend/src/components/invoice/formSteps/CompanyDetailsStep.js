@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 
-export default function CompanyDetailsForm( {handleNext, formData, setFormData} ) {
+export default function CompanyDetailsStep({handleNext, formData, setFormData} ) {
     const [name, setName] = useState(formData.company ? formData.company.name : '');
     const [nip, setNip] = useState(formData.company ? formData.company.NIP : '');
     const [country, setCountry] = useState(formData.company ? formData.company.address.country.country : '');

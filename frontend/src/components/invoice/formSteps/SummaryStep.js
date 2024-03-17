@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import {Divider} from "@mui/material";
 
 
-export default function SummaryInfo( {formData} ) {
+export default function SummaryStep({formData} ) {
 
     return (
         <Container>

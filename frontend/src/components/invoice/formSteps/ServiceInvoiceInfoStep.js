@@ -8,7 +8,7 @@ import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 
 
-export default function ServiceInvoiceInfoForm( {handleNext} ) {
+export default function ServiceInvoiceInfoStep({handleNext} ) {
 
     const [listOfServiceInvoiceInfo, setListOfServiceInvoiceInfo] = useState([{
         name: "",

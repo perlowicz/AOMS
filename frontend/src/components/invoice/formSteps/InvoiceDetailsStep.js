@@ -18,7 +18,7 @@ class InvoiceDetails {
     }
 }
 
-export default function InvoiceDetailsForm( {handleNext, formData, setFormData} ) {
+export default function InvoiceDetailsStep({handleNext, formData, setFormData} ) {
 
     const [number, setNumber] = useState(formData.invoiceDetails ? formData.invoiceDetails.number : '');
     const [date, setDate] = useState(formData.invoiceDetails ? formData.invoiceDetails.date : '');

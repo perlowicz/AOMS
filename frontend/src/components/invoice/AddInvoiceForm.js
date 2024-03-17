@@ -3,12 +3,12 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {Step, StepLabel, Stepper} from "@mui/material";
 import {useState} from "react";
-import InvoiceDetailsForm from "./subForms/InvoiceDetailsForm";
-import CompanyDetailsForm from "./subForms/CompanyDetailsForm";
-import CustomerDetailsForm from "./subForms/CustomerDetailsForm";
-import ServiceInvoiceInfoForm from "./subForms/ServiceInvoiceInfoForm";
-import ProductInvoiceInfoForm from "./subForms/ProductInvoiceInfoForm";
-import SummaryInfo from "./subForms/SummaryInfo";
+import InvoiceDetailsStep from "./formSteps/InvoiceDetailsStep";
+import CompanyDetailsStep from "./formSteps/CompanyDetailsStep";
+import CustomerDetailsStep from "./formSteps/CustomerDetailsStep";
+import ServiceInvoiceInfoStep from "./formSteps/ServiceInvoiceInfoStep";
+import ProductInvoiceInfoStep from "./formSteps/ProductInvoiceInfoStep";
+import SummaryStep from "./formSteps/SummaryStep";
 
 class InvoiceFormData {
     constructor() {
@@ -135,27 +135,27 @@ export default function AddInvoiceForm() {
             </Stepper>
 
             {activeStep === 0 && (
-                <InvoiceDetailsForm handleNext={handleNext} formData={formData} setFormData={setFormData}/>
+                <InvoiceDetailsStep handleNext={handleNext} formData={formData} setFormData={setFormData}/>
             )}
 
             {activeStep === 1 && (
-                <CompanyDetailsForm handleNext={handleNext} formData={formData} setFormData={setFormData}/>
+                <CompanyDetailsStep handleNext={handleNext} formData={formData} setFormData={setFormData}/>
             )}
 
             {activeStep === 2 && (
-                <CustomerDetailsForm handleNext={handleNext} formData={formData} setFormData={setFormData}/>
+                <CustomerDetailsStep handleNext={handleNext} formData={formData} setFormData={setFormData}/>
             )}
 
             {activeStep === 3 && (
-                <ProductInvoiceInfoForm handleNext={handleNext}/>
+                <ProductInvoiceInfoStep handleNext={handleNext}/>
             )}
 
             {activeStep === 4 && (
-                <ServiceInvoiceInfoForm handleNext={handleNext}/>
+                <ServiceInvoiceInfoStep handleNext={handleNext}/>
             )}
 
             {activeStep === 5 && (
-                <SummaryInfo formData={formData}/>
+                <SummaryStep formData={formData}/>
             )}
 
             {activeStep === 5 && (
