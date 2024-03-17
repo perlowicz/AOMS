@@ -2,7 +2,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {Step, StepLabel, Stepper} from "@mui/material";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import InvoiceDetailsForm from "./subForms/InvoiceDetailsForm";
 import CompanyDetailsForm from "./subForms/CompanyDetailsForm";
 import CustomerDetailsForm from "./subForms/CustomerDetailsForm";
@@ -143,7 +143,7 @@ export default function AddInvoiceForm() {
             )}
 
             {activeStep === 2 && (
-                <CustomerDetailsForm handleNext={handleNext}/>
+                <CustomerDetailsForm handleNext={handleNext} formData={formData} setFormData={setFormData}/>
             )}
 
             {activeStep === 3 && (

@@ -5,19 +5,19 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 
-export default function CustomerDetailsForm( {handleNext} ) {
-    const [name, setName] = useState('');
-    const [nip, setNip] = useState('');
-    const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
-    const [streetName, setStreetName] = useState('');
-    const [streetNumber, setStreetNumber] = useState('');
+export default function CustomerDetailsForm( {handleNext, formData, setFormData} ) {
+    const [name, setName] = useState(formData.customer ? formData.customer.name : '');
+    const [nip, setNip] = useState(formData.customer ? formData.customer.NIP : '');
+    const [country, setCountry] = useState(formData.customer ? formData.customer.address.country.country : '');
+    const [city, setCity] = useState(formData.customer ? formData.customer.address.city : '');
+    const [streetName, setStreetName] = useState(formData.customer ? formData.customer.address.streetName : '');
+    const [streetNumber, setStreetNumber] = useState(formData.customer ? formData.customer.address.streetNumber : '');
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const customerData = {
             name,
-            nip,
+            NIP: nip,
             address: {
                 country: {
                     country
@@ -27,7 +27,11 @@ export default function CustomerDetailsForm( {handleNext} ) {
                 streetNumber: parseInt(streetNumber)
             }
         };
-        handleNext({ customer: customerData });
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            customer: customerData
+        }));
+        handleNext();
     };
 
     return (
