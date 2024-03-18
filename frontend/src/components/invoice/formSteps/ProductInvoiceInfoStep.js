@@ -8,16 +8,17 @@ import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 
 
-export default function ProductInvoiceInfoStep({handleNext} ) {
+export default function ProductInvoiceInfoStep({handleNext, formData, setFormData} ) {
 
-    const [listOfProductInvoiceInfo, setListOfProductInvoiceInfo] = useState([{
-        name: "",
-        quantity: "",
-        nettoPrice: "" ,
-        bruttoPrice: "",
-        date: "",
-        productType: ""
-    }]);
+    const [listOfProductInvoiceInfo, setListOfProductInvoiceInfo] = useState(
+        formData.listOfProductInvoiceInfo ? formData.listOfProductInvoiceInfo : [{
+            name: "",
+            quantity: "",
+            nettoPrice: "",
+            bruttoPrice: "",
+            date: "",
+            productType: ""
+        }]);
 
     const addProduct = () => {
         setListOfProductInvoiceInfo([...listOfProductInvoiceInfo, {
@@ -134,7 +135,7 @@ export default function ProductInvoiceInfoStep({handleNext} ) {
                         //required
                         name="productType"
                         label="Typ towaru"
-                        value={product.productType}
+                        value={product.productType.type}
                         onChange={(event) => handleProductChange(event, index)}
                     />
                     <Button onClick={() => removeProduct(index)}>Usuń towar</Button>

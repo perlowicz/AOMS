@@ -147,7 +147,7 @@ export default function AddInvoiceForm() {
             )}
 
             {activeStep === 3 && (
-                <ProductInvoiceInfoStep handleNext={handleNext}/>
+                <ProductInvoiceInfoStep handleNext={handleNext} formData={formData} stepFormData={setFormData}/>
             )}
 
             {activeStep === 4 && (
