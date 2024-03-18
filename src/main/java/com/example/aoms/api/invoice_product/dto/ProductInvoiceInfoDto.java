@@ -1,5 +1,6 @@
 package com.example.aoms.api.invoice_product.dto;
 
+import com.example.aoms.api.unit_of_measure.dto.UnitOfMeasureDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,5 @@ public class ProductInvoiceInfoDto {
     private Instant date;
     private BigDecimal nettoPrice;
     private BigDecimal bruttoPrice;
+    private UnitOfMeasureDto unitOfMeasure;
 }

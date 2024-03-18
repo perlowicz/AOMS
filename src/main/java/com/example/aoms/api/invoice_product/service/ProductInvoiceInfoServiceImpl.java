@@ -4,7 +4,11 @@ import com.example.aoms.api.invoice.entity.Invoice;
 import com.example.aoms.api.invoice_product.dto.ProductInvoiceInfoDto;
 import com.example.aoms.api.invoice_product.repository.ProductInvoiceInfoRepository;
 import com.example.aoms.api.invoice_product.entity.ProductInvoiceInfo;
+import com.example.aoms.api.unit_of_measure.dto.UnitOfMeasureDto;
+import com.example.aoms.api.unit_of_measure.entity.UnitOfMeasure;
+import com.example.aoms.api.unit_of_measure.repository.UnitOfMeasureRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +20,14 @@ import java.util.stream.Collectors;
 public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService {
 
     private final ProductInvoiceInfoRepository productInvoiceInfoRepository;
+    private final UnitOfMeasureRepository unitOfMeasureRepository;
 
 
     @Override
     @Transactional
     public ProductInvoiceInfo save(ProductInvoiceInfoDto dto, Invoice invoice) {
-        ProductInvoiceInfo entity = mapDtoToEntity(dto, invoice);
+        UnitOfMeasure unitOfMeasure = findOrCreateUnitOfMeasure(dto.getUnitOfMeasure());
+        ProductInvoiceInfo entity = mapDtoToEntity(dto, unitOfMeasure, invoice);
         return productInvoiceInfoRepository.save(entity);
     }
 
@@ -29,18 +35,38 @@ public class ProductInvoiceInfoServiceImpl implements ProductInvoiceInfoService 
     @Transactional
     public List<ProductInvoiceInfo> saveAll(List<ProductInvoiceInfoDto> dtoList, Invoice invoice) {
         List<ProductInvoiceInfo> entities = dtoList.stream()
-                .map(dto -> mapDtoToEntity(dto, invoice))
+                .map(dto -> {
+                    UnitOfMeasure unitOfMeasure = findOrCreateUnitOfMeasure(dto.getUnitOfMeasure());
+                    return mapDtoToEntity(dto, unitOfMeasure, invoice);
+                })
                 .collect(Collectors.toList());
         return productInvoiceInfoRepository.saveAll(entities);
     }
 
-    private ProductInvoiceInfo mapDtoToEntity(ProductInvoiceInfoDto dto, Invoice invoice) {
+    @SneakyThrows
+    private UnitOfMeasure findOrCreateUnitOfMeasure(UnitOfMeasureDto dto) {
+        return unitOfMeasureRepository
+                .findUnitOfMeasureByUnit(dto.getUnit())
+                .orElseGet(() -> {
+                    UnitOfMeasure entity = mapUnitOfMeasureDtoToEntity(dto);
+                    return unitOfMeasureRepository.save(entity);
+                });
+    }
+
+    private UnitOfMeasure mapUnitOfMeasureDtoToEntity(UnitOfMeasureDto dto) {
+        UnitOfMeasure entity = new UnitOfMeasure();
+        entity.setUnit(dto.getUnit());
+        return entity;
+    }
+
+    private ProductInvoiceInfo mapDtoToEntity(ProductInvoiceInfoDto dto, UnitOfMeasure unit, Invoice invoice) {
         ProductInvoiceInfo entity = new ProductInvoiceInfo();
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
         entity.setQuantity(dto.getQuantity());
         entity.setNettoPrice(dto.getNettoPrice());
         entity.setBruttoPrice(dto.getBruttoPrice());
+        entity.setUnitOfMeasure(unit);
         entity.setInvoice(invoice);
         return entity;
     }

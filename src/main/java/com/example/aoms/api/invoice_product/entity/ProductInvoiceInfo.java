@@ -1,6 +1,7 @@
 package com.example.aoms.api.invoice_product.entity;
 
 import com.example.aoms.api.invoice.entity.Invoice;
+import com.example.aoms.api.unit_of_measure.entity.UnitOfMeasure;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,5 +37,9 @@ public class ProductInvoiceInfo {
 
     @Column(name = "brutto_price", nullable = false, precision = 6, scale = 2)
     private BigDecimal bruttoPrice;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "unit_of_measure_id", nullable = false, referencedColumnName = "id")
+    private UnitOfMeasure unitOfMeasure;
 
 }
