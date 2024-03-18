@@ -24,10 +24,6 @@ public class ProductInvoiceInfo {
     @Column(name = "date")
     private Instant date;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_type_id", nullable = false)
-    private ProductInvoiceProductType productType;
-
     @Column(name = "name", length = 256)
     private String name;
 

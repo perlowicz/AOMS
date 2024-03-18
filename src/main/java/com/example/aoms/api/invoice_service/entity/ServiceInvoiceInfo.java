@@ -24,10 +24,6 @@ public class ServiceInvoiceInfo {
     @Column(name = "date")
     private Instant date;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "service_type_id", nullable = false)
-    private ServiceInvoiceServiceType serviceType;
-
     @Column(name = "name", length = 256)
     private String name;
 
