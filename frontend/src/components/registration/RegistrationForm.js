@@ -1,14 +1,15 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import UsernameInput from "./registrationFormComponents/UsernameInput";
-import PasswordInput from "./registrationFormComponents/PasswordInput";
-import EmailInput from "./registrationFormComponents/EmailInput";
+import UsernameInput from "../formComponents/UsernameInput";
+import PasswordInput from "../formComponents/PasswordInput";
+import EmailInput from "../formComponents/EmailInput";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function RegistrationForm() {
 
-
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -21,13 +22,12 @@ export default function RegistrationForm() {
 
         try {
             const response = await axios.post('http://localhost:8080/api/register', formData);
-            if (response.status === 200 || response.status === 201) {
-                console.log('Registration successful');
-            } else {
-                console.log('Registration failed');
+            if (response.status === 200) {
+                navigate('/?registered=true');
             }
         } catch (error) {
             console.log(error);
+            navigate('/?registered=false');
         }
     }
 

@@ -94,7 +94,7 @@ export default function AddInvoiceForm() {
             }))
         };
 
-        axios.post('/api/invoice/save', invoiceDto)
+        axios.post('http://localhost:8080/api/invoice/save', invoiceDto)
             .then(response => {
                 console.log('Invoice saved successfully');
             })

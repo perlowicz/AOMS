@@ -7,6 +7,7 @@ import CompanyProfile from "./pages/CompanyProfile";
 import Registration from "./pages/Registration";
 import Users from "./pages/Users";
 import Invoices from "./pages/Invoices";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/profile" element=<CompanyProfile/>/>
               <Route path="/register" element=<Registration/>/>
               <Route path="/users" element=<Users/>/>
+              <Route path="/login" element=<Login/>/>
           </Routes>
       </BrowserRouter>
   );

@@ -135,6 +135,28 @@ function Navbar() {
                         >
                             Lista faktur
                         </Link>
+                        <Link
+                            href="/register"
+                            sx={{
+                                my: 2,
+                                display: 'block',
+                                textAlign: 'center',
+                                color: 'white'
+                            }}
+                        >
+                            Zarejestruj się
+                        </Link>
+                        <Link
+                            href="/login"
+                            sx={{
+                                my: 2,
+                                display: 'block',
+                                textAlign: 'center',
+                                color: 'white'
+                            }}
+                        >
+                            Zaloguj się
+                        </Link>
                     </Box>
                 </Toolbar>
             </Container>
