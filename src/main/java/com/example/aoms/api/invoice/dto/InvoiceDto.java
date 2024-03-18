@@ -2,8 +2,8 @@ package com.example.aoms.api.invoice.dto;
 
 import com.example.aoms.api.company.dto.CompanyDto;
 import com.example.aoms.api.customer.dto.CustomerDto;
-import com.example.aoms.api.invoice_product.dto.ProductInvoiceInfoDto;
-import com.example.aoms.api.invoice_service.dto.ServiceInvoiceInfoDto;
+import com.example.aoms.api.product_invoice.dto.ProductInvoiceInfoDto;
+import com.example.aoms.api.service_invoice.dto.ServiceInvoiceInfoDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +26,6 @@ public class InvoiceDto {
     private BigDecimal overallValue;
     private CompanyDto company;
     private CustomerDto customer;
-    private List<ServiceInvoiceInfoDto> listOfServiceInvoiceInfo;
     private List<ProductInvoiceInfoDto> listOfProductInvoiceInfo;
+    private List<ServiceInvoiceInfoDto> listOfServiceInvoiceInfo;
 }

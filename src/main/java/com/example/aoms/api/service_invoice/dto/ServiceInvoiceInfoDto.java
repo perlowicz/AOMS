@@ -1,6 +1,5 @@
-package com.example.aoms.api.invoice_product.dto;
+package com.example.aoms.api.service_invoice.dto;
 
-import com.example.aoms.api.unit_of_measure.dto.UnitOfMeasureDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +12,10 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductInvoiceInfoDto {
+public class ServiceInvoiceInfoDto {
     private String name;
-    private Integer quantity;
+    private String scope;
     private Instant date;
     private BigDecimal nettoPrice;
     private BigDecimal bruttoPrice;
-    private UnitOfMeasureDto unitOfMeasure;
 }

@@ -1,7 +1,8 @@
-package com.example.aoms.api.invoice_product.entity;
+package com.example.aoms.api.product_invoice.entity;
 
 import com.example.aoms.api.invoice.entity.Invoice;
 import com.example.aoms.api.unit_of_measure.entity.UnitOfMeasure;
+import com.example.aoms.api.vat_rate.entity.VatRate;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,5 +42,18 @@ public class ProductInvoiceInfo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "unit_of_measure_id", nullable = false, referencedColumnName = "id")
     private UnitOfMeasure unitOfMeasure;
+
+    @Column(name = "netto_value", nullable = false, precision = 6, scale = 2)
+    private BigDecimal nettoValue;
+
+    @Column(name = "brutto_value", nullable = false, precision = 6, scale = 2)
+    private BigDecimal bruttoValue;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "vat_rate_id", nullable = false)
+    private VatRate vatRate;
+
+    @Column(name = "vat_value", nullable = false, precision = 6, scale = 2)
+    private BigDecimal vatValue;
 
 }

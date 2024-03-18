@@ -2,8 +2,8 @@ package com.example.aoms.api.invoice.service;
 
 import com.example.aoms.api.invoice.dto.InvoiceDto;
 import com.example.aoms.api.invoice.entity.Invoice;
-import com.example.aoms.api.invoice_product.service.ProductInvoiceInfoService;
-import com.example.aoms.api.invoice_service.service.ServiceInvoiceInfoService;
+import com.example.aoms.api.product_invoice.service.ProductInvoiceInfoService;
+import com.example.aoms.api.service_invoice.service.ServiceInvoiceInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

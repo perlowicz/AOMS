@@ -1,4 +1,4 @@
-package com.example.aoms.api.invoice_service.entity;
+package com.example.aoms.api.service_invoice.entity;
 
 import com.example.aoms.api.invoice.entity.Invoice;
 import jakarta.persistence.*;

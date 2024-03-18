@@ -1,9 +1,9 @@
-package com.example.aoms.api.invoice_service.service;
+package com.example.aoms.api.service_invoice.service;
 
 import com.example.aoms.api.invoice.entity.Invoice;
-import com.example.aoms.api.invoice_service.dto.ServiceInvoiceInfoDto;
-import com.example.aoms.api.invoice_service.entity.ServiceInvoiceInfo;
-import com.example.aoms.api.invoice_service.repository.ServiceInvoiceInfoRepository;
+import com.example.aoms.api.service_invoice.dto.ServiceInvoiceInfoDto;
+import com.example.aoms.api.service_invoice.entity.ServiceInvoiceInfo;
+import com.example.aoms.api.service_invoice.repository.ServiceInvoiceInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,11 +26,11 @@ public class ServiceInvoiceInfoServiceImpl implements ServiceInvoiceInfoService 
     }
 
     @Override
-    public List<ServiceInvoiceInfo> saveAll(List<ServiceInvoiceInfoDto> dtoList, Invoice invoice) {
+    public void saveAll(List<ServiceInvoiceInfoDto> dtoList, Invoice invoice) {
         List<ServiceInvoiceInfo> entities = dtoList.stream()
                 .map(dto -> mapDtoToEntity(dto, invoice))
                 .collect(Collectors.toList());
-        return serviceInvoiceInfoRepository.saveAll(entities);
+        serviceInvoiceInfoRepository.saveAll(entities);
     }
 
     private ServiceInvoiceInfo mapDtoToEntity(ServiceInvoiceInfoDto dto, Invoice invoice) {
