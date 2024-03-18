@@ -75,8 +75,14 @@ export default function AddInvoiceForm() {
                 nettoPrice: product.nettoPrice,
                 bruttoPrice: product.bruttoPrice,
                 date: product.date.toISOString(),
-                productType: {
-                    type: product.productType
+                nettoValue: product.nettoValue,
+                bruttoValue: product.bruttoValue,
+                vatValue: product.vatValue,
+                unitOfMeasure: {
+                    unit: product.unit
+                },
+                vatRate: {
+                    rate: product.vatRate
                 }
             })),
             listOfServiceInvoiceInfo: formData.listOfServiceInvoiceInfo.map(service => ({
@@ -85,9 +91,6 @@ export default function AddInvoiceForm() {
                 date: service.date.toISOString(),
                 nettoPrice: service.nettoPrice,
                 bruttoPrice:service.bruttoPrice,
-                serviceType: {
-                    type: service.serviceType
-                }
             }))
         };
 
@@ -151,7 +154,7 @@ export default function AddInvoiceForm() {
             )}
 
             {activeStep === 4 && (
-                <ServiceInvoiceInfoStep handleNext={handleNext}/>
+                <ServiceInvoiceInfoStep handleNext={handleNext} formData={formData} stepFormData={setFormData}/>
             )}
 
             {activeStep === 5 && (

@@ -15,8 +15,7 @@ export default function ServiceInvoiceInfoStep({handleNext} ) {
         scope: "",
         nettoPrice: "",
         bruttoPrice: "",
-        date: "",
-        serviceType: ""
+        date: ""
     }]);
 
     const addService = () => {
@@ -25,8 +24,7 @@ export default function ServiceInvoiceInfoStep({handleNext} ) {
             scope: "",
             nettoPrice: "",
             bruttoPrice: "",
-            date: "",
-            serviceType: ""
+            date: ""
         }]);
     };
 
@@ -55,10 +53,7 @@ export default function ServiceInvoiceInfoStep({handleNext} ) {
             scope: service.scope,
             nettoPrice: service.nettoPrice,
             bruttoPrice: service.bruttoPrice,
-            date: service.date.toISOString,
-            serviceType: {
-                type: service.serviceType
-            }
+            date: service.date.toISOString
         }));
         handleNext({ listOfServiceInvoiceInfo: serviceInvoiceInfoData });
     };
@@ -127,14 +122,6 @@ export default function ServiceInvoiceInfoStep({handleNext} ) {
                             onChange={(selectedDate) => handleDateChange(selectedDate, index)}
                         />
                     </LocalizationProvider>
-                    <TextField
-                        // TODO Uncomment required attribute
-                        //required
-                        name="serviceType"
-                        label="Typ usługi"
-                        value={service.serviceType}
-                        onChange={(event) => handleServiceChange(event, index)}
-                    />
                     <Button onClick={() => removeService(index)}>Usuń usługę</Button>
                 </div>
             ))}
