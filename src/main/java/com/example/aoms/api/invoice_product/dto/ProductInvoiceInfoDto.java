@@ -18,5 +18,4 @@ public class ProductInvoiceInfoDto {
     private Instant date;
     private BigDecimal nettoPrice;
     private BigDecimal bruttoPrice;
-    private ProductInvoiceProductTypeDto productType;
 }

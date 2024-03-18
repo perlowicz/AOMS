@@ -18,5 +18,4 @@ public class ServiceInvoiceInfoDto {
     private Instant date;
     private BigDecimal nettoPrice;
     private BigDecimal bruttoPrice;
-    private ServiceInvoiceServiceTypeDto serviceType;
 }
