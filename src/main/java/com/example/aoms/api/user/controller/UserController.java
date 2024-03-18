@@ -1,11 +1,12 @@
 package com.example.aoms.api.user.controller;
 
-import com.example.aoms.api.user.dto.UserDto;
+import com.example.aoms.api.user.dto.*;
+import com.example.aoms.api.user.dto.login.UserLoginRequest;
+import com.example.aoms.api.user.dto.login.UserLoginResponse;
 import com.example.aoms.api.user.event.RegistrationCompleteEvent;
 import com.example.aoms.api.user.service.UserService;
-import com.example.aoms.api.user.dto.UserFormDto;
-import com.example.aoms.api.user.dto.VerificationTokenDto;
 import com.example.aoms.api.user.service.VerificationTokenService;
+import com.example.aoms.security.service.UserRegistrationDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -20,7 +21,18 @@ public class UserController {
     private final UserService userService;
     private final ApplicationEventPublisher publisher;
     private final VerificationTokenService verificationTokenService;
+    private final UserRegistrationDetailsService userDetailsService;
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserLoginRequest dto) {
+        UserLoginResponse response = userDetailsService.processLoginRequest(dto);
+        if (response.getIsUserValid()) {
+            return ResponseEntity.ok(response.getJwtToken());
+        }
+        return ResponseEntity
+                .badRequest()
+                .body("Invalid username or password");
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserFormDto userFormDto, final HttpServletRequest request){

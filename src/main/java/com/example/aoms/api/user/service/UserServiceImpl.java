@@ -1,16 +1,16 @@
 package com.example.aoms.api.user.service;
 
 import com.example.aoms.api.user.dto.UserDto;
+import com.example.aoms.api.user.dto.UserFormDto;
+import com.example.aoms.api.user.dto.VerificationTokenDto;
+import com.example.aoms.api.user.entity.User;
 import com.example.aoms.api.user.entity.VerificationToken;
 import com.example.aoms.api.user.exception.UserAlreadyExistsException;
-import com.example.aoms.api.user.repository.UserRepository;
-import com.example.aoms.api.user.repository.VerificationTokenRepository;
-import com.example.aoms.api.user.dto.UserFormDto;
-import com.example.aoms.api.user.entity.User;
 import com.example.aoms.api.user.exception.UserNotFoundException;
 import com.example.aoms.api.user.mappers.UserMapper;
 import com.example.aoms.api.user.mappers.VerificationTokenMapper;
-import com.example.aoms.api.user.dto.VerificationTokenDto;
+import com.example.aoms.api.user.repository.UserRepository;
+import com.example.aoms.api.user.repository.VerificationTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
