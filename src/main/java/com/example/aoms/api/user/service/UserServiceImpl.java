@@ -1,5 +1,6 @@
 package com.example.aoms.api.user.service;
 
+import com.example.aoms.api.user.data.token.VerificationTokenInfo;
 import com.example.aoms.api.user.dto.UserDto;
 import com.example.aoms.api.user.dto.UserFormDto;
 import com.example.aoms.api.user.dto.VerificationTokenDto;
@@ -61,19 +62,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String validateToken(String token) {
+    public VerificationTokenInfo validateToken(String token) {
         VerificationToken verificationToken = tokenRepository.findByToken(token);
         if(verificationToken == null){
-            return "Invalid verification token";
+            return VerificationTokenInfo.builder()
+                    .isValid(false)
+                    .message("Invalid verification token")
+                    .build();
         }
         User user = verificationToken.getUser();
         if (verificationToken.getExpirationTime().isBefore(Instant.now())){
-            return "Verification link already expired," +
-                    " Please, click the link below to receive a new verification link";
+            return VerificationTokenInfo.builder()
+                    .isValid(false)
+                    .message("Verification link already expired")
+                    .build();
         }
         user.setIsEnabled(true);
         userRepository.save(user);
-        return "valid";
+        return VerificationTokenInfo.builder()
+                .isValid(true)
+                .message("Verification token valid")
+                .build();
     }
 
     @Override

@@ -1,8 +1,9 @@
 package com.example.aoms.api.user.controller;
 
+import com.example.aoms.api.user.data.token.VerificationTokenInfo;
 import com.example.aoms.api.user.dto.*;
-import com.example.aoms.api.user.dto.login.UserLoginRequest;
-import com.example.aoms.api.user.dto.login.UserLoginResponse;
+import com.example.aoms.api.user.data.login.UserLoginRequest;
+import com.example.aoms.api.user.data.login.UserLoginResponse;
 import com.example.aoms.api.user.event.RegistrationCompleteEvent;
 import com.example.aoms.api.user.service.UserService;
 import com.example.aoms.api.user.service.VerificationTokenService;
@@ -50,13 +51,14 @@ public class UserController {
                     .badRequest()
                     .body("Email already verified. Please login to your account.");
         }
-        String verificationResult = userService.validateToken(token);
-        if (verificationResult.equalsIgnoreCase("valid")){
-            return ResponseEntity.ok("Email validated properly");
+        VerificationTokenInfo verificationTokenInfo = userService.validateToken(token);
+        if (verificationTokenInfo.getIsValid()){
+            return ResponseEntity
+                    .ok("Email validated properly");
         }
         return ResponseEntity
                 .badRequest()
-                .body("Invalid token");
+                .body(verificationTokenInfo.getMessage());
     }
 
     private String getApplicationUrl(HttpServletRequest request) {

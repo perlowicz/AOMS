@@ -1,7 +1,7 @@
 package com.example.aoms.security.service;
 
-import com.example.aoms.api.user.dto.login.UserLoginRequest;
-import com.example.aoms.api.user.dto.login.UserLoginResponse;
+import com.example.aoms.api.user.data.login.UserLoginRequest;
+import com.example.aoms.api.user.data.login.UserLoginResponse;
 import com.example.aoms.api.user.repository.UserRepository;
 import com.example.aoms.security.data.UserRegistrationDetails;
 import lombok.RequiredArgsConstructor;

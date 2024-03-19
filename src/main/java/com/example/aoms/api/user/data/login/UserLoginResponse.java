@@ -1,4 +1,4 @@
-package com.example.aoms.api.user.dto.login;
+package com.example.aoms.api.user.data.login;
 
 import lombok.*;
 

@@ -52,8 +52,12 @@ public class UserRegistrationSecurityConfig {
                                                 "/customer",
                                                 "/invoice/**")
                                         .permitAll()
-                                        .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
-                                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                                        .requestMatchers(
+                                                "/users/**"
+                                        ).hasAnyAuthority("USER", "ADMIN")
+                                        .requestMatchers(
+                                                "/admin/**"
+                                        ).hasAuthority("ADMIN")
                         ))
 //                .formLogin(Customizer.withDefaults())
                 .build();
