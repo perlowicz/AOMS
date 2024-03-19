@@ -2,13 +2,16 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {useState} from "react";
-import {TextField} from "@mui/material";
+import {Alert, AlertTitle, TextField} from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function LoginForm() {
 
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [alertOpen, setAlertOpen] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,10 +22,13 @@ export default function LoginForm() {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/api/login', userData);
-            localStorage.setItem('sessionToken', response.data.token);
+            const response = await axios.post('http://localhost:8080/api/user/login', userData);
+            if (response.status === 200) {
+                localStorage.setItem('sessionToken', response.data);
+                navigate('/?logged=true');
+            }
         } catch (error) {
-            console.log(error);
+            setAlertOpen(true);
         }
     }
 
@@ -42,6 +48,12 @@ export default function LoginForm() {
                 borderRadius: '10px'
             }}
         >
+            {alertOpen &&
+                <Alert severity="error">
+                    <AlertTitle>Nie udało się zalogować</AlertTitle>
+                    Niepoprawne dane logowania.
+                </Alert>
+            }
             <TextField
                 required
                 id="username-input"

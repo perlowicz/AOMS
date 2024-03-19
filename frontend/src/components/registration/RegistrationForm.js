@@ -1,24 +1,28 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import UsernameInput from "../formComponents/UsernameInput";
-import PasswordInput from "../formComponents/PasswordInput";
-import EmailInput from "../formComponents/EmailInput";
 import { useNavigate } from 'react-router-dom';
+import {useState} from "react";
+import {TextField} from "@mui/material";
 
 
 export default function RegistrationForm() {
 
     const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const formData = {
-            userName: event.target[0].value,
-            email: event.target[2].value,
-            password: event.target[4].value
+            username: username,
+            email: email,
+            password: password
         };
+
+        console.log(formData);
 
         try {
             const response = await axios.post('http://localhost:8080/api/register', formData);
@@ -47,9 +51,31 @@ export default function RegistrationForm() {
                 borderRadius: '10px'
             }}
         >
-            <UsernameInput/>
-            <EmailInput/>
-            <PasswordInput/>
+            <TextField
+                required
+                id="username-input"
+                label="Nazwa użytkownika"
+                variant="outlined"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+            />
+            <TextField
+                required
+                id="email-input"
+                label="Email"
+                variant="outlined"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+            />
+            <TextField
+                required
+                id="password-input"
+                label="Hasło"
+                type="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+            />
             <Button
                 type="submit"
                 variant="contained"

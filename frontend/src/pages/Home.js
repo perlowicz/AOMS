@@ -8,6 +8,7 @@ export default function Home() {
 
     const [alertOpen, setAlertOpen] = useState(false);
     const [errorAlertOpen, setErrorAlertOpen] = useState(false);
+    const [loginSuccess, setLoginSuccess] = useState(false);
 
     useEffect(() => {
         if(window.location.search.includes('registered=true')) {
@@ -18,6 +19,12 @@ export default function Home() {
     useEffect(() => {
         if(window.location.search.includes('registered=false')) {
             setErrorAlertOpen(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if(window.location.search.includes('logged=true')) {
+            setLoginSuccess(true);
         }
     }, []);
 
@@ -35,6 +42,11 @@ export default function Home() {
                 <Alert severity="error">
                     <AlertTitle>Wystąpił błąd podczas wysyłnia formularza</AlertTitle>
                     Proszę spróbować ponownie.
+                </Alert>
+            }
+            {loginSuccess &&
+                <Alert variant="outlined" severity="success">
+                    Zalogowano pomyślnie
                 </Alert>
             }
         </Container>
