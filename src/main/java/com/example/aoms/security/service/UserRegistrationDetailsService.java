@@ -30,7 +30,7 @@ public class UserRegistrationDetailsService implements UserDetailsService {
 
     public UserLoginResponse processLoginRequest(UserLoginRequest dto) {
         UserDetails userDetails = loadUserByUsername(dto.getUsername());
-        if (userDetails == null) {
+        if (userDetails == null || !userDetails.isEnabled()) {
             return buildInvalidResponse();
         }
         if (bCryptPasswordEncoder.matches(dto.getPassword(), userDetails.getPassword())) {

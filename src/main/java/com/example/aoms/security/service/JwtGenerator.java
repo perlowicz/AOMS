@@ -2,12 +2,14 @@ package com.example.aoms.security.service;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 class JwtGenerator {
 
     private final SecretKey SECRET_KEY = Jwts.SIG.HS256.key().build();

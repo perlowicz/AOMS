@@ -41,8 +41,9 @@ public class UserRegistrationSecurityConfig {
                         authorize ->
                                 authorize
                                         .requestMatchers(
-                                                "/register/**",
-                                                "/register/verifyEmail",
+                                                "/user/register/**",
+                                                "/user/register/verifyEmail",
+                                                "/user/login/**",
                                                 "/service",
                                                 "/info",
                                                 "/product",
@@ -54,7 +55,7 @@ public class UserRegistrationSecurityConfig {
                                         .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
                                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         ))
-                .formLogin(Customizer.withDefaults())
+//                .formLogin(Customizer.withDefaults())
                 .build();
     }
 }
