@@ -2,6 +2,7 @@ package com.example.aoms.api.company.entity;
 
 import com.example.aoms.api.address.entity.Address;
 import com.example.aoms.api.invoice.entity.Invoice;
+import com.example.aoms.api.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,5 +32,9 @@ public class Company {
 
     @OneToMany(mappedBy = "company")
     private Set<Invoice> invoices = new LinkedHashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 }

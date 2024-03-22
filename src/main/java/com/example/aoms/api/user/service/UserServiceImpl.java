@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findUserByUsername(String username) {
+        return userRepository.findByUserName(username);
+    }
+
+    @Override
     public UserDto registerUser(UserFormDto userFormDto) {
         String userEmail = userFormDto.getEmail();
         if (userRepository.findByEmail(userEmail).isPresent()) {

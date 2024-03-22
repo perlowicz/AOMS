@@ -1,8 +1,12 @@
 package com.example.aoms.api.user.entity;
 
+import com.example.aoms.api.company.entity.Company;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,5 +32,11 @@ public class User {
 
     @Column(name = "is_enabled", nullable = false)
     private Boolean isEnabled = false;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Company> companies = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<VerificationToken> verificationTokens = new LinkedHashSet<>();
 
 }

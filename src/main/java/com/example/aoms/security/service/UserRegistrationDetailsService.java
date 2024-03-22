@@ -18,7 +18,6 @@ public class UserRegistrationDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JwtGenerator jwtGenerator;
 
 
     @Override
@@ -34,7 +33,7 @@ public class UserRegistrationDetailsService implements UserDetailsService {
             return buildInvalidResponse();
         }
         if (bCryptPasswordEncoder.matches(dto.getPassword(), userDetails.getPassword())) {
-            String jwtToken = jwtGenerator.generateToken(userDetails);
+            String jwtToken = JwtUtil.generateToken(userDetails);
             return buildValidResponse(jwtToken);
         }
         return buildInvalidResponse();

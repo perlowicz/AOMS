@@ -43,14 +43,15 @@ public class UserRegistrationSecurityConfig {
                                         .requestMatchers(
                                                 "/user/register/**",
                                                 "/user/register/verifyEmail",
-                                                "/user/login/**",
-                                                "/service",
-                                                "/info",
-                                                "/product",
-                                                "/address",
-                                                "/company",
-                                                "/customer",
-                                                "/invoice/**")
+                                                "/user/login/**"
+//                                                "/service",
+//                                                "/info",
+//                                                "/product",
+//                                                "/address",
+//                                                "/company",
+//                                                "/customer",
+//                                                "/invoice/**"
+                                        )
                                         .permitAll()
                                         .requestMatchers(
                                                 "/users/**"
