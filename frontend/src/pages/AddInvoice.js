@@ -5,9 +5,11 @@ import Typography from "@mui/material/Typography";
 
 
 export default function AddInvoice() {
+
+
+
     return (
         <Container>
-            <Navbar/>
             <Typography
                 variant="h4"
                 align="center"

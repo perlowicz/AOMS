@@ -21,7 +21,6 @@ export default function Users() {
 
     return (
         <Container>
-            <Navbar/>
             <Typography>Users</Typography>
             <List>
                 {users.map(user => {

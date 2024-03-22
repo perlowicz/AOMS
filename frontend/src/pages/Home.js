@@ -30,7 +30,6 @@ export default function Home() {
 
     return (
         <Container>
-            <Navbar/>
             <h1>Home</h1>
             {alertOpen &&
                 <Alert severity="success">

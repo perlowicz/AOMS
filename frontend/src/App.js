@@ -8,13 +8,25 @@ import Registration from "./pages/Registration";
 import Users from "./pages/Users";
 import Invoices from "./pages/Invoices";
 import Login from "./pages/Login";
+import Navbar from "./components/navigation/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+
+    const [user, setUser] = React.useState(null);
+
+
   return (
       <BrowserRouter>
+          <Navbar/>
           <Routes>
               <Route path="/" element=<Home/>/>
-              <Route path="/add-invoice" element=<AddInvoice/>/>
+              <Route path="/add-invoice" element={
+                  <ProtectedRoute>
+                      <AddInvoice/>
+                  </ProtectedRoute>
+              }
+              />
               <Route path="/invoices" element=<Invoices/>/>
               <Route path="/profile" element=<CompanyProfile/>/>
               <Route path="/register" element=<Registration/>/>
