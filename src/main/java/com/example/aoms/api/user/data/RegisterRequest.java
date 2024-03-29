@@ -1,4 +1,4 @@
-package com.example.aoms.api.user.dto;
+package com.example.aoms.api.user.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserFormDto {
+public class RegisterRequest {
     @JsonProperty("username")
     @Nonnull
     private String userName;

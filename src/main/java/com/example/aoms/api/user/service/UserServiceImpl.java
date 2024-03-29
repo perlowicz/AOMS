@@ -1,8 +1,8 @@
 package com.example.aoms.api.user.service;
 
-import com.example.aoms.api.user.data.token.VerificationTokenInfo;
+import com.example.aoms.api.user.verificationToken.VerificationTokenInfo;
 import com.example.aoms.api.user.dto.UserDto;
-import com.example.aoms.api.user.dto.UserFormDto;
+import com.example.aoms.api.user.data.RegisterRequest;
 import com.example.aoms.api.user.dto.VerificationTokenDto;
 import com.example.aoms.api.user.entity.User;
 import com.example.aoms.api.user.entity.VerificationToken;
@@ -39,17 +39,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByUsername(String username) {
-        return userRepository.findByUserName(username);
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
-    public UserDto registerUser(UserFormDto userFormDto) {
-        String userEmail = userFormDto.getEmail();
+    public UserDto registerUser(RegisterRequest registerRequest) {
+        String userEmail = registerRequest.getEmail();
         if (userRepository.findByEmail(userEmail).isPresent()) {
             throw new UserAlreadyExistsException("User with email " + userEmail + " already exists in database");
         }
-        User newUser = mapDtoToEntity(userFormDto, passwordEncoder);
+        User newUser = mapDtoToEntity(registerRequest, passwordEncoder);
         User savedUser = userRepository.save(newUser);
         return mapEntityToDto(savedUser);
     }

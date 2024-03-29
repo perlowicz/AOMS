@@ -12,6 +12,7 @@ import com.example.aoms.api.product_invoice.dto.ProductInvoiceInfoDto;
 import com.example.aoms.api.product_invoice.service.ProductInvoiceInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,5 +65,10 @@ public class TestController {
         return ResponseEntity
                 .status(201)
                 .build();
+    }
+
+    @GetMapping("/secret")
+    ResponseEntity<?> secret() {
+        return ResponseEntity.ok("Authenticated properly!");
     }
 }

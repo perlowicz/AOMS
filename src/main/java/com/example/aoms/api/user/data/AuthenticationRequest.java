@@ -1,20 +1,15 @@
-package com.example.aoms.api.user.dto;
+package com.example.aoms.api.user.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private Long id;
-    private String userName;
+public class AuthenticationRequest {
     private String email;
     private String password;
-    private String role;
-    private Boolean isEnabled;
-
 }

@@ -1,13 +1,15 @@
 package com.example.aoms.api.user.controller;
 
-import com.example.aoms.api.user.data.token.VerificationTokenInfo;
-import com.example.aoms.api.user.dto.*;
-import com.example.aoms.api.user.data.login.UserLoginRequest;
-import com.example.aoms.api.user.data.login.UserLoginResponse;
+import com.example.aoms.api.user.data.AuthenticationRequest;
+import com.example.aoms.api.user.data.AuthenticationResponse;
+import com.example.aoms.api.user.service.AuthenticationService;
+import com.example.aoms.api.user.verificationToken.VerificationTokenInfo;
+import com.example.aoms.api.user.dto.UserDto;
+import com.example.aoms.api.user.data.RegisterRequest;
+import com.example.aoms.api.user.dto.VerificationTokenDto;
 import com.example.aoms.api.user.event.RegistrationCompleteEvent;
 import com.example.aoms.api.user.service.UserService;
 import com.example.aoms.api.user.service.VerificationTokenService;
-import com.example.aoms.security.service.UserRegistrationDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -23,30 +25,25 @@ public class UserController {
     private final UserService userService;
     private final ApplicationEventPublisher publisher;
     private final VerificationTokenService verificationTokenService;
-    private final UserRegistrationDetailsService userDetailsService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserLoginRequest dto) {
-        UserLoginResponse response = userDetailsService.processLoginRequest(dto);
-        if (response.getIsUserValid()) {
-            return ResponseEntity.ok(response.getJwtToken());
-        }
-        return ResponseEntity
-                .badRequest()
-                .body("Invalid username or password");
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
+        AuthenticationResponse response = authenticationService.authenticate(request);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserFormDto userFormDto, final HttpServletRequest request){
-        UserDto registeredUser = userService.registerUser(userFormDto);
+    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest, final HttpServletRequest request){
+        UserDto registeredUser = userService.registerUser(registerRequest);
         publisher.publishEvent(new RegistrationCompleteEvent(registeredUser, getApplicationUrl(request)));
         return ResponseEntity.ok("User created");
     }
 
     @GetMapping("/register/verifyEmail")
     public ResponseEntity<?> verifyEmail(@RequestParam("token") String token){
-        VerificationTokenDto theToken = verificationTokenService.findByToken(token);
-        if (theToken.getUserDto().getIsEnabled()){
+        VerificationTokenDto verificationTokenDto = verificationTokenService.findByToken(token);
+        if (verificationTokenDto.getUserDto().getIsEnabled()){
             return ResponseEntity
                     .badRequest()
                     .body("Email already verified. Please login to your account.");

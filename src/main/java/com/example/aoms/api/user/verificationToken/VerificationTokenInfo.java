@@ -1,4 +1,4 @@
-package com.example.aoms.api.user.data.token;
+package com.example.aoms.api.user.verificationToken;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,9 @@
 package com.example.aoms.api.user.mappers;
 
 import com.example.aoms.api.user.dto.UserDto;
+import com.example.aoms.api.user.entity.Role;
 import com.example.aoms.api.user.entity.User;
-import com.example.aoms.api.user.dto.UserFormDto;
+import com.example.aoms.api.user.data.RegisterRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserMapper {
@@ -10,9 +11,9 @@ public class UserMapper {
     public static UserDto mapEntityToDto(User entity) {
         return UserDto.builder()
                 .id(entity.getId())
-                .userName(entity.getUserName())
+                .userName(entity.getUsername())
                 .email(entity.getEmail())
-                .role(entity.getRole())
+                .role(String.valueOf(entity.getRole()))
                 .isEnabled(entity.getIsEnabled())
                 .build();
     }
@@ -22,16 +23,16 @@ public class UserMapper {
         user.setUserName(userDto.getUserName());
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRole(userDto.getRole());
+        user.setRole(Role.valueOf(userDto.getRole()));
         return user;
     }
 
-    public static User mapDtoToEntity(UserFormDto userFormDto, PasswordEncoder passwordEncoder) {
+    public static User mapDtoToEntity(RegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
         User user = new User();
-        user.setUserName(userFormDto.getUserName());
-        user.setEmail(userFormDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userFormDto.getPassword()));
-        user.setRole("USER");
+        user.setUserName(registerRequest.getUserName());
+        user.setEmail(registerRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setRole(Role.valueOf("USER"));
         return user;
     }
 }

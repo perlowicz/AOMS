@@ -27,7 +27,7 @@ public class CompanyServiceImpl implements CompanyService {
     public Company save(CompanyDto dto) {
         Address address = addressService.save(dto.getAddress());
         User user = userService
-                .findUserByUsername(dto.getUserName())
+                .findUserByEmail(dto.getUserName())
                 .orElseThrow(() -> new UserNotFoundException("User with username " + dto.getUserName() + " not found"));
         Company entity = mapDtoToEntity(dto, address, user);
         return companyRepository.save(entity);
