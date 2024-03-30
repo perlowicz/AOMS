@@ -14,5 +14,4 @@ public class CompanyDto {
     private String name;
     private String NIP;
     private AddressDto address;
-    private String userName;
 }

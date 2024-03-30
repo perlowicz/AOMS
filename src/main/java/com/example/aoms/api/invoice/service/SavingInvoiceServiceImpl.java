@@ -19,8 +19,8 @@ public class SavingInvoiceServiceImpl implements SavingInvoiceService {
 
     @Override
     @Transactional
-    public void save(InvoiceDto dto) {
-        Invoice invoice = invoiceService.save(dto);
+    public void save(InvoiceDto dto, String jwt) {
+        Invoice invoice = invoiceService.save(dto, jwt);
         productInvoiceInfoService.saveAll(dto.getListOfProductInvoiceInfo(), invoice);
         serviceInvoiceInfoService.saveAll(dto.getListOfServiceInvoiceInfo(), invoice);
     }

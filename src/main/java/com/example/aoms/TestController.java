@@ -8,8 +8,10 @@ import com.example.aoms.api.customer.dto.CustomerDto;
 import com.example.aoms.api.customer.service.CustomerService;
 import com.example.aoms.api.invoice.dto.InvoiceDto;
 import com.example.aoms.api.invoice.service.InvoiceService;
+import com.example.aoms.api.jwt_token.util.JwtUtil;
 import com.example.aoms.api.product_invoice.dto.ProductInvoiceInfoDto;
 import com.example.aoms.api.product_invoice.service.ProductInvoiceInfoService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,8 +46,9 @@ public class TestController {
     }
 
     @PostMapping("/company")
-    ResponseEntity<?> company(@RequestBody CompanyDto dto) {
-        companyService.save(dto);
+    ResponseEntity<?> company(@RequestBody CompanyDto dto, HttpServletRequest request) {
+        String jwt = request.getHeader("Authorization").substring(7);
+        companyService.save(dto, jwt);
         return ResponseEntity
                 .status(201)
                 .build();
@@ -60,8 +63,9 @@ public class TestController {
     }
 
     @PostMapping("/invoice")
-    ResponseEntity<?> invoice(@RequestBody InvoiceDto dto) {
-        invoiceService.save(dto);
+    ResponseEntity<?> invoice(@RequestBody InvoiceDto dto, HttpServletRequest request) {
+        String jwt = JwtUtil.extractJwtFromRequest(request);
+        invoiceService.save(dto, jwt);
         return ResponseEntity
                 .status(201)
                 .build();
@@ -70,5 +74,10 @@ public class TestController {
     @GetMapping("/secret")
     ResponseEntity<?> secret() {
         return ResponseEntity.ok("Authenticated properly!");
+    }
+
+    @GetMapping("/oauth2")
+    ResponseEntity<?> oauth2() {
+        return ResponseEntity.ok("Authenticated properly with OAuth2!");
     }
 }

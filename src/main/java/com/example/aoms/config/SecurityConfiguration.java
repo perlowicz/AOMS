@@ -1,6 +1,7 @@
 package com.example.aoms.config;
 
 import com.example.aoms.security.filter.JwtAuthenticationFilter;
+import com.example.aoms.security.oauth2.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,17 +10,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.web.cors.CorsConfiguration;
 
-import java.util.List;
-
+import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -31,6 +27,7 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
+//    private final CustomOAuth2UserService customOAuth2UserService;
 
 
     @Bean
@@ -53,11 +50,11 @@ public class SecurityConfiguration {
 //                                                "/invoice/**"
                                         )
                                         .permitAll()
-                                        .requestMatchers("/secret").hasAuthority("USER")
-                                        .anyRequest()
-                                        .authenticated()
+//                                        .requestMatchers("/secret").hasAuthority("USER")
+//                                        .requestMatchers("/oauth2").authenticated()
+                                        .anyRequest().hasAuthority("USER")
                         ))
-                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+//                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(
@@ -65,6 +62,8 @@ public class SecurityConfiguration {
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()))
                 )
+//                .formLogin(withDefaults())
+//                .oauth2Login(configurer -> configurer.userInfoEndpoint(endpoint -> endpoint.userService(customOAuth2UserService)))
                 .build();
     }
 }

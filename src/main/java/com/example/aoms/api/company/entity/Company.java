@@ -33,7 +33,7 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Invoice> invoices = new LinkedHashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

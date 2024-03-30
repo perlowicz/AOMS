@@ -1,23 +1,22 @@
 package com.example.aoms.api.user.entity;
 
 import com.example.aoms.api.company.entity.Company;
+import com.example.aoms.api.jwt_token.entity.JwtToken;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "\"user\"", schema = "app")
-public class User implements UserDetails {
+public class User implements UserDetails, OAuth2User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -40,14 +39,22 @@ public class User implements UserDetails {
     private Boolean isEnabled = false;
 
     @OneToMany(mappedBy = "user")
-    private Set<Company> companies = new LinkedHashSet<>();
+    private Set<VerificationToken> verificationTokens = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<VerificationToken> verificationTokens = new LinkedHashSet<>();
+    private Set<JwtToken> jwtTokens = new LinkedHashSet<>();
+
+    @OneToOne(mappedBy = "user")
+    private Company company;
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("USER"));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
@@ -73,5 +80,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    @Override
+    public String getName() {
+        return this.email;
     }
 }
