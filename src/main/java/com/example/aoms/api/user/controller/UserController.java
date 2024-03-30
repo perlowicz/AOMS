@@ -1,11 +1,9 @@
 package com.example.aoms.api.user.controller;
 
-import com.example.aoms.api.user.data.AuthenticationRequest;
-import com.example.aoms.api.user.data.AuthenticationResponse;
+import com.example.aoms.api.user.data.*;
 import com.example.aoms.api.user.service.AuthenticationService;
 import com.example.aoms.api.user.verificationToken.VerificationTokenInfo;
 import com.example.aoms.api.user.dto.UserDto;
-import com.example.aoms.api.user.data.RegisterRequest;
 import com.example.aoms.api.user.dto.VerificationTokenDto;
 import com.example.aoms.api.user.event.RegistrationCompleteEvent;
 import com.example.aoms.api.user.service.UserService;
@@ -31,6 +29,11 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         AuthenticationResponse response = authenticationService.authenticate(request);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> authenticate(){
+        return ResponseEntity.ok("Authenticated");
     }
 
     @PostMapping("/register")

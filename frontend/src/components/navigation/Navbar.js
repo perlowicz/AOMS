@@ -10,10 +10,15 @@ import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "@mui/material";
+import {useContext} from "react";
+import {AuthContext} from "../AuthContext";
+import Button from "@mui/material/Button";
+import axios from "axios";
 
 
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const { isAuthenticated, handleLogout } = useContext(AuthContext);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -23,11 +28,20 @@ function Navbar() {
         setAnchorElNav(null);
     };
 
+    const handleLogoutClick = async () => {
+        try {
+            await axios.get('http://localhost:8080/api/logout');
+            handleLogout();
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    }
+
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <AdbIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
                     <Typography
                         variant="h6"
                         noWrap
@@ -35,7 +49,7 @@ function Navbar() {
                         href="/"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: {xs: 'none', md: 'flex'},
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
@@ -46,7 +60,7 @@ function Navbar() {
                         LOGO
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -55,7 +69,7 @@ function Navbar() {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -72,13 +86,13 @@ function Navbar() {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: {xs: 'block', md: 'none'},
                             }}
                         >
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link
                                     href="/add-invoice"
-                                    sx={{ display: 'block', textAlign: 'center' }}
+                                    sx={{display: 'block', textAlign: 'center'}}
                                 >
                                     Dodaj fakturę
                                 </Link>
@@ -86,14 +100,14 @@ function Navbar() {
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link
                                     href="/invoices"
-                                    sx={{ display: 'block', textAlign: 'center' }}
+                                    sx={{display: 'block', textAlign: 'center'}}
                                 >
                                     Lista faktur
                                 </Link>
                             </MenuItem>
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
                     <Typography
                         variant="h5"
                         noWrap
@@ -101,7 +115,7 @@ function Navbar() {
                         href="/"
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: {xs: 'flex', md: 'none'},
                             flexGrow: 1,
                             fontFamily: 'monospace',
                             fontWeight: 700,
@@ -112,66 +126,85 @@ function Navbar() {
                     >
                         LOGO
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Link
-                            href="/add-invoice"
-                            sx={{
-                                my: 2,
-                                display: 'block',
-                                textAlign: 'center',
-                                color: 'white'
-                        }}
-                        >
-                            Dodaj fakturę
-                        </Link>
-                        <Link
-                            href="/invoices"
-                            sx={{
-                                my: 2,
-                                display: 'block',
-                                textAlign: 'center',
-                                color: 'white'
-                        }}
-                        >
-                            Lista faktur
-                        </Link>
-                        <Link
-                            href="/register"
-                            sx={{
-                                my: 2,
-                                display: 'block',
-                                textAlign: 'center',
-                                color: 'white'
-                            }}
-                        >
-                            Zarejestruj się
-                        </Link>
-                        <Link
-                            href="/login"
-                            sx={{
-                                my: 2,
-                                display: 'block',
-                                textAlign: 'center',
-                                color: 'white'
-                            }}
-                        >
-                            Zaloguj się
-                        </Link>
-                        <Link
-                            href="/profile"
-                            sx={{
-                                my: 2,
-                                display: 'block',
-                                textAlign: 'center',
-                                color: 'white'
-                            }}
-                        >
-                            Dane firmy
-                        </Link>
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
+                        {isAuthenticated
+                            ? <Box>
+                                <Link
+                                    href="/add-invoice"
+                                    sx={{
+                                        my: 2,
+                                        display: 'block',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Dodaj fakturę
+                                </Link>
+                                <Link
+                                    href="/invoices"
+                                    sx={{
+                                        my: 2,
+                                        display: 'block',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Lista faktur
+                                </Link>
+                                <Link
+                                    href="/profile"
+                                    sx={{
+                                        my: 2,
+                                        display: 'block',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Dane firmy
+                                </Link>
+                                <Button
+                                    onClick={handleLogoutClick}
+                                    href="/"
+                                    sx={{
+                                        my: 2,
+                                        display: 'block',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Wyloguj się
+                                </Button>
+                            </Box>
+                            : <Box>
+                                <Link
+                                    href="/register"
+                                    sx={{
+                                        my: 2,
+                                        display: 'block',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Zarejestruj się
+                                </Link>
+                                <Link
+                                    href="/login"
+                                    sx={{
+                                        my: 2,
+                                        display: 'block',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Zaloguj się
+                                </Link>
+                            </Box>
+                        }
                     </Box>
                 </Toolbar>
             </Container>
         </AppBar>
     );
 }
+
 export default Navbar;

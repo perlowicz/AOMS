@@ -5,6 +5,9 @@ import CompanyInfo from "../components/profile/CompanyInfo";
 
 
 export default function CompanyProfile() {
+
+    
+
     return (
         <Container>
             <Typography>Dane przedsiębiorstwa</Typography>

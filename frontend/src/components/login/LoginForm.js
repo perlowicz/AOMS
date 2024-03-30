@@ -1,9 +1,10 @@
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Alert, AlertTitle, TextField} from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import {AuthContext} from "../AuthContext";
 
 
 export default function LoginForm() {
@@ -12,6 +13,7 @@ export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [alertOpen, setAlertOpen] = useState(false);
+    const { handleLogin } = useContext(AuthContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,6 +28,7 @@ export default function LoginForm() {
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.access_token);
                 navigate('/?logged=true');
+                handleLogin();
             } else {
                 setAlertOpen(true);
             }
