@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 export default function LoginForm() {
 
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [alertOpen, setAlertOpen] = useState(false);
 
@@ -17,15 +17,17 @@ export default function LoginForm() {
         event.preventDefault();
 
         const userData = {
-            username: username,
+            email: email,
             password: password,
         }
 
         try {
             const response = await axios.post('http://localhost:8080/api/user/login', userData);
             if (response.status === 200) {
-                localStorage.setItem('sessionToken', response.data);
+                localStorage.setItem('token', response.data.access_token);
                 navigate('/?logged=true');
+            } else {
+                setAlertOpen(true);
             }
         } catch (error) {
             setAlertOpen(true);
@@ -48,19 +50,13 @@ export default function LoginForm() {
                 borderRadius: '10px'
             }}
         >
-            {alertOpen &&
-                <Alert severity="error">
-                    <AlertTitle>Nie udało się zalogować</AlertTitle>
-                    Niepoprawne dane logowania.
-                </Alert>
-            }
             <TextField
                 required
-                id="username-input"
-                label="Nazwa użytkownika"
+                id="email-input"
+                label="Email"
                 variant="outlined"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
             />
             <TextField
                 required
@@ -71,6 +67,12 @@ export default function LoginForm() {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
+            {alertOpen &&
+                <Alert severity="error">
+                    <AlertTitle>Nie udało się zalogować</AlertTitle>
+                    Niepoprawne dane logowania.
+                </Alert>
+            }
             <Button
                 type="submit"
                 variant="contained"

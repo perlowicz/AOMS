@@ -157,6 +157,17 @@ function Navbar() {
                         >
                             Zaloguj się
                         </Link>
+                        <Link
+                            href="/profile"
+                            sx={{
+                                my: 2,
+                                display: 'block',
+                                textAlign: 'center',
+                                color: 'white'
+                            }}
+                        >
+                            Dane firmy
+                        </Link>
                     </Box>
                 </Toolbar>
             </Container>
