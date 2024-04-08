@@ -1,5 +1,6 @@
 package com.example.aoms.api.user.controller;
 
+import com.example.aoms.api.jwt_token.util.JwtUtil;
 import com.example.aoms.api.user.data.*;
 import com.example.aoms.api.user.service.AuthenticationService;
 import com.example.aoms.api.user.verificationToken.VerificationTokenInfo;
@@ -34,6 +35,17 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> authenticate(){
         return ResponseEntity.ok("Authenticated");
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(HttpServletRequest request){
+        String jwt = JwtUtil.extractJwtFromRequest(request);
+        UserInfoResponse response = userService.findUserInfoByJwt(jwt);
+        if (response.isFound()){
+            return ResponseEntity.ok(response.getUserDto());
+        } else {
+            return ResponseEntity.badRequest().body(response.getErrorMessage());
+        }
     }
 
     @PostMapping("/register")

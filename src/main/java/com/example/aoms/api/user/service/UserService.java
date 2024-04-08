@@ -1,5 +1,6 @@
 package com.example.aoms.api.user.service;
 
+import com.example.aoms.api.user.data.UserInfoResponse;
 import com.example.aoms.api.user.verificationToken.VerificationTokenInfo;
 import com.example.aoms.api.user.dto.UserDto;
 import com.example.aoms.api.user.data.RegisterRequest;
@@ -18,4 +19,5 @@ public interface UserService {
     VerificationTokenInfo validateToken(String token);
     VerificationToken generateNewVerificationToken(String oldToken);
 
+    UserInfoResponse findUserInfoByJwt(String jwt);
 }

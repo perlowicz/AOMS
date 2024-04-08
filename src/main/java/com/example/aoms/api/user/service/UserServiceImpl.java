@@ -1,5 +1,7 @@
 package com.example.aoms.api.user.service;
 
+import com.example.aoms.api.jwt_token.service.JwtService;
+import com.example.aoms.api.user.data.UserInfoResponse;
 import com.example.aoms.api.user.verificationToken.VerificationTokenInfo;
 import com.example.aoms.api.user.dto.UserDto;
 import com.example.aoms.api.user.data.RegisterRequest;
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;
+    private final JwtService jwtService;
 
 
     @Override
@@ -97,5 +100,22 @@ public class UserServiceImpl implements UserService {
         verificationToken.setToken(UUID.randomUUID().toString());
         verificationToken.setExpirationTime(tokenExpirationTime.getExpirationTime());
         return tokenRepository.save(verificationToken);
+    }
+
+    @Override
+    public UserInfoResponse findUserInfoByJwt(String jwt) {
+        String email = jwtService.extractEmail(jwt);
+        return userRepository.findByEmail(email)
+                .map(entity -> {
+                    UserDto userDto = mapEntityToDto(entity);
+                    return UserInfoResponse.builder()
+                            .userDto(userDto)
+                            .found(true)
+                            .build();
+                })
+                .orElseGet(() -> UserInfoResponse.builder()
+                        .found(false)
+                        .errorMessage(String.format("User with email %s not found", email))
+                        .build());
     }
 }
