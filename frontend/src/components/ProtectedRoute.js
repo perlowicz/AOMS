@@ -1,16 +1,12 @@
-import {Navigate} from "react-router-dom";
-import {useEffect, useState} from "react";
-import axios from "axios";
-import {LinearProgress} from "@mui/material";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
+const ProtectedRoute = ({ children }) => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const accessToken = localStorage.getItem('access_token');
+    const refreshToken = localStorage.getItem('refresh_token');
 
-export default function ProtectedRoute ({ children }) {
+    return isAuthenticated && accessToken && refreshToken ? children : <Navigate to="/login" />;
+};
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    //FIXME Trzeba w każdym page przy wysyłaniu requestu doklejać w nagłówku token jwt i na backendzie na endpoincie
-    // authoryzować go.
-
-    return children;
-}
+export default ProtectedRoute;

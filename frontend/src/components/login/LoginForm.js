@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import {useContext, useState} from "react";
 import {Alert, AlertTitle, TextField} from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import {AuthContext} from "../AuthContext";
+import {AuthContext} from "../../context/AuthContext";
 
 
 export default function LoginForm() {
@@ -26,9 +26,8 @@ export default function LoginForm() {
         try {
             const response = await axios.post('http://localhost:8080/api/user/login', userData);
             if (response.status === 200) {
-                localStorage.setItem('token', response.data.access_token);
+                handleLogin(response.data.access_token, response.data.refresh_token);
                 navigate('/?logged=true');
-                handleLogin();
             } else {
                 setAlertOpen(true);
             }
@@ -59,6 +58,7 @@ export default function LoginForm() {
                 label="Email"
                 variant="outlined"
                 value={email}
+                autoComplete="on"
                 onChange={e => setEmail(e.target.value)}
             />
             <TextField

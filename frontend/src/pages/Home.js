@@ -1,5 +1,4 @@
 import Container from "@mui/material/Container";
-import Navbar from "../components/navigation/Navbar";
 import {Alert, AlertTitle} from "@mui/material";
 import {useEffect, useState} from "react";
 
@@ -9,6 +8,7 @@ export default function Home() {
     const [alertOpen, setAlertOpen] = useState(false);
     const [errorAlertOpen, setErrorAlertOpen] = useState(false);
     const [loginSuccess, setLoginSuccess] = useState(false);
+    const [logoutSuccess, setLogoutSuccess] = useState(false);
 
     useEffect(() => {
         if(window.location.search.includes('registered=true')) {
@@ -25,6 +25,12 @@ export default function Home() {
     useEffect(() => {
         if(window.location.search.includes('logged=true')) {
             setLoginSuccess(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if(window.location.search.includes('logout=true')) {
+            setLogoutSuccess(true);
         }
     }, []);
 
@@ -46,6 +52,11 @@ export default function Home() {
             {loginSuccess &&
                 <Alert variant="outlined" severity="success">
                     Zalogowano pomyślnie
+                </Alert>
+            }
+            {logoutSuccess &&
+                <Alert variant="outlined" severity="success">
+                    Wylogowano pomyślnie
                 </Alert>
             }
         </Container>

@@ -11,14 +11,15 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "@mui/material";
 import {useContext} from "react";
-import {AuthContext} from "../AuthContext";
+import {AuthContext} from "../../context/AuthContext";
 import Button from "@mui/material/Button";
-import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const { isAuthenticated, handleLogout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -28,13 +29,8 @@ function Navbar() {
         setAnchorElNav(null);
     };
 
-    const handleLogoutClick = async () => {
-        try {
-            await axios.get('http://localhost:8080/api/logout');
-            handleLogout();
-        } catch (error) {
-            console.error('Logout error:', error);
-        }
+    const handleLogoutClick = () => {
+        handleLogout();
     }
 
     return (
@@ -164,7 +160,7 @@ function Navbar() {
                                 </Link>
                                 <Button
                                     onClick={handleLogoutClick}
-                                    href="/"
+                                    href="/?logout=true"
                                     sx={{
                                         my: 2,
                                         display: 'block',

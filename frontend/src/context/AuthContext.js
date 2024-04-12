@@ -11,13 +11,16 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('isAuthenticated', isAuthenticated);
     }, [isAuthenticated]);
 
-    const handleLogin = () => {
+    const handleLogin = (accessToken, refreshToken) => {
         setIsAuthenticated(true);
+        localStorage.setItem('access_token', accessToken);
+        localStorage.setItem('refresh_token', refreshToken);
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false);
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
     }
 
     return (

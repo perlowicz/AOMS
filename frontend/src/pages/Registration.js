@@ -12,7 +12,7 @@ export default function Registration() {
                 variant="h4"
                 align="center"
             >
-                Rejestracja użytkownika w Systemie
+                Zarejestruj się
             </Typography>
             <RegistrationForm/>
             <Typography

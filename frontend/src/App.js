@@ -8,8 +8,8 @@ import Registration from "./pages/Registration";
 import Invoices from "./pages/Invoices";
 import Login from "./pages/Login";
 import Navbar from "./components/navigation/Navbar";
+import {AuthProvider} from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import {AuthProvider} from "./components/AuthContext";
 
 function App() {
     return (
@@ -18,12 +18,32 @@ function App() {
                 <Navbar/>
                 <Routes>
                     <Route path="/" element=<Home/>/>
-                    <Route path="/add-invoice" element=<AddInvoice/>/>
-                    <Route path="/invoices" element=<Invoices/>/>
-                    <Route path="/profile" element=<CompanyProfile/>/>
                     <Route path="/register" element=<Registration/>/>
                     <Route path="/login" element=<Login/>/>
-                    <Route path="/logout" element=<Home/>/>
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <CompanyProfile/>
+                            </ProtectedRoute>}
+
+                    />
+                    <Route
+                        path="/add-invoice"
+                        element={
+                            <ProtectedRoute>
+                                <AddInvoice/>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/invoices"
+                        element={
+                            <ProtectedRoute>
+                                <Invoices/>
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
