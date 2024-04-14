@@ -38,9 +38,9 @@ public class InvoiceController {
                 .ok(allUnits);
     }
 
-    @GetMapping
-    ResponseEntity<?> getAllInvoicesByUserId(HttpServletRequest request) {
+    @GetMapping("/all")
+    ResponseEntity<?> getAll(HttpServletRequest request) {
         final String jwt = request.getHeader("Authorization").substring(7);
-        return ResponseEntity.ok(invoiceService.findInvoicesByUserEmailFromJwt(jwt));
+        return ResponseEntity.ok(invoiceService.getAllForUserWithJwt(jwt));
     }
 }

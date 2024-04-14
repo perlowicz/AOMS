@@ -22,14 +22,13 @@ export default function RegistrationForm() {
             password: password
         };
 
-        console.log(formData);
-
         try {
-            const response = await axios.post('http://localhost:8080/api/register', formData);
+            const response = await axios.post('http://localhost:8080/api/user/register', formData);
             if (response.status === 200) {
-                navigate('/?registered=true');
+                navigate('/check-email');
             }
         } catch (error) {
+            console.log('Api zwróciło błędną odpowiedź');
             console.log(error);
             navigate('/?registered=false');
         }

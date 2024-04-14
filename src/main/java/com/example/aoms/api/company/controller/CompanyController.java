@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/company")
@@ -18,7 +20,13 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<?> getCompany(HttpServletRequest request) {
         final String jwt = request.getHeader("Authorization").substring(7);
-        return ResponseEntity.ok(companyService.findCompanyByUserEmailFromJwt(jwt));
+        Optional<CompanyDto> foundCompany = companyService.findCompanyByUserEmailFromJwt(jwt);
+        if (foundCompany.isPresent()) {
+            return ResponseEntity.ok(foundCompany.get());
+        }
+        return ResponseEntity
+                .notFound()
+                .build();
     }
 
     @PostMapping("/save")

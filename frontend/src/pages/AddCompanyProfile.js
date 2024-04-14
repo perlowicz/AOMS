@@ -1,21 +1,18 @@
 import Container from "@mui/material/Container";
-import AddInvoiceForm from "../components/invoice/AddInvoiceForm";
 import Typography from "@mui/material/Typography";
+import AddCompanyForm from "../components/company/AddCompanyForm";
 
 
-export default function AddInvoice() {
-
-
-
+export default function AddCompanyProfile() {
     return (
         <Container>
             <Typography
                 variant="h4"
                 align="center"
             >
-                Formularz dodania nowej faktury
+                Formularz dodania danych firmy
             </Typography>
-            <AddInvoiceForm/>
+            <AddCompanyForm/>
         </Container>
-    );
+    )
 }

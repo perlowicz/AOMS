@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Navbar from "../components/navigation/Navbar";
-import CompanyInfo from "../components/profile/CompanyInfo";
+import CompanyInfo from "../components/company/CompanyInfo";
 
 
 export default function CompanyProfile() {

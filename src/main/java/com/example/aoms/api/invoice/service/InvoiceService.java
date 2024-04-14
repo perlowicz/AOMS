@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface InvoiceService {
     Invoice save(InvoiceDto dto, String jwt);
-    List<InvoiceDto> findInvoicesByUserEmailFromJwt(String jwt);
+    List<InvoiceDto> getAllForUserWithJwt(String jwt);
 }

@@ -33,7 +33,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
     @Override
-    public List<InvoiceDto> findInvoicesByUserEmailFromJwt(String jwt) {
+    public List<InvoiceDto> getAllForUserWithJwt(String jwt) {
         String email = jwtService.extractEmail(jwt);
         User user = userService.findUserByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with email %s not found", email)));
