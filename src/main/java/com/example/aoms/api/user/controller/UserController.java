@@ -26,6 +26,8 @@ public class UserController {
     private final VerificationTokenService verificationTokenService;
     private final AuthenticationService authenticationService;
 
+    private static final String FRONTEND_EMAIL_VERIFICATION_ENDPOINT = "http://localhost:3000/activate-account";
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         AuthenticationResponse response = authenticationService.authenticate(request);
@@ -49,9 +51,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest, final HttpServletRequest request){
+    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest){
         UserDto registeredUser = userService.registerUser(registerRequest);
-        publisher.publishEvent(new RegistrationCompleteEvent(registeredUser, getApplicationUrl(request)));
+        publisher.publishEvent(new RegistrationCompleteEvent(registeredUser, FRONTEND_EMAIL_VERIFICATION_ENDPOINT));
         return ResponseEntity.ok("User created");
     }
 
@@ -71,9 +73,5 @@ public class UserController {
         return ResponseEntity
                 .badRequest()
                 .body(verificationTokenInfo.getMessage());
-    }
-
-    private String getApplicationUrl(HttpServletRequest request) {
-        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 }
