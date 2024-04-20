@@ -36,14 +36,19 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Optional<UserDto> findUserById(Long id) {
-        return userRepository.findById(id)
+    public Optional<UserDto> findDtoByEmail(String email) {
+        return findUserByEmail(email)
                 .map(UserMapper::mapEntityToDto);
     }
 
     @Override
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     @Override
@@ -104,8 +109,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoResponse findUserInfoByJwt(String jwt) {
-        String email = jwtService.extractEmail(jwt);
-        return userRepository.findByEmail(email)
+        Long userId = jwtService.extractUserId(jwt);
+        return userRepository.findById(userId)
                 .map(entity -> {
                     UserDto userDto = mapEntityToDto(entity);
                     return UserInfoResponse.builder()
@@ -115,7 +120,7 @@ public class UserServiceImpl implements UserService {
                 })
                 .orElseGet(() -> UserInfoResponse.builder()
                         .found(false)
-                        .errorMessage(String.format("User with email %s not found", email))
+                        .errorMessage(String.format("User with id %s not found", userId))
                         .build());
     }
 }

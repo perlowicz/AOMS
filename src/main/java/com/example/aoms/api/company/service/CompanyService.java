@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface CompanyService {
     Company save(CompanyDto dto, String jwt);
     Optional<Company> findCompanyById(Long id);
-    Optional<CompanyDto> findCompanyByUserEmailFromJwt(String jwt);
+    Optional<CompanyDto> findCompanyByJwt(String jwt);
 }

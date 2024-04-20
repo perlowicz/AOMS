@@ -1,5 +1,6 @@
 package com.example.aoms.api.jwt_token.service;
 
+import com.example.aoms.api.user.dto.UserDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -20,6 +21,8 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
+    private static final String USERNAME_CLAIM_NAME = "username";
+
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
     @Value("${application.security.jwt.expiration}")
@@ -29,18 +32,23 @@ public class JwtServiceImpl implements JwtService {
 
 
     @Override
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(UserDto userDto) {
+        return generateToken(new HashMap<>(), userDto);
     }
 
     @Override
-    public String generateRefreshToken(UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+    public String generateRefreshToken(UserDto userDto) {
+        return buildToken(new HashMap<>(), userDto, refreshExpiration);
     }
 
     @Override
     public String extractEmail(String token) {
-        return extractClaim(token, Claims::getSubject);
+        return extractClaim(token, claims -> claims.get(USERNAME_CLAIM_NAME, String.class));
+    }
+
+    @Override
+    public Long extractUserId(String token) {
+        return Long.valueOf(extractClaim(token, Claims::getSubject));
     }
 
     @Override
@@ -54,15 +62,16 @@ public class JwtServiceImpl implements JwtService {
         return isTokenExpired(token);
     }
 
-    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return buildToken(extraClaims, userDetails, jwtExpiration);
+    private String generateToken(Map<String, Object> extraClaims, UserDto userDto) {
+        return buildToken(extraClaims, userDto, jwtExpiration);
     }
 
-    private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
+    private String buildToken(Map<String, Object> extraClaims, UserDto userDto, long expiration) {
         return Jwts
                 .builder()
                 .claims(extraClaims)
-                .subject(userDetails.getUsername())
+                .claim(USERNAME_CLAIM_NAME, userDto.getUserName())
+                .subject(String.valueOf(userDto.getId()))
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey())

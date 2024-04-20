@@ -20,7 +20,7 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<?> getCompany(HttpServletRequest request) {
         final String jwt = request.getHeader("Authorization").substring(7);
-        Optional<CompanyDto> foundCompany = companyService.findCompanyByUserEmailFromJwt(jwt);
+        Optional<CompanyDto> foundCompany = companyService.findCompanyByJwt(jwt);
         if (foundCompany.isPresent()) {
             return ResponseEntity.ok(foundCompany.get());
         }

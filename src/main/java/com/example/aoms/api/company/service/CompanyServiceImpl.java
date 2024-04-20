@@ -42,15 +42,15 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Optional<CompanyDto> findCompanyByUserEmailFromJwt(String jwt) {
-        User user = findUserFromJwt(jwt);
-        return companyRepository.findByUser(user)
+    public Optional<CompanyDto> findCompanyByJwt(String jwt) {
+        Long userId = jwtService.extractUserId(jwt);
+        return companyRepository.findByUserId(userId)
                 .map(CompanyMapper::mapEntityToDto);
     }
 
     private User findUserFromJwt(String jwt) {
-        String email = jwtService.extractEmail(jwt);
-        return userService.findUserByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(String.format("User with email %s not found", email)));
+        Long userId = jwtService.extractUserId(jwt);
+        return userService.findUserById(userId)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with id %s not found", userId)));
     }
 }

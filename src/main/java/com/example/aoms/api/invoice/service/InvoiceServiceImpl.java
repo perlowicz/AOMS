@@ -34,11 +34,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<InvoiceDto> getAllForUserWithJwt(String jwt) {
-        String email = jwtService.extractEmail(jwt);
-        User user = userService.findUserByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(String.format("User with email %s not found", email)));
+        Long userId = jwtService.extractUserId(jwt);
+        User user = userService.findUserById(userId)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with id %s not found", userId)));
         Company company = companyService.findCompanyById(user.getCompany().getId())
-                .orElseThrow(() -> new CompanyNotFoundException(String.format("Company for user with email: %s not found", email)));
+                .orElseThrow(() -> new CompanyNotFoundException(String.format("Company for user with id: %s not found", userId)));
 
         return invoiceRepository.findAllByCompany(company)
                 .stream()
