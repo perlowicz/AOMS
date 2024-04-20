@@ -13,8 +13,7 @@ import AddCompanyProfile from "./pages/AddCompanyProfile";
 import CheckEmail from "./pages/CheckEmail";
 import ActivateAccount from "./pages/ActivateAccount";
 import {GeneralProvider} from "./context/provider/GeneralProvider";
-import * as ROUTES from './utils/routePaths';
-import {CompanyProvider} from "./context/provider/CompanyProvider";
+import {FRONTEND_ENDPOINTS} from "./utils/routePaths";
 
 function App() {
     return (
@@ -23,13 +22,13 @@ function App() {
                 {/*<CompanyProvider>*/}
                     <Navbar/>
                     <Routes>
-                        <Route path={ROUTES.HOME} element={<Home/>}/>
-                        <Route path={ROUTES.REGISTER} element={<Registration/>}/>
-                        <Route path={ROUTES.LOGIN} element={<Login/>}/>
-                        <Route path={ROUTES.CHECK_EMAIL} element={<CheckEmail/>}/>
-                        <Route path={ROUTES.ACTIVATE_ACCOUNT} element={<ActivateAccount/>}/>
+                        <Route path={FRONTEND_ENDPOINTS.HOME} element={<Home/>}/>
+                        <Route path={FRONTEND_ENDPOINTS.REGISTER} element={<Registration/>}/>
+                        <Route path={FRONTEND_ENDPOINTS.LOGIN} element={<Login/>}/>
+                        <Route path={FRONTEND_ENDPOINTS.CHECK_EMAIL} element={<CheckEmail/>}/>
+                        <Route path={FRONTEND_ENDPOINTS.ACTIVATE_ACCOUNT} element={<ActivateAccount/>}/>
                         <Route
-                            path={ROUTES.PROFILE}
+                            path={FRONTEND_ENDPOINTS.PROFILE}
                             element={
                                 <ProtectedRoute>
                                     <CompanyProfile/>
@@ -37,7 +36,7 @@ function App() {
 
                         />
                         <Route
-                            path={ROUTES.PROFILE}
+                            path={FRONTEND_ENDPOINTS.PROFILE}
                             element={
                                 <ProtectedRoute>
                                     <CompanyProfile/>
@@ -45,7 +44,7 @@ function App() {
 
                         />
                         <Route
-                            path={ROUTES.ADD_PROFILE}
+                            path={FRONTEND_ENDPOINTS.ADD_PROFILE}
                             element={
                                 <ProtectedRoute>
                                     <AddCompanyProfile/>
@@ -53,7 +52,7 @@ function App() {
                             }
                         />
                         <Route
-                            path={ROUTES.ADD_INVOICE}
+                            path={FRONTEND_ENDPOINTS.ADD_INVOICE}
                             element={
                                 <ProtectedRoute>
                                     <AddInvoice/>
@@ -61,7 +60,7 @@ function App() {
                             }
                         />
                         <Route
-                            path={ROUTES.INVOICES}
+                            path={FRONTEND_ENDPOINTS.INVOICES}
                             element={
                                 <ProtectedRoute>
                                     <Invoices/>

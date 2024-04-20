@@ -1,5 +1,4 @@
 import Container from "@mui/material/Container";
-import Navbar from "../components/navigation/Navbar";
 import RegistrationForm from "../components/registration/RegistrationForm";
 import Typography from "@mui/material/Typography";
 import {Link} from "@mui/material";

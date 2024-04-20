@@ -95,6 +95,7 @@ export default function AddInvoiceForm() {
             }))
         };
 
+        // TODO: Add Bearer to request's authorization header
         axios.post(`${BACKEND_URL}/invoice/save`, invoiceDto)
             .then(response => {
                 console.log('Invoice saved successfully');

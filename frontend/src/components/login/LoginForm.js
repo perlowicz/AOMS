@@ -5,7 +5,7 @@ import {useContext, useState} from "react";
 import {Alert, AlertTitle, TextField} from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import {AuthContext} from "../../context/AuthContext";
-import {BACKEND_URL, HOME} from '../../utils/routePaths';
+import {BACKEND_ENDPOINTS, FRONTEND_ENDPOINTS} from '../../utils/routePaths';
 
 
 export default function LoginForm() {
@@ -24,24 +24,15 @@ export default function LoginForm() {
             password: password,
         }
 
-        // try {
-        //     const response = await axios.post('http://localhost:8080/api/user/login', userData);
-        //     if (response.status === 200) {
-        //         handleLogin(response.data.access_token, response.data.refresh_token);
-        //         navigate('/?logged=true');
-        //     } else {
-        //         setAlertOpen(true);
-        //     }
-        // } catch (error) {
-        //     setAlertOpen(true);
-        // }
-
-        await axios.post(`${BACKEND_URL}/user/login`, userData)
+        await axios.post(BACKEND_ENDPOINTS.USER_LOGIN, userData)
             .then(response => {
                 handleLogin(response.data.access_token, response.data.refresh_token);
-                navigate(`${HOME}?logged=true`);
+                navigate(`${FRONTEND_ENDPOINTS.HOME}?logged=true`);
             })
-            .catch(() => setAlertOpen(true));
+            .catch(error => {
+                console.log(`API responded with error on ${BACKEND_ENDPOINTS.USER_LOGIN} endpoint: `, error);
+                setAlertOpen(true);
+            });
     }
 
     return (

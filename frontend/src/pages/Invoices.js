@@ -4,7 +4,7 @@ import {CircularProgress, Link} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import InvoiceCard from "../components/invoice/InvoiceCard";
 import {useEffect, useState} from "react";
-import {ADD_INVOICE, BACKEND_URL} from "../utils/routePaths";
+import {BACKEND_ENDPOINTS, FRONTEND_ENDPOINTS} from "../utils/routePaths";
 import Typography from "@mui/material/Typography";
 
 export default function Invoices() {
@@ -19,7 +19,7 @@ export default function Invoices() {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            axios.get(`${BACKEND_URL}/invoice/all`, {
+            axios.get(BACKEND_ENDPOINTS.GET_ALL_INVOICES, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -29,7 +29,7 @@ export default function Invoices() {
                     setLoading(false);
                 })
                 .catch(error => {
-                    console.log('Error fetching invoices from api: ', error);
+                    console.log(`API responded with error on ${BACKEND_ENDPOINTS.GET_ALL_INVOICES} endpoint: `, error);
                     setLoading(false);
                 });
         };
@@ -38,7 +38,7 @@ export default function Invoices() {
     }, [accessToken]);
 
     if (error) {
-        navigate('/login');
+        navigate(FRONTEND_ENDPOINTS.LOGIN);
     }
 
     if (loading) {
@@ -60,7 +60,7 @@ export default function Invoices() {
                 variant="h3"
             >
                 Brak faktur w systemie. Możesz dodać fakturę &nbsp;
-                <Link href={ADD_INVOICE}>tutaj</Link>
+                <Link href={FRONTEND_ENDPOINTS.ADD_INVOICE}>tutaj</Link>
             </Typography>
         </Container>
 
