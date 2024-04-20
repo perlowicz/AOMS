@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import {useState} from "react";
 import {TextField} from "@mui/material";
+import {CHECK_EMAIL, HOME} from "../../utils/routePaths";
+import {BACKEND_URL} from "../../utils/routePaths";
 
 
 export default function RegistrationForm() {
@@ -22,16 +24,13 @@ export default function RegistrationForm() {
             password: password
         };
 
-        try {
-            const response = await axios.post('http://localhost:8080/api/user/register', formData);
-            if (response.status === 200) {
-                navigate('/check-email');
-            }
-        } catch (error) {
-            console.log('Api zwróciło błędną odpowiedź');
-            console.log(error);
-            navigate('/?registered=false');
-        }
+        await axios.post(`${BACKEND_URL}/user/register`, formData)
+            .then(() => navigate(CHECK_EMAIL))
+            .catch(error => {
+                console.log('Api zwróciło błędną odpowiedź');
+                console.log(error);
+                navigate(`${HOME}?registered=false`);
+            });
     }
 
     return (

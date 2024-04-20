@@ -1,9 +1,11 @@
 import Container from "@mui/material/Container";
 import axios from 'axios';
-import {CircularProgress} from "@mui/material";
+import {CircularProgress, Link} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import InvoiceCard from "../components/invoice/InvoiceCard";
 import {useEffect, useState} from "react";
+import {ADD_INVOICE, BACKEND_URL} from "../utils/routePaths";
+import Typography from "@mui/material/Typography";
 
 export default function Invoices() {
 
@@ -17,18 +19,19 @@ export default function Invoices() {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            try {
-                const response = await axios.get('invoice/all', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
+            axios.get(`${BACKEND_URL}/invoice/all`, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
+                .then(response => {
+                    setData(response.data);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.log('Error fetching invoices from api: ', error);
+                    setLoading(false);
                 });
-                setData(response.data);
-                setError(null);
-            } catch (err) {
-                setError(err);
-            }
-            setLoading(false);
         };
 
         fetchData();
@@ -43,11 +46,23 @@ export default function Invoices() {
     }
 
     return (
-        <Container>
-            <h1>Lista faktur</h1>
-            {data.map(invoice => (
-                <InvoiceCard key={invoice.number} invoice={invoice} />
-            ))}
+        data ? (
+            <Container>
+                <Typography>
+                    Lista faktur
+                </Typography>
+                {data.map(invoice => (
+                    <InvoiceCard key={invoice.number} invoice={invoice}/>
+                ))}
+            </Container>
+        ) : <Container>
+            <Typography
+                variant="h3"
+            >
+                Brak faktur w systemie. Możesz dodać fakturę &nbsp;
+                <Link href={ADD_INVOICE}>tutaj</Link>
+            </Typography>
         </Container>
+
     );
 }

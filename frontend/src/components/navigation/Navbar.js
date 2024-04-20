@@ -129,7 +129,8 @@ function Navbar() {
                                     href="/add-invoice"
                                     sx={{
                                         my: 2,
-                                        display: 'block',
+                                        // display: 'block',
+                                        margin: 2,
                                         textAlign: 'center',
                                         color: 'white'
                                     }}
@@ -140,7 +141,8 @@ function Navbar() {
                                     href="/invoices"
                                     sx={{
                                         my: 2,
-                                        display: 'block',
+                                        // display: 'block',
+                                        margin: 2,
                                         textAlign: 'center',
                                         color: 'white'
                                     }}
@@ -151,7 +153,8 @@ function Navbar() {
                                     href="/profile"
                                     sx={{
                                         my: 2,
-                                        display: 'block',
+                                        // display: 'block',
+                                        margin: 2,
                                         textAlign: 'center',
                                         color: 'white'
                                     }}
@@ -163,7 +166,8 @@ function Navbar() {
                                     href="/?logout=true"
                                     sx={{
                                         my: 2,
-                                        display: 'block',
+                                        // display: 'block',
+                                        margin: 2,
                                         textAlign: 'center',
                                         color: 'white'
                                     }}
@@ -176,7 +180,8 @@ function Navbar() {
                                     href="/register"
                                     sx={{
                                         my: 2,
-                                        display: 'block',
+                                        // display: 'block',
+                                        margin: 2,
                                         textAlign: 'center',
                                         color: 'white'
                                     }}
@@ -187,7 +192,8 @@ function Navbar() {
                                     href="/login"
                                     sx={{
                                         my: 2,
-                                        display: 'block',
+                                        // display: 'block',
+                                        margin: 2,
                                         textAlign: 'center',
                                         color: 'white'
                                     }}

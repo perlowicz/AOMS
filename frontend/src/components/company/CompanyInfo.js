@@ -14,33 +14,7 @@ export default function CompanyInfo() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const response = await axios.get('company', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                });
-                setData(response.data);
-                setError(null);
-            } catch (err) {
-                setError(err);
-            }
-            setLoading(false);
-        };
 
-        fetchData();
-    }, [accessToken]);
-
-    if (error) {
-        navigate('/login');
-    }
-
-    if (loading) {
-        return <CircularProgress/>
-    }
 
     return (
         <Box>

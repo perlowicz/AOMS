@@ -1,12 +1,15 @@
 import axios from 'axios';
+import {BACKEND_URL} from "./routePaths";
 
 const checkApiStatus = async () => {
-    try {
-        const response = await axios.get('http://localhost:8080/api/health-check');
-        return response.status === 200;
-    } catch (error) {
-        return false;
-    }
+    return axios.get(`${BACKEND_URL}/health-check`)
+        .then(response => {
+            return response.status === 200;
+        })
+        .catch(error => {
+            console.log('error checking health status of api: ', error);
+            return false;
+        })
 }
 
 export default checkApiStatus;

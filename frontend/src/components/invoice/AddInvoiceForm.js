@@ -9,6 +9,7 @@ import CustomerDetailsStep from "./formSteps/CustomerDetailsStep";
 import ServiceInvoiceInfoStep from "./formSteps/ServiceInvoiceInfoStep";
 import ProductInvoiceInfoStep from "./formSteps/ProductInvoiceInfoStep";
 import SummaryStep from "./formSteps/SummaryStep";
+import {BACKEND_URL} from "../../utils/routePaths";
 
 class InvoiceFormData {
     constructor() {
@@ -94,7 +95,7 @@ export default function AddInvoiceForm() {
             }))
         };
 
-        axios.post('http://localhost:8080/api/invoice/save', invoiceDto)
+        axios.post(`${BACKEND_URL}/invoice/save`, invoiceDto)
             .then(response => {
                 console.log('Invoice saved successfully');
             })

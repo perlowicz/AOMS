@@ -8,21 +8,28 @@ import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
+import {BACKEND_URL} from "../../../utils/routePaths";
 
 
 export default function ProductInvoiceInfoStep({handleNext, formData, setFormData} ) {
 
     const [units, setUnits] = useState([]);
+    const accessToken = localStorage.getItem('access_token');
 
+    //TODO do nagłówka Authorization axiosa trzeba dołączyć access token (JWT) !! (update: Chyba done ale nie testowałem)
     useEffect(() => {
-        axios.get('http://localhost:8080/api/invoice/units')
+        axios.get(`${BACKEND_URL}/invoice/units`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
             .then(response => {
                 setUnits(response.data);
             })
             .catch(error => {
                 console.error('Error fetching units', error);
             });
-    }, []);
+    }, [accessToken]);
 
     const [listOfProductInvoiceInfo, setListOfProductInvoiceInfo] = useState(
         formData.listOfProductInvoiceInfo ? formData.listOfProductInvoiceInfo : [{

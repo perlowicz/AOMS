@@ -1,38 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useContext } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { CompanyContext } from '../context/CompanyContext';
+import {LOGIN, ADD_PROFILE} from "../utils/routePaths";
 
 const ProtectedRoute = ({ children }) => {
+    const location = useLocation();
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
     const accessToken = localStorage.getItem('access_token');
     const refreshToken = localStorage.getItem('refresh_token');
-
-    const [companyInfo, setCompanyInfo] = useState(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('company', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                });
-                setCompanyInfo(response.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        fetchData();
-    }, [accessToken]);
+    const companyInfo = useContext(CompanyContext);
 
     if (!isAuthenticated || !accessToken || !refreshToken) {
-        return <Navigate to="/login" />
+        return <Navigate to={LOGIN} />
     }
 
-    if (!companyInfo) {
-        return <Navigate to="/add-profile" />
-    }
+    // if (!companyInfo && location.pathname !== ADD_PROFILE) {
+    //     return <Navigate to={ADD_PROFILE} state={{ message: 'Aby kontynuować wprowadź dane dotyczące twojej firmy' }} />
+    // }
 
     return children;
 };
