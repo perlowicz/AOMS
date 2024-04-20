@@ -1,7 +1,6 @@
 package com.example.aoms.api.user.entity;
 
 import com.example.aoms.api.company.entity.Company;
-import com.example.aoms.api.jwt_token.entity.JwtToken;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,9 +39,6 @@ public class User implements UserDetails, OAuth2User {
 
     @OneToMany(mappedBy = "user")
     private Set<VerificationToken> verificationTokens = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "user")
-    private Set<JwtToken> jwtTokens = new LinkedHashSet<>();
 
     @OneToOne(mappedBy = "user")
     private Company company;
