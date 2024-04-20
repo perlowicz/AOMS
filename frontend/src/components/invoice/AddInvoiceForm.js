@@ -9,7 +9,7 @@ import CustomerDetailsStep from "./formSteps/CustomerDetailsStep";
 import ServiceInvoiceInfoStep from "./formSteps/ServiceInvoiceInfoStep";
 import ProductInvoiceInfoStep from "./formSteps/ProductInvoiceInfoStep";
 import SummaryStep from "./formSteps/SummaryStep";
-import {BACKEND_URL} from "../../utils/routePaths";
+import {BACKEND_ENDPOINTS, BACKEND_URL} from "../../utils/routePaths";
 
 class InvoiceFormData {
     constructor() {
@@ -96,12 +96,13 @@ export default function AddInvoiceForm() {
         };
 
         // TODO: Add Bearer to request's authorization header
-        axios.post(`${BACKEND_URL}/invoice/save`, invoiceDto)
+        axios.post(BACKEND_ENDPOINTS.SAVE_INVOICE, invoiceDto)
             .then(response => {
-                console.log('Invoice saved successfully');
+                //TODO Add some information for user on UI that invoice has been saved successfully
+                console.log('Invoice saved successfully. Status: ', response.status);
             })
             .catch(error => {
-                console.log('Error while saving invoice', error);
+                console.log(`API responded with error on ${BACKEND_ENDPOINTS.SAVE_INVOICE} endpoint: `, error);
             });
     }
 

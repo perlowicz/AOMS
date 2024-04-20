@@ -4,6 +4,7 @@ import axios from 'axios';
 import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
+import {BACKEND_ENDPOINTS} from "../utils/routePaths";
 
 const ActivateAccount = () => {
     const location = useLocation();
@@ -20,7 +21,7 @@ const ActivateAccount = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`user/register/verifyEmail?token=${token}`);
+                const response = await axios.get(`${BACKEND_ENDPOINTS.ACTIVATE_ACCOUNT}?token=${token}`);
                 setData(response.data);
                 setError(null);
             } catch (err) {
