@@ -1,6 +1,6 @@
 package com.example.aoms.config;
 
-import com.example.aoms.api.user.repository.UserRepository;
+import com.example.aoms.api.repository.UserRepository;
 import com.example.aoms.auditing.ApplicationAuditAware;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

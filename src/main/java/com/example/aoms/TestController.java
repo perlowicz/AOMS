@@ -1,16 +1,16 @@
 package com.example.aoms;
 
-import com.example.aoms.api.address.dto.AddressDto;
-import com.example.aoms.api.address.service.AddressService;
-import com.example.aoms.api.company.dto.CompanyDto;
-import com.example.aoms.api.company.service.CompanyService;
-import com.example.aoms.api.customer.dto.CustomerDto;
-import com.example.aoms.api.customer.service.CustomerService;
-import com.example.aoms.api.invoice.dto.InvoiceDto;
-import com.example.aoms.api.invoice.service.InvoiceService;
+import com.example.aoms.api.dto.AddressDto;
+import com.example.aoms.api.service.AddressService;
+import com.example.aoms.api.dto.CompanyDto;
+import com.example.aoms.api.service.CompanyService;
+import com.example.aoms.api.dto.CustomerDto;
+import com.example.aoms.api.service.CustomerService;
+import com.example.aoms.api.dto.InvoiceDto;
+import com.example.aoms.api.service.InvoiceService;
 import com.example.aoms.api.jwt_token.util.JwtUtil;
-import com.example.aoms.api.product_invoice.dto.ProductInvoiceInfoDto;
-import com.example.aoms.api.product_invoice.service.ProductInvoiceInfoService;
+import com.example.aoms.api.dto.ProductInvoiceInfoDto;
+import com.example.aoms.api.service.ProductInvoiceInfoService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

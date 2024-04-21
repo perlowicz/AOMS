@@ -1,6 +1,6 @@
 package com.example.aoms.api.jwt_token.service;
 
-import com.example.aoms.api.user.dto.UserDto;
+import com.example.aoms.api.dto.user.UserDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

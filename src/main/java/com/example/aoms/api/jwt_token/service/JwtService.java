@@ -1,6 +1,6 @@
 package com.example.aoms.api.jwt_token.service;
 
-import com.example.aoms.api.user.dto.UserDto;
+import com.example.aoms.api.dto.user.UserDto;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface JwtService {

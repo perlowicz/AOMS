@@ -1,7 +1,7 @@
 package com.example.aoms.security.oauth2;
 
-import com.example.aoms.api.user.entity.User;
-import com.example.aoms.api.user.repository.UserRepository;
+import com.example.aoms.api.entity.user.User;
+import com.example.aoms.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

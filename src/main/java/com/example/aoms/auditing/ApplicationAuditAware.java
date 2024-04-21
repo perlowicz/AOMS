@@ -1,6 +1,6 @@
 package com.example.aoms.auditing;
 
-import com.example.aoms.api.user.entity.User;
+import com.example.aoms.api.entity.user.User;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
