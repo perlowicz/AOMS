@@ -40,9 +40,3 @@ application:
 logging:
   level:
     org.springframework.security: TRACE
-#  file:
-#    name: src/main/resources/logs/app.log
-#  logback:
-#    rolling policy:
-#      max-history: 10
-#      max-file-size: 10MB
