@@ -3,65 +3,61 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import React, {useState} from "react";
-import {Step, StepLabel, Stepper, TextField} from "@mui/material";
+import {Alert, AlertTitle, Divider, TextField} from "@mui/material";
 import {BACKEND_ENDPOINTS, FRONTEND_ENDPOINTS} from "../../utils/routePaths";
+import Typography from "@mui/material/Typography";
 
-class RegistrationFormData {
-    constructor() {
-        this.userData = null;
-        this.companyData = null;
-    }
-}
 
 
 export default function RegistrationForm() {
 
-    const [activeStep, setActiveStep] = useState(0);
-    const [formData, setFormData] = useState(new RegistrationFormData());
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        userData: {
+            username: '',
+            email: '',
+            password: ''
+        },
+        companyData: {
+            name: '',
+            NIP: '',
+            city: '',
+            streetName: '',
+            streetNumber: '',
+            country: ''
+        }
+    });
 
-    const handleNext = (stepData) => {
-        setFormData(prevFormData => ({...prevFormData, ...stepData}));
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        const [dataKey, fieldKey] = name.split('.');
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    }
+        setFormData(prevState => ({
+            ...prevState,
+            [dataKey]: {
+                ...prevState[dataKey],
+                [fieldKey]: value
+            }
+        }));
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const registrationRequest = {
-            userData: {
-                username: formData.userData.username,
-                email: formData.userData.email,
-                password: formData.userData.password
-            },
-            companyData: {
-                name: formData.companyData.name,
-                NIP: formData.companyData.NIP,
-                city: formData.companyData.city,
-                streetName: formData.companyData.streetName,
-                streetNumber: formData.companyData.streetNumber,
-                country: formData.companyData.country
-            }
-        };
-
-
-        await axios.post(BACKEND_ENDPOINTS.USER_REGISTRATION, registrationRequest)
+        await axios.post(BACKEND_ENDPOINTS.USER_REGISTRATION, formData)
             .then(() => navigate(FRONTEND_ENDPOINTS.CHECK_EMAIL))
             .catch(error => {
                 console.log(`API responded with error on ${BACKEND_ENDPOINTS.USER_REGISTRATION} endpoint: `, error);
-                navigate(`${FRONTEND_ENDPOINTS.HOME}?registered=false`);
+                setAlertOpen(true);
             });
     }
 
     return (
         <Box
+            component="form"
+            onSubmit={handleSubmit}
+            autoComplete="off"
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -73,40 +69,89 @@ export default function RegistrationForm() {
                 borderRadius: '10px'
             }}
         >
-            <Stepper activeStep={activeStep}>
-                <Step>
-                    <StepLabel>Dane użytkownika</StepLabel>
-                </Step>
-                <Step>
-                    <StepLabel>Dane firmy</StepLabel>
-                </Step>
-            </Stepper>
-
-            {activeStep === 0 && (
-                <UserDataStep handleNext={handleNext} formData={formData} setFormData={setFormData} />
-            )}
-
-            {activeStep === 1 && (
-                <CompanyDataStep handleNext={handleNext} formData={formData} setFormData={setFormData} />
-            )}
-
-            {activeStep === 2 && (
-                <SummaryStep formData={formData} />
-            )}
-
-            {activeStep === 2 && (
-                <Button
-                    onClick={handleSubmit}
-                >
-                    Wyślij formularz
-                </Button>
-            )}
-
-            <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
+            <Typography
+                variant="h4"
             >
-                Cofnij
+                Dane użytkownika:
+            </Typography>
+            <TextField
+                name="userData.username"
+                label="Nazwa użytkownika"
+                value={formData.userData.username}
+                onChange={handleChange}
+            />
+            <TextField
+                name="userData.email"
+                label="Email"
+                value={formData.userData.email}
+                onChange={handleChange}
+            />
+            <TextField
+                name="userData.password"
+                label="Hasło"
+                value={formData.userData.password}
+                onChange={handleChange}
+            />
+            <Divider/>
+            <Typography
+                variant="h4"
+            >
+                Dane firmy:
+            </Typography>
+            <TextField
+                name="companyData.name"
+                label="Nazwa firmy"
+                value={formData.companyData.name}
+                onChange={handleChange}
+            />
+            <TextField
+                name="companyData.NIP"
+                label="NIP"
+                value={formData.companyData.NIP}
+                onChange={handleChange}
+            />
+            <Divider/>
+            <Typography
+                variant="h5"
+            >
+                Adres firmy:
+            </Typography>
+            <TextField
+                name="companyData.country"
+                label="Kraj"
+                value={formData.companyData.country}
+                onChange={handleChange}
+            />
+            <TextField
+                name="companyData.city"
+                label="Miejscowość"
+                value={formData.companyData.city}
+                onChange={handleChange}
+            />
+            <TextField
+                name="companyData.streetName"
+                label="Nazwa ulicy"
+                value={formData.companyData.streetName}
+                onChange={handleChange}
+            />
+            <TextField
+                name="companyData.streetNumber"
+                label="Numer ulicy"
+                value={formData.companyData.streetNumber}
+                onChange={handleChange}
+            />
+
+            {alertOpen &&
+                <Alert severity="error">
+                    <AlertTitle>Nie udało się zarejestrować</AlertTitle>
+                    Spróbuj ponownie.
+                </Alert>
+            }
+            <Button
+                type="submit"
+                variant="contained"
+            >
+                Zatwiedź
             </Button>
         </Box>
     );

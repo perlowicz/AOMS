@@ -31,7 +31,6 @@ function App() {
                             <ProtectedRoute>
                                 <CompanyProfile/>
                             </ProtectedRoute>}
-
                     />
                     <Route
                         path={FRONTEND_ENDPOINTS.PROFILE}
@@ -39,7 +38,6 @@ function App() {
                             <ProtectedRoute>
                                 <CompanyProfile/>
                             </ProtectedRoute>}
-
                     />
                     <Route
                         path={FRONTEND_ENDPOINTS.ADD_INVOICE}

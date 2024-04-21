@@ -2,14 +2,15 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {Step, StepLabel, Stepper} from "@mui/material";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import InvoiceDetailsStep from "./formSteps/InvoiceDetailsStep";
 import CompanyDetailsStep from "./formSteps/CompanyDetailsStep";
 import CustomerDetailsStep from "./formSteps/CustomerDetailsStep";
 import ServiceInvoiceInfoStep from "./formSteps/ServiceInvoiceInfoStep";
 import ProductInvoiceInfoStep from "./formSteps/ProductInvoiceInfoStep";
 import SummaryStep from "./formSteps/SummaryStep";
-import {BACKEND_ENDPOINTS, BACKEND_URL} from "../../utils/routePaths";
+import {BACKEND_ENDPOINTS} from "../../utils/routePaths";
+import {InvoicesContext} from "../../context/InvoiceContext";
 
 class InvoiceFormData {
     constructor() {
@@ -25,6 +26,7 @@ export default function AddInvoiceForm() {
 
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState(new InvoiceFormData());
+    const { refetch } = useContext(InvoicesContext);
 
     const handleNext = (stepData) => {
         setFormData(prevFormData => ({...prevFormData, ...stepData}));
@@ -100,6 +102,7 @@ export default function AddInvoiceForm() {
             .then(response => {
                 //TODO Add some information for user on UI that invoice has been saved successfully
                 console.log('Invoice saved successfully. Status: ', response.status);
+                refetch();
             })
             .catch(error => {
                 console.log(`API responded with error on ${BACKEND_ENDPOINTS.SAVE_INVOICE} endpoint: `, error);

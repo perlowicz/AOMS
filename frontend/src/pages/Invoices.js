@@ -1,57 +1,40 @@
 import Container from "@mui/material/Container";
-import axios from 'axios';
 import {CircularProgress, Link} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import InvoiceCard from "../components/invoice/InvoiceCard";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {BACKEND_ENDPOINTS, FRONTEND_ENDPOINTS} from "../utils/routePaths";
 import Typography from "@mui/material/Typography";
+import {InvoicesContext} from "../context/InvoiceContext";
 
 export default function Invoices() {
 
-    const navigate = useNavigate();
-
-    const accessToken = localStorage.getItem('access_token');
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    // const navigate = useNavigate();
+    const { invoices, loading, error, refetch } = useContext(InvoicesContext);
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            axios.get(BACKEND_ENDPOINTS.GET_ALL_INVOICES, {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            })
-                .then(response => {
-                    setData(response.data);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    console.log(`API responded with error on ${BACKEND_ENDPOINTS.GET_ALL_INVOICES} endpoint: `, error);
-                    setLoading(false);
-                });
-        };
-
-        fetchData();
-    }, [accessToken]);
-
-    if (error) {
-        navigate(FRONTEND_ENDPOINTS.LOGIN);
-    }
+        refetch();
+    }, [refetch]);
 
     if (loading) {
         return <CircularProgress/>
     }
 
+    if (error) {
+        return <Container>
+            <Typography variant="h3">
+                An error occurred while fetching the invoices. Please try to refresh the page.
+            </Typography>
+        </Container>
+    }
+
     return (
-        data ? (
+        invoices ? (
             <Container>
                 <Typography>
                     Lista faktur
                 </Typography>
-                {data.map(invoice => (
+                {invoices.map(invoice => (
                     <InvoiceCard key={invoice.number} invoice={invoice}/>
                 ))}
             </Container>
