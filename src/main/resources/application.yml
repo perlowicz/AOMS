@@ -1,0 +1,48 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 625380685390-ao59ug0ioma5crrq8bhu0fle6hgvk8ff.apps.googleusercontent.com
+            client-secret: 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
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/aoms
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  mail:
+    host: email-smtp.eu-north-1.amazonaws.com
+    username: AKIA6GBMHE665MJ2HAAB
+    password: BJbWjnZCuz07krN3bhdXBWSErvy3m9iZHJ0rWKILzGBM
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    port: 587
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+logging:
+  level:
+    org.springframework.security: TRACE
+#  file:
+#    name: src/main/resources/logs/app.log
+#  logback:
+#    rolling policy:
+#      max-history: 10
+#      max-file-size: 10MB
