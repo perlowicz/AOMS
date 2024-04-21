@@ -44,4 +44,4 @@ gradlew
 
 ### Spring Boot Config ###
 src/main/resources/application.yml
-/src/main/resources/logs/app.log
+/src/main/resources/logs/
