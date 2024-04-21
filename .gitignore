@@ -42,4 +42,6 @@ gradle/wrapper/*
 gradlew.bat
 gradlew
 
+### Spring Boot Config ###
 src/main/resources/application.yml
+/src/main/resources/logs/app.log
