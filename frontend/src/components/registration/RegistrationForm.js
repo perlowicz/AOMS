@@ -6,57 +6,35 @@ import React, {useState} from "react";
 import {Alert, AlertTitle, Divider, TextField} from "@mui/material";
 import {BACKEND_ENDPOINTS, FRONTEND_ENDPOINTS} from "../../utils/routePaths";
 import Typography from "@mui/material/Typography";
-
+import {useForm} from "react-hook-form";
 
 
 export default function RegistrationForm() {
 
     const navigate = useNavigate();
     const [alertOpen, setAlertOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        userData: {
-            username: '',
-            email: '',
-            password: ''
-        },
-        companyData: {
-            name: '',
-            NIP: '',
-            city: '',
-            streetName: '',
-            streetNumber: '',
-            country: ''
+    const [confirmedPassword, setConfirmedPassword] = useState('');
+    const [passwordConfirmationError, setPasswordConfirmationError] = useState(false);
+    const {register, handleSubmit} = useForm();
+
+    const onSubmit = async (data) => {
+
+        if (confirmedPassword !== data.userData.password) {
+            setPasswordConfirmationError(true);
+        } else {
+            await axios.post(BACKEND_ENDPOINTS.USER_REGISTRATION, data)
+                .then(() => navigate(FRONTEND_ENDPOINTS.CHECK_EMAIL))
+                .catch(error => {
+                    console.log(`API responded with error on ${BACKEND_ENDPOINTS.USER_REGISTRATION} endpoint: `, error);
+                    setAlertOpen(true);
+                });
         }
-    });
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        const [dataKey, fieldKey] = name.split('.');
-
-        setFormData(prevState => ({
-            ...prevState,
-            [dataKey]: {
-                ...prevState[dataKey],
-                [fieldKey]: value
-            }
-        }));
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        await axios.post(BACKEND_ENDPOINTS.USER_REGISTRATION, formData)
-            .then(() => navigate(FRONTEND_ENDPOINTS.CHECK_EMAIL))
-            .catch(error => {
-                console.log(`API responded with error on ${BACKEND_ENDPOINTS.USER_REGISTRATION} endpoint: `, error);
-                setAlertOpen(true);
-            });
     }
 
     return (
         <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             autoComplete="off"
             sx={{
                 display: 'flex',
@@ -77,20 +55,25 @@ export default function RegistrationForm() {
             <TextField
                 name="userData.username"
                 label="Nazwa użytkownika"
-                value={formData.userData.username}
-                onChange={handleChange}
+                {...register("userData.username")}
             />
             <TextField
                 name="userData.email"
                 label="Email"
-                value={formData.userData.email}
-                onChange={handleChange}
+                {...register("userData.email")}
             />
+            {passwordConfirmationError && <Alert severity="error">Hasła muszą być identyczne</Alert>}
             <TextField
                 name="userData.password"
                 label="Hasło"
-                value={formData.userData.password}
-                onChange={handleChange}
+                type="password"
+                {...register("userData.password")}
+            />
+            <TextField
+                label="Potwierdź hasło"
+                type="password"
+                value={confirmedPassword}
+                onChange={(event) => setConfirmedPassword(event.target.value)}
             />
             <Divider/>
             <Typography
@@ -101,14 +84,12 @@ export default function RegistrationForm() {
             <TextField
                 name="companyData.name"
                 label="Nazwa firmy"
-                value={formData.companyData.name}
-                onChange={handleChange}
+                {...register("companyData.name")}
             />
             <TextField
                 name="companyData.NIP"
                 label="NIP"
-                value={formData.companyData.NIP}
-                onChange={handleChange}
+                {...register("companyData.NIP")}
             />
             <Divider/>
             <Typography
@@ -117,28 +98,24 @@ export default function RegistrationForm() {
                 Adres firmy:
             </Typography>
             <TextField
-                name="companyData.country"
+                name="companyData.address.country"
                 label="Kraj"
-                value={formData.companyData.country}
-                onChange={handleChange}
+                {...register("companyData.address.country")}
             />
             <TextField
-                name="companyData.city"
+                name="companyData.address.city"
                 label="Miejscowość"
-                value={formData.companyData.city}
-                onChange={handleChange}
+                {...register("companyData.address.city")}
             />
             <TextField
-                name="companyData.streetName"
+                name="companyData.address.streetName"
                 label="Nazwa ulicy"
-                value={formData.companyData.streetName}
-                onChange={handleChange}
+                {...register("companyData.address.streetName")}
             />
             <TextField
-                name="companyData.streetNumber"
+                name="companyData.address.streetNumber"
                 label="Numer ulicy"
-                value={formData.companyData.streetNumber}
-                onChange={handleChange}
+                {...register("companyData.address.streetNumber")}
             />
 
             {alertOpen &&

@@ -21,10 +21,10 @@ public class User implements UserDetails, OAuth2User {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "user_name", nullable = false, length = 256)
+    @Column(name = "user_name", nullable = false, length = 256, unique = true)
     private String userName;
 
-    @Column(name = "email", nullable = false, length = 256)
+    @Column(name = "email", nullable = false, length = 256, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false, length = 256)

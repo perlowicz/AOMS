@@ -23,7 +23,7 @@ public class Customer {
     @Column(name = "nip", nullable = false, length = 10)
     private String nip;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
