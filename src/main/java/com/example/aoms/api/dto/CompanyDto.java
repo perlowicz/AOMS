@@ -14,4 +14,5 @@ public class CompanyDto {
     private String name;
     private String NIP;
     private AddressDto address;
+    // FIXME Now company entity has foreign key to user table
 }

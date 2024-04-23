@@ -1,10 +1,12 @@
 package com.example.aoms.api.mapper;
 
-import com.example.aoms.api.entity.Address;
-import com.example.aoms.api.mapper.AddressMapper;
+import com.example.aoms.api.data.userRegistration.CompanyRegistrationData;
 import com.example.aoms.api.dto.CompanyDto;
+import com.example.aoms.api.entity.Address;
 import com.example.aoms.api.entity.Company;
 import com.example.aoms.api.entity.user.User;
+
+import static com.example.aoms.api.mapper.AddressMapper.mapAddressRegistrationDataToDto;
 
 public class CompanyMapper {
 
@@ -23,5 +25,13 @@ public class CompanyMapper {
         entity.setAddress(address);
         entity.setUser(user);
         return entity;
+    }
+
+    public static CompanyDto mapCompanyRegistrationDataToCompanyDto(CompanyRegistrationData companyRegistrationData) {
+        return CompanyDto.builder()
+                .name(companyRegistrationData.getName())
+                .NIP(companyRegistrationData.getNIP())
+                .address(mapAddressRegistrationDataToDto(companyRegistrationData.getAddressRegistrationData()))
+                .build();
     }
 }

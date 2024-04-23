@@ -2,7 +2,6 @@ package com.example.aoms.api.controller;
 
 import com.example.aoms.api.dto.CompanyDto;
 import com.example.aoms.api.service.CompanyService;
-import com.example.aoms.api.jwt_token.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +19,12 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<?> getCompany(HttpServletRequest request) {
         final String jwt = request.getHeader("Authorization").substring(7);
-        Optional<CompanyDto> foundCompany = companyService.findCompanyByJwt(jwt);
+        Optional<CompanyDto> foundCompany = companyService.findCompanyDtoByJwt(jwt);
         if (foundCompany.isPresent()) {
             return ResponseEntity.ok(foundCompany.get());
         }
         return ResponseEntity
-                .notFound()
-                .build();
-    }
-
-    @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody CompanyDto dto, HttpServletRequest request) {
-        String jwt = JwtUtil.extractJwtFromRequest(request);
-        companyService.save(dto, jwt);
-        return ResponseEntity
-                .status(201)
+                .badRequest()
                 .build();
     }
 }

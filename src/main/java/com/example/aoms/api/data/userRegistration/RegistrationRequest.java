@@ -1,4 +1,4 @@
-package com.example.aoms.api.data;
+package com.example.aoms.api.data.userRegistration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
@@ -11,14 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
-    @JsonProperty("username")
+public class RegistrationRequest {
+    @JsonProperty("userData")
     @Nonnull
-    private String userName;
-    @JsonProperty("email")
+    private UserRegistrationData userRegistrationData;
+    @JsonProperty("companyData")
     @Nonnull
-    private String email;
-    @JsonProperty("password")
-    @Nonnull
-    private String password;
+    private CompanyRegistrationData companyRegistrationData;
 }

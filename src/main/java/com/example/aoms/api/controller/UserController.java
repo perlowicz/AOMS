@@ -2,7 +2,7 @@ package com.example.aoms.api.controller;
 
 import com.example.aoms.api.data.AuthenticationRequest;
 import com.example.aoms.api.data.AuthenticationResponse;
-import com.example.aoms.api.data.RegisterRequest;
+import com.example.aoms.api.data.userRegistration.RegistrationRequest;
 import com.example.aoms.api.data.UserInfoResponse;
 import com.example.aoms.api.jwt_token.util.JwtUtil;
 import com.example.aoms.api.service.AuthenticationService;
@@ -14,6 +14,8 @@ import com.example.aoms.api.service.UserService;
 import com.example.aoms.api.service.VerificationTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,8 @@ public class UserController {
     private final ApplicationEventPublisher publisher;
     private final VerificationTokenService verificationTokenService;
     private final AuthenticationService authenticationService;
+
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private static final String FRONTEND_EMAIL_VERIFICATION_ENDPOINT = "http://localhost:3000/activate-account";
 
@@ -54,8 +58,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest){
-        UserDto registeredUser = userService.registerUser(registerRequest);
+    public ResponseEntity<?> register(@RequestBody RegistrationRequest registrationRequest){
+        logger.info("Mapped dto: {}", registrationRequest);
+        UserDto registeredUser = userService.registerUser(registrationRequest);
         publisher.publishEvent(new RegistrationCompleteEvent(registeredUser, FRONTEND_EMAIL_VERIFICATION_ENDPOINT));
         return ResponseEntity.ok("User created");
     }

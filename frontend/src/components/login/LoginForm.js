@@ -26,6 +26,7 @@ export default function LoginForm() {
 
         await axios.post(BACKEND_ENDPOINTS.USER_LOGIN, userData)
             .then(response => {
+                console.log('response: ', response);
                 handleLogin(response.data.access_token, response.data.refresh_token);
                 navigate(`${FRONTEND_ENDPOINTS.HOME}?logged=true`);
             })

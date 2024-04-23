@@ -7,7 +7,6 @@ import com.example.aoms.api.mapper.CompanyMapper;
 import com.example.aoms.api.repository.CompanyRepository;
 import com.example.aoms.api.jwt_token.service.JwtService;
 import com.example.aoms.api.entity.user.User;
-import com.example.aoms.api.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -21,15 +20,14 @@ public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
     private final AddressService addressService;
-    private final UserService userService;
     private final JwtService jwtService;
 
     @Override
+    //FIXME Think if @SneakyThrows annotation is needed here
     @SneakyThrows
     @Transactional
-    public Company save(CompanyDto dto, String jwt) {
+    public Company save(CompanyDto dto, User user) {
         Address address = addressService.save(dto.getAddress());
-        User user = findUserFromJwt(jwt);
         Company entity = CompanyMapper.mapDtoToEntity(dto, address, user);
         return companyRepository.save(entity);
     }
@@ -40,15 +38,15 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Optional<CompanyDto> findCompanyByJwt(String jwt) {
+    public Optional<CompanyDto> findCompanyDtoByJwt(String jwt) {
         Long userId = jwtService.extractUserId(jwt);
         return companyRepository.findByUserId(userId)
                 .map(CompanyMapper::mapEntityToDto);
     }
 
-    private User findUserFromJwt(String jwt) {
+    @Override
+    public Optional<Company> findCompanyByJwt(String jwt) {
         Long userId = jwtService.extractUserId(jwt);
-        return userService.findUserById(userId)
-                .orElseThrow(() -> new UserNotFoundException(String.format("User with id %s not found", userId)));
+        return companyRepository.findByUserId(userId);
     }
 }

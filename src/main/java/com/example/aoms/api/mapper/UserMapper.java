@@ -1,9 +1,10 @@
 package com.example.aoms.api.mapper;
 
+import com.example.aoms.api.data.userRegistration.UserRegistrationData;
 import com.example.aoms.api.dto.user.UserDto;
 import com.example.aoms.api.entity.user.Role;
 import com.example.aoms.api.entity.user.User;
-import com.example.aoms.api.data.RegisterRequest;
+import com.example.aoms.api.data.userRegistration.RegistrationRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserMapper {
@@ -27,12 +28,21 @@ public class UserMapper {
         return user;
     }
 
-    public static User mapDtoToEntity(RegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
-        User user = new User();
-        user.setUserName(registerRequest.getUserName());
-        user.setEmail(registerRequest.getEmail());
-        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setRole(Role.valueOf("USER"));
-        return user;
+//    public static User mapDtoToEntity(RegistrationRequest registrationRequest, PasswordEncoder passwordEncoder) {
+//        User user = new User();
+//        user.setUserName(registrationRequest.getUserRegistrationData().g);
+//        user.setEmail(registrationRequest.getEmail());
+//        user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
+//        user.setRole(Role.valueOf("USER"));
+//        return user;
+//    }
+
+    public static UserDto mapUserRegistrationDataToUserDto(UserRegistrationData userRegistrationData) {
+        return UserDto.builder()
+                .userName(userRegistrationData.getUserName())
+                .email(userRegistrationData.getEmail())
+                .password(userRegistrationData.getPassword())
+                .role("USER")
+                .build();
     }
 }

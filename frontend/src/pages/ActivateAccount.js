@@ -20,14 +20,16 @@ const ActivateAccount = () => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            try {
-                const response = await axios.get(`${BACKEND_ENDPOINTS.ACTIVATE_ACCOUNT}?token=${token}`);
-                setData(response.data);
-                setError(null);
-            } catch (err) {
-                setError(err);
-            }
-            setLoading(false);
+            await axios.get(`${BACKEND_ENDPOINTS.ACTIVATE_ACCOUNT}?token=${token}`)
+                .then(response => {
+                    setData(response.data);
+                    setError(null);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    setError(error.response.data);
+                    setLoading(false);
+                });
         };
 
         fetchData();
@@ -35,7 +37,7 @@ const ActivateAccount = () => {
 
     useEffect(() => {
         if (error) {
-            setActivationStatus({ type: 'error', message: 'An error occurred while activating your account. Please try again.' });
+            setActivationStatus({ type: 'error', message: `An error occurred while activating your account. ${error}` });
         } else if (!error && loading) {
             setActivationStatus({ type: 'loading' });
         } else if (!loading && data) {

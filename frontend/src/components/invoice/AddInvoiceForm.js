@@ -101,8 +101,10 @@ export default function AddInvoiceForm() {
         axios.post(BACKEND_ENDPOINTS.SAVE_INVOICE, invoiceDto)
             .then(response => {
                 //TODO Add some information for user on UI that invoice has been saved successfully
-                console.log('Invoice saved successfully. Status: ', response.status);
-                refetch();
+                if (response.status === 201) {
+                    console.log('Invoice saved successfully.');
+                    refetch();
+                }
             })
             .catch(error => {
                 console.log(`API responded with error on ${BACKEND_ENDPOINTS.SAVE_INVOICE} endpoint: `, error);

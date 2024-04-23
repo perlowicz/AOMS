@@ -1,15 +1,18 @@
 package com.example.aoms.api.service;
 
-import com.example.aoms.api.jwt_token.service.JwtService;
 import com.example.aoms.api.data.UserInfoResponse;
 import com.example.aoms.api.data.VerificationTokenInfo;
+import com.example.aoms.api.data.userRegistration.CompanyRegistrationData;
+import com.example.aoms.api.data.userRegistration.RegistrationRequest;
+import com.example.aoms.api.data.userRegistration.UserRegistrationData;
+import com.example.aoms.api.dto.CompanyDto;
 import com.example.aoms.api.dto.user.UserDto;
-import com.example.aoms.api.data.RegisterRequest;
 import com.example.aoms.api.dto.user.VerificationTokenDto;
 import com.example.aoms.api.entity.user.User;
 import com.example.aoms.api.entity.user.VerificationToken;
 import com.example.aoms.api.exception.UserAlreadyExistsException;
 import com.example.aoms.api.exception.UserNotFoundException;
+import com.example.aoms.api.jwt_token.service.JwtService;
 import com.example.aoms.api.mapper.UserMapper;
 import com.example.aoms.api.mapper.VerificationTokenMapper;
 import com.example.aoms.api.repository.UserRepository;
@@ -17,19 +20,21 @@ import com.example.aoms.api.repository.VerificationTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.aoms.api.mapper.UserMapper.mapDtoToEntity;
-import static com.example.aoms.api.mapper.UserMapper.mapEntityToDto;
+import static com.example.aoms.api.mapper.CompanyMapper.mapCompanyRegistrationDataToCompanyDto;
+import static com.example.aoms.api.mapper.UserMapper.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CompanyService companyService;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;
     private final JwtService jwtService;
@@ -52,13 +57,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto registerUser(RegisterRequest registerRequest) {
-        String userEmail = registerRequest.getEmail();
-        if (userRepository.findByEmail(userEmail).isPresent()) {
-            throw new UserAlreadyExistsException("User with email " + userEmail + " already exists in database");
+    //FIXME Think if i need @Transactional annotation here
+    @Transactional
+    public UserDto registerUser(RegistrationRequest registrationRequest) {
+        CompanyRegistrationData companyRegistrationData = registrationRequest.getCompanyRegistrationData();
+        UserRegistrationData userRegistrationData = registrationRequest.getUserRegistrationData();
+
+        CompanyDto companyDto = mapCompanyRegistrationDataToCompanyDto(companyRegistrationData);
+        UserDto userDto = mapUserRegistrationDataToUserDto(userRegistrationData);
+
+        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException("User with email " + userDto.getEmail() + " already exists in database");
         }
-        User newUser = mapDtoToEntity(registerRequest, passwordEncoder);
-        User savedUser = userRepository.save(newUser);
+
+        User userEntityToSave = mapDtoToEntity(userDto, passwordEncoder);
+        User savedUser = userRepository.save(userEntityToSave);
+        companyService.save(companyDto, savedUser);
         return mapEntityToDto(savedUser);
     }
 
@@ -77,14 +91,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public VerificationTokenInfo validateToken(String token) {
         VerificationToken verificationToken = tokenRepository.findByToken(token);
-        if(verificationToken == null){
+        if (verificationToken == null) {
             return VerificationTokenInfo.builder()
                     .isValid(false)
                     .message("Invalid verification token")
                     .build();
         }
         User user = verificationToken.getUser();
-        if (verificationToken.getExpirationTime().isBefore(Instant.now())){
+        if (verificationToken.getExpirationTime().isBefore(Instant.now())) {
             return VerificationTokenInfo.builder()
                     .isValid(false)
                     .message("Verification link already expired")

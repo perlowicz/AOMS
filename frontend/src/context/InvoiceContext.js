@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useState, useCallback } from 'react';
 import axios from 'axios';
 import { BACKEND_ENDPOINTS } from '../utils/routePaths';
 
@@ -28,10 +28,6 @@ export const InvoicesProvider = ({ children }) => {
                 setLoading(false);
             });
     }, [accessToken]);
-
-    useEffect(() => {
-        fetchInvoices();
-    }, [fetchInvoices]);
 
     return (
         <InvoicesContext.Provider value={{ invoices, loading, error, refetch: fetchInvoices }}>

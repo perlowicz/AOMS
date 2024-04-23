@@ -47,8 +47,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Transactional
     public Invoice save(InvoiceDto dto, String jwt) {
         Customer savedCustomer = customerService.save(dto.getCustomer());
-        Company savedCompany = companyService.save(dto.getCompany(), jwt);
-        Invoice entity = mapDtoToEntity(dto, savedCustomer, savedCompany);
+        Company company = companyService.findCompanyByJwt(jwt)
+                .orElseThrow(() -> new CompanyNotFoundException("Company for user not found in database"));
+        Invoice entity = mapDtoToEntity(dto, savedCustomer, company);
         return invoiceRepository.save(entity);
     }
 
