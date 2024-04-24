@@ -14,6 +14,7 @@ import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
+import {FRONTEND_ENDPOINTS} from "../../utils/routePaths";
 
 
 function Navbar() {
@@ -87,7 +88,7 @@ function Navbar() {
                         >
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link
-                                    href="/add-invoice"
+                                    href={FRONTEND_ENDPOINTS.ADD_INVOICE}
                                     sx={{display: 'block', textAlign: 'center'}}
                                 >
                                     Dodaj fakturę
@@ -95,7 +96,7 @@ function Navbar() {
                             </MenuItem>
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link
-                                    href="/invoices"
+                                    href={FRONTEND_ENDPOINTS.INVOICES}
                                     sx={{display: 'block', textAlign: 'center'}}
                                 >
                                     Lista faktur
@@ -126,7 +127,7 @@ function Navbar() {
                         {isAuthenticated
                             ? <Box>
                                 <Link
-                                    href="/add-invoice"
+                                    href={FRONTEND_ENDPOINTS.ADD_INVOICE}
                                     sx={{
                                         my: 2,
                                         // display: 'block',
@@ -138,7 +139,7 @@ function Navbar() {
                                     Dodaj fakturę
                                 </Link>
                                 <Link
-                                    href="/invoices"
+                                    href={FRONTEND_ENDPOINTS.INVOICES}
                                     sx={{
                                         my: 2,
                                         // display: 'block',
@@ -150,7 +151,7 @@ function Navbar() {
                                     Lista faktur
                                 </Link>
                                 <Link
-                                    href="/profile"
+                                    href={FRONTEND_ENDPOINTS.PROFILE}
                                     sx={{
                                         my: 2,
                                         // display: 'block',
@@ -161,9 +162,21 @@ function Navbar() {
                                 >
                                     Dane firmy
                                 </Link>
+                                <Link
+                                    href={FRONTEND_ENDPOINTS.CURRENCY_EXCHANGE}
+                                    sx={{
+                                        my: 2,
+                                        // display: 'block',
+                                        margin: 2,
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Kursy walut
+                                </Link>
                                 <Button
                                     onClick={handleLogoutClick}
-                                    href="/?logout=true"
+                                    href={`${FRONTEND_ENDPOINTS.HOME}?logout=true`}
                                     sx={{
                                         my: 2,
                                         // display: 'block',
@@ -177,7 +190,7 @@ function Navbar() {
                             </Box>
                             : <Box>
                                 <Link
-                                    href="/register"
+                                    href={FRONTEND_ENDPOINTS.REGISTER}
                                     sx={{
                                         my: 2,
                                         // display: 'block',
@@ -189,7 +202,7 @@ function Navbar() {
                                     Zarejestruj się
                                 </Link>
                                 <Link
-                                    href="/login"
+                                    href={FRONTEND_ENDPOINTS.LOGIN}
                                     sx={{
                                         my: 2,
                                         // display: 'block',

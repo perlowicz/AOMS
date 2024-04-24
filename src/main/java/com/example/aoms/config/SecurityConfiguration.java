@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                                         .requestMatchers(
                                                 "/user/register/**",
                                                 "/user/register/verifyEmail",
+                                                "/nbp/**",
                                                 "/user/login/**"
 //                                                "/service",
 //                                                "/info",
