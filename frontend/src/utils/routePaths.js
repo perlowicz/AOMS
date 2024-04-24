@@ -19,5 +19,5 @@ export const BACKEND_ENDPOINTS = {
     GET_ALL_INVOICES: `${BACKEND_URL}/invoice/all`,
     SAVE_INVOICE: `${BACKEND_URL}/invoice/save`,
     GET_ALL_COUNTRIES: `${BACKEND_URL}/country/all`,
-    NBP_API_CURRENTLY_VALID_EXCHANGE_RATE_TABLE: `${BACKEND_URL}/nbp/exchangeRates`
+    NBP_API_EXCHANGE_RATE_FOR_TABLE: `${BACKEND_URL}/nbp/exchangeRates`
 }

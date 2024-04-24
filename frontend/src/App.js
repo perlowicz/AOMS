@@ -14,6 +14,8 @@ import ActivateAccount from "./pages/ActivateAccount";
 import {GeneralProvider} from "./context/provider/GeneralProvider";
 import {FRONTEND_ENDPOINTS} from "./utils/routePaths";
 import CurrencyExchange from "./pages/CurrencyExchange";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 function App() {
     return (
@@ -60,7 +62,9 @@ function App() {
                         path={FRONTEND_ENDPOINTS.CURRENCY_EXCHANGE}
                         element={
                             <ProtectedRoute>
-                                <CurrencyExchange/>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <CurrencyExchange/>
+                                </LocalizationProvider>
                             </ProtectedRoute>
                         }
                     />

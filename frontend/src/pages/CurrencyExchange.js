@@ -14,17 +14,20 @@ import {BACKEND_ENDPOINTS} from '../utils/routePaths';
 import CurrencyExchangeTable from "../components/currencies/CurrencyExchangeTable";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 
 export default function CurrencyExchange() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [table, setTable] = useState('A');
     const [search, setSearch] = useState('');
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const accessToken = localStorage.getItem('access_token');
 
     const fetchData = async () => {
         setLoading(true);
-        await axios.get(`${BACKEND_ENDPOINTS.NBP_API_CURRENTLY_VALID_EXCHANGE_RATE_TABLE}/${table}`, {
+        const formattedDate = selectedDate.toLocaleDateString('en-CA');
+        await axios.get(`${BACKEND_ENDPOINTS.NBP_API_EXCHANGE_RATE_FOR_TABLE}/${table}/${formattedDate}`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -34,7 +37,7 @@ export default function CurrencyExchange() {
                 setLoading(false);
             })
             .catch(error => {
-                console.log(`API responded with error on ${BACKEND_ENDPOINTS.NBP_API_CURRENTLY_VALID_EXCHANGE_RATE_TABLE}/${table} endpoint: `, error);
+                console.log(`API responded with error on ${BACKEND_ENDPOINTS.NBP_API_EXCHANGE_RATE_FOR_TABLE}/${table}/${formattedDate} endpoint: `, error);
                 setLoading(false);
             });
     };
@@ -45,6 +48,10 @@ export default function CurrencyExchange() {
 
     const handleSearchChange = (event) => {
         setSearch(event.target.value);
+    };
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
     };
 
     return (
@@ -102,6 +109,13 @@ export default function CurrencyExchange() {
                         variant="outlined"
                         value={search}
                         onChange={handleSearchChange}
+                    />
+                    <DatePicker
+                        label="Wybierz datę"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        maxDate={new Date()}
+                        renderInput={(params) => <TextField {...params} />}
                     />
                     <Button variant="contained" onClick={fetchData}>
                         Zatwierdź

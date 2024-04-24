@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -15,15 +17,23 @@ public class NbpApiController {
 
     private final NbpApiService nbpApiService;
 
+
     @GetMapping("/exchangeRates/{table}")
     public ResponseEntity<?> getExchangeRateFromTodayForTable(@PathVariable NbpExchangeRateTable table) {
         return ResponseEntity.ok(nbpApiService.getExchangeRatesFromTodayForTable(table));
     }
 
+    @GetMapping("/exchangeRates/{table}/{date}")
+    public ResponseEntity<?> getTopCountExchangeRatesForTableOnSpecificDay(@PathVariable NbpExchangeRateTable table,
+                                                                           @PathVariable LocalDate date) {
+        return ResponseEntity.ok(nbpApiService.getExchangeRatesForTableOnSpecificDay(table, date));
+    }
 
-    @GetMapping("/exchangeRates/{table}/{topCount}")
-    public ResponseEntity<?> getTopCountExchangeRatesForTable(@PathVariable NbpExchangeRateTable table,
-                                                              @PathVariable Integer topCount) {
-        return ResponseEntity.ok(nbpApiService.getTopCountExchangeRatesForTable(table, topCount));
+    //TODO For now endpoint not used on frontend
+    @GetMapping("/exchangeRates/{table}/{code}/{date}")
+    public ResponseEntity<?> getExchangeRateForCurrencyOnSpecificDay(@PathVariable NbpExchangeRateTable table,
+                                                                     @PathVariable String code,
+                                                                     @PathVariable LocalDate date) {
+        return ResponseEntity.ok(nbpApiService.getExchangeRateForCurrencyOnSpecificDay(table, code, date));
     }
 }
